@@ -1,8 +1,8 @@
 @extends('backend.layouts.app')
 @section('content')
-@section('title', '| Create Patient')
-@section('header-title', 'Create Patient')
-@section('breadcrumb', 'Create Patient')
+@section('title', '| Edit Patient')
+@section('header-title', 'Edit Patient')
+@section('breadcrumb', 'Edit Patient')
 <div class="row">
     <div class="col-sm-12">
         <div class="panel panel-bd lobidrag">

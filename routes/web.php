@@ -4,6 +4,8 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorDepartmentController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\NewAppointmentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
@@ -20,14 +22,20 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
-
+Route::get('/', [FrontendController::class, 'index']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 Route::get('/admin', [DashboardController::class, 'index']);
+
+Route::prefix('frontend')->group(function () {
+    Route::get('/index', [FrontendController::class, 'index']);
+    Route::get('/appointment', [FrontendController::class, 'appointment']);
+    Route::get('/doctors', [FrontendController::class, 'getActiveDoctors']);
+    Route::get('/doctorId/{id}', [FrontendController::class, 'doctorId']);
+    Route::resource('/new_appointments', NewAppointmentController::class);
+});
+
 Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::resource('/user-profile', ProfileController::class);

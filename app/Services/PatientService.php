@@ -17,6 +17,11 @@ class PatientService
         $userId = Auth::user()->id;
         if (isset($data['id'])) {
             $patient = Patient::findOrFail($data['id']);
+            if ($data['picture']) {
+                if (File::exists($patient->picture)) {
+                    File::delete($patient->picture);
+                }
+            }
             $patient->updated_by = $userId;
         } else {
             $patient = new Patient();

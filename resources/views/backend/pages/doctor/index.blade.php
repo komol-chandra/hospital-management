@@ -58,6 +58,7 @@
                                 <th>SL</th>
                                 <th>Image</th>
                                 <th>Name</th>
+                                <th>Department</th>
                                 <th>Mobile</th>
                                 <th>status</th>
                                 <th>action</th>
@@ -72,6 +73,7 @@
                                     <img src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="50" width="50">
                                 </td>
                                 <td>{{ $value->name }}</td>
+                                <td>{{ $value->department }}</td>
                                 <td>{{ $value->mobile }}</td>
                                 <td class="text-center">
                                     @if($value->status == 1)

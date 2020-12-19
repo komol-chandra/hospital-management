@@ -6,10 +6,12 @@ use App\Http\Requests\PatientRequest;
 use App\Models\Patient;
 use App\Services\PatientService;
 use App\Services\ResponseService;
+use App\Traits\FileUpload;
 use Str;
 
 class PatientController extends Controller
 {
+    use FileUpload;
     protected $patientService;
     protected $message;
     public function __construct()
@@ -49,6 +51,9 @@ class PatientController extends Controller
     {
         $data = $request->all();
         $data['code'] = Str::random(7);
+        if ($request->hasFile('picture')) {
+            $data['picture'] = $this->ImageUpload($request, 'picture', 'patient/', 'patient_');
+        }
         $patient = $this->patientService->createOrUpdate($data);
         if ($patient) {
             $notification = $this->message->success('Patient', 'Patient Added Successfully ');
@@ -92,6 +97,9 @@ class PatientController extends Controller
     public function update(PatientRequest $request)
     {
         $data = $request->all();
+        if ($request->hasFile('picture')) {
+            $data['picture'] = $this->ImageUpload($request, 'picture', 'patient/', 'patient_');
+        }
         $patient = $this->patientService->createOrUpdate($data);
         if ($patient) {
             $notification = $this->message->success('Patient', 'Patient Updated Successfully');
