@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="panel panel-bd lobidrag">
-            <div class="panel-heading">
+            <div class="panel-head">
                 <div class="btn-group"> 
                     <a class="btn btn-primary" href="{{ url('/admin/doctor') }}"> <i class="fa fa-list"></i>Doctor List</a>  
                 </div>
