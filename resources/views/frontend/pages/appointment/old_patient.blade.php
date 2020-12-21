@@ -9,12 +9,15 @@
 </div>
 <div class="col-sm-12 form-group">
     <label>Department <span class="text-danger">*</span></label>
-    {!! Form::select('department',$departments , null , ['placeholder' => 'Select Department',"class"=>"form-control","onchange"=>"getDoctor()","id"=>"department"]) !!}
+    {!! Form::select('department_id',$departments , null , ['placeholder' => 'Select Department',"class"=>"form-control","onchange"=>"getDoctorTwo()","id"=>"department_two"]) !!}
 </div>
 <div class="col-sm-12 form-group">
     <label>Doctor <span class="text-danger">*</span></label>
-    
-    {!! Form::select('doctor',$doctors,  null , ['placeholder' => 'Select Doctor',"class"=>"form-control","id"=>"doctor"]) !!}
+    <select name="doctor_id" class="select2 form-control custom-select doctor_two">
+        <option selected disabled hidden>Select</option>
+        
+    </select>
+    {{-- {!! Form::select('doctor',$doctors,  null , ['placeholder' => 'Select Doctor',"class"=>"form-control","id"=>"doctor"]) !!} --}}
 </div>
 <div class="col-sm-12 form-group">
     <label>Message</label>

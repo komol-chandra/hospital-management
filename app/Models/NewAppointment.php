@@ -16,8 +16,17 @@ class NewAppointment extends Model
         "email",
         "mobile",
         "date",
-        "department",
-        "doctor",
+        "department_id",
+        "doctor_id",
         "message",
     ];
+    public function departments()
+    {
+        return $this->belongsTo("App\Models\DoctorDepartment", "department_id", 'id');
+    }
+    public function doctors()
+    {
+        return $this->belongsTo("App\Models\Doctor", "doctor_id", 'id');
+    }
+
 }

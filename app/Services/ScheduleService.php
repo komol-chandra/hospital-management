@@ -10,7 +10,7 @@ class ScheduleService
 {
     public function lists()
     {
-        return Schedule::orderBy('id', 'DESC')->get();
+        return Schedule::with('days', 'doctors')->orderBy('id', 'DESC')->get();
     }
     public function getDays()
     {

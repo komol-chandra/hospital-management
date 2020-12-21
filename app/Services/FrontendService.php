@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Models\Day;
 use App\Models\Doctor;
 use App\Models\DoctorDepartment;
 
@@ -22,4 +23,9 @@ class FrontendService
     {
         return Doctor::where('status', '1')->get();
     }
+    public function Days()
+    {
+        return Day::pluck('name', 'id');
+    }
+
 }

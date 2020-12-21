@@ -16,11 +16,11 @@
 </div>
 <div class="col-sm-12 form-group">
     <label>Department <span class="text-danger">*</span></label>
-    {!! Form::select('department',$departments , null , ['placeholder' => 'Select Department',"class"=>"form-control","onchange"=>"getDoctor()","id"=>"department"]) !!}
+    {!! Form::select('department_id',$departments , null , ['placeholder' => 'Select Department',"class"=>"form-control","onchange"=>"getDoctor()","id"=>"department"]) !!}
 </div>
 <div class="col-sm-12 form-group">
     <label>Doctor <span class="text-danger">*</span></label>
-    <select name="doctor" id="doctor" class="select2 form-control custom-select doctor">
+    <select name="doctor_id" id="doctor" class="select2 form-control custom-select doctor">
         <option selected disabled hidden>Select</option>
         
     </select>
@@ -29,4 +29,9 @@
 <div class="col-sm-12 form-group">
     <label>Message</label>
     {!! Form::textarea("message", null,["class"=>"form-control"]) !!}
+</div>
+<div class="col-sm-12 form-group">
+    <label>Want to Register</label>
+    {!! Form::checkbox("checkbox",null,["class"=>"form-control"]) !!}
+
 </div>

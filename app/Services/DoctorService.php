@@ -11,7 +11,7 @@ class DoctorService
 {
     public function lists()
     {
-        return Doctor::orderBy('id', 'DESC')->get();
+        return Doctor::with('departments')->orderBy('id', 'DESC')->get();
     }
     public function createOrUpdate($data)
     {
@@ -35,7 +35,7 @@ class DoctorService
     }
     public function getById($id)
     {
-        return Doctor::findOrFail($id);
+        return Doctor::with('departments')->findOrFail($id);
     }
     public function getDeterment()
     {

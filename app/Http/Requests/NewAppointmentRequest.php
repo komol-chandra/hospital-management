@@ -25,13 +25,14 @@ class NewAppointmentRequest extends FormRequest
     {
         $appointment = $this->route('new_appointments');
         return [
-            "email"      => 'nullable |unique:new_appointments,email,' . $appointment . ',id',
-            "name"       => 'required',
-            "mobile"     => 'required',
-            "date"       => 'required',
-            "department" => 'required',
-            "doctor"     => 'required',
-            "message"    => 'nullable',
+            // "email"         => 'nullable |unique:new_appointments,email,' . $appointment . ',id',
+            "email"         => "required",
+            "name"          => 'required',
+            "mobile"        => 'required',
+            "date"          => 'required',
+            "department_id" => 'required',
+            "doctor_id"     => 'required',
+            "message"       => 'nullable',
         ];
     }
 }

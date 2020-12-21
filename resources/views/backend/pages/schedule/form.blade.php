@@ -16,7 +16,7 @@
 </div>
 <div class="col-sm-6 form-group">
     <label>Quantity of Patient<span class="text-danger">*</span></label>
-    {!! Form::number("parpatient",$schedule['quantity'] ?? null,["class"=>"form-control"]) !!}
+    {!! Form::number("quantity",$schedule['quantity'] ?? null,["class"=>"form-control"]) !!}
 </div>
 <div class="col-sm-6 form-group">
     <label>Status <span class="text-danger">*</span></label>

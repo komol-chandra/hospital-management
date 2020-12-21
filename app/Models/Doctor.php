@@ -33,9 +33,9 @@ class Doctor extends Model
     {
         return $this->belongsTo("App\Models\Blood", "name");
     }
-    public function department()
+    public function departments()
     {
-        return $this->belongsTo("App\Models\DoctorDepartment", "name");
+        return $this->belongsTo("App\Models\DoctorDepartment", "department", "id");
     }
     public function user()
     {

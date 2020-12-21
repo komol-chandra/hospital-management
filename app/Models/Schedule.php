@@ -19,12 +19,12 @@ class Schedule extends Model
         "status",
     ];
 
-    public function day()
+    public function days()
     {
-        return $this->belongsTo("App\Models\Day", "name");
+        return $this->belongsTo("App\Models\Day", "day", "id");
     }
-    public function doctor()
+    public function doctors()
     {
-        return $this->belongsTo("App\Models\Doctor", "name");
+        return $this->belongsTo("App\Models\Doctor", "doctor", "id");
     }
 }

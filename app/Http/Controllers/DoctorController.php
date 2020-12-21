@@ -30,6 +30,8 @@ class DoctorController extends Controller
     public function index()
     {
         $doctors = $this->doctorService->lists();
+        // $doctors = Doctor::with('departments')->orderBy('id', 'DESC')->get();
+        // dd($doctors);
         return view('backend.pages.doctor.index', compact('doctors'));
     }
 
