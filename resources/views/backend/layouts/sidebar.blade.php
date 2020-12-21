@@ -79,18 +79,19 @@
                     <li><a href="{{ url('/admin/appointment') }}">Appionment list</a></li>
                 </ul>
             </li>
-            {{-- <li class="treeview">
+            <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-credit-card-alt"></i><span>payment</span>
+                    <i class="fa fa-credit-card-alt"></i><span>Online Appionment</span>
                     <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="add-payment.html">Add payment</a></li>
-                    <li><a href="pay-list.html">payment list</a></li>
+                    {{-- <li><a href="add-payment.html">Add payment</a></li> --}}
+                    <li><a href="{{ url('/admin/new_appointments') }}">Appionment list</a></li>
                 </ul>
             </li>
+            {{-- 
             <li class="treeview">
                 <a href="#">
                   <i class="fa fa-file-text"></i><span>Report</span>

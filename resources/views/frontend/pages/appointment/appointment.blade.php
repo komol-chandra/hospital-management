@@ -40,7 +40,7 @@
                 <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="card">
                         <div class="card-body">
-                            {!! Form::open(['url' => '/frontend/oldPatient','method'=>'post','files'=>true]) !!}
+                            {!! Form::open(['url' => '/frontend/old_appointments','method'=>'post','files'=>true]) !!}
                                 @include('frontend.pages.appointment.old_patient')
                                 <div class="col-sm-12 reset-button">
                                     <button type="submit" class="btn btn-success">Book Now</button>
@@ -65,14 +65,27 @@
             dataType:"json",
             success:function(response){
                 response.forEach(function(value,index){
-                    console.log(value);
                     $('.doctor').append(`<option class="selectDoctor"  value="${value.id}" >${value.name}</option>`);
 
                 })
             }
         })
-        console.log(id);
     };
+</script>
+<script>
+    function getDoctorTwo(){
+        let id = $(department_two).val();
+        $.ajax({
+            url:`/frontend/doctorId2/${id}`,
+            type:'get',
+            dataType:'json',
+            success:function(response){
+                response.forEach(function(value,index){
+                    $('.doctor_two').append(`<option class="selectDoctor2" value="${value.id}">${value.name}</option>`)
+                })
+            }
+        })
+    }
 </script>
 
 @endsection

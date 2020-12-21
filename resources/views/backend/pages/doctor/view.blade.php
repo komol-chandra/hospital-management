@@ -9,9 +9,10 @@
             <div class="panel-heading">
                 <div class="btn-group"> 
                     <a class="btn btn-primary" href="{{ url('/admin/doctor') }}"> <i class="fa fa-list"></i>Doctor List</a>  
+                    <a class="btn btn-primary" style="margin-left: 10px;" onclick="printDiv('printableArea')" tabindex="0"><span>Print</span></a>
                 </div>
             </div>
-            <div class="panel-body">
+            <div class="panel-body" id="printableArea">
                 <div class="col-sm-12"> 
                         <div class="card">
                             <div class="card-header">
@@ -76,7 +77,7 @@
                                                 </div>
                                                 <div>
                                                     <ul>
-                                                        <li>{{ $doctor->department }}
+                                                        <li>{{ $doctor->departments->name }}
                                                             <div class="fluency fluency-4"></div>
                                                         </li>
                                                     </ul>

@@ -21,7 +21,8 @@ class FrontendController extends Controller
     {
         $departments = $this->frontendService->Department();
         $doctors = $this->frontendService->Doctor();
-        return view('frontend.pages.appointment.appointment', compact('departments', 'doctors'));
+        $days = $this->frontendService->Days();
+        return view('frontend.pages.appointment.appointment', compact('departments', 'doctors', 'days'));
     }
     public function getActiveDoctors()
     {
@@ -29,6 +30,11 @@ class FrontendController extends Controller
         return view('frontend.pages.doctors', compact('data'));
     }
     public function doctorId($id)
+    {
+        $doctors = Doctor::where('department', $id)->get();
+        return response()->json($doctors, 200);
+    }
+    public function doctorId2($id)
     {
         $doctors = Doctor::where('department', $id)->get();
         return response()->json($doctors, 200);

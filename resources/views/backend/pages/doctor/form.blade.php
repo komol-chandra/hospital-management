@@ -29,7 +29,7 @@
 </div>
 <div class="col-sm-12 form-group">
     <label>Biography</label>
-    {!! Form::textarea("biography", $doctor['biography'] ?? null,["class"=>"form-control"]) !!}
+    {!! Form::textarea("biography", $doctor['biography'] ?? null,["class"=>"form-control","id"=>"editor"]) !!}
 </div>
 <div class="col-sm-6 form-group">
     <label>Specialist</label>
@@ -63,7 +63,7 @@
 </div>
 <div class="col-sm-12 form-group">
     <label>Education/Degree</label>
-    {!! Form::textarea("education", $doctor['education'] ?? null,["class"=>"form-control"]) !!}
+    {!! Form::textarea("education", $doctor['education'] ?? null,["class"=>"form-control","id"=>"editor2"]) !!}
 </div>
 <div class="col-sm-6 form-group">
     <label >Picture upload</label>

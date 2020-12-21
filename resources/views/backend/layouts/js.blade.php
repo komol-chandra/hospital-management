@@ -21,6 +21,40 @@
 <script src="{{ asset('backend/assets/plugins/datamaps/datamaps.all.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/dist/js/custom.js') }}" type="text/javascript"></script>
 
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    function printDiv(divName) {
+  var printContents = document.getElementById(divName).innerHTML;
+  var originalContents = document.body.innerHTML;
+
+  document.body.innerHTML = printContents;
+
+  window.print();
+
+  document.body.innerHTML = originalContents;
+}
+</script>
+<script>
+    tinymce.init({
+      selector: 'textarea#editor',
+      skin: 'bootstrap',
+    //   plugins: 'lists, link, image, media',
+      toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+      menubar: false
+    });
+  </script>
+  <script>
+    tinymce.init({
+      selector: 'textarea#editor2',
+      skin: 'bootstrap',
+    //   plugins: 'lists, link, image, media',
+      toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+      menubar: false
+    });
+  </script>
+
+
+
 <script>
     @foreach ($errors->all() as $error)
     iziToast.warning({

@@ -15,17 +15,19 @@ class CreateNewAppointmentsTable extends Migration
     {
         Schema::create('new_appointments', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('patient_id')->nullable();
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('set null');
             $table->string('name');
-            $table->string('email')->unique()->nullable();
+            $table->string('email')->nullable();
             $table->string('mobile');
             $table->string('date');
-            $table->unsignedBigInteger('department')->nullable();
-            $table->foreign('department')->references('id')->on('departments')->onDelete('set null');
-            $table->unsignedBigInteger('doctor')->nullable();
-            $table->foreign('doctor')->references('id')->on('doctors')->onDelete('set null');
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('set null');
+            $table->unsignedBigInteger('doctor_id')->nullable();
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('set null');
             $table->string('message');
-            // $table->tinyInteger('status');
-            $table->unsignedInteger('created_by');
+            $table->tinyInteger('status')->nullable();
+            $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();

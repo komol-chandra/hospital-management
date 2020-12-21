@@ -25,6 +25,7 @@ class Patient extends Model
     ];
     public function blood()
     {
-        return $this->belongsTo("App\Models\Blood", "name");
+        return $this->belongsTo("App\Models\Blood", "blood", 'id');
     }
+
 }

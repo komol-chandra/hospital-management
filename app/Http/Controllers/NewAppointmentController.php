@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewAppointmentRequest;
+use App\Http\Requests\OldAppointmentRequest;
+use App\Models\NewAppointment;
 use App\Services\NewAppointmentService;
 use App\Services\ResponseService;
 use Illuminate\Http\Request;
@@ -25,7 +27,8 @@ class NewAppointmentController extends Controller
      */
     public function index()
     {
-        //
+        $data = $this->newAppointmentService->lists();
+        return view('backend.pages.online_appointment.index', compact('data'));
     }
 
     /**
@@ -47,7 +50,7 @@ class NewAppointmentController extends Controller
     public function store(NewAppointmentRequest $request)
     {
         $data = $request->all();
-        $newAppointment = $this->newAppointmentService->createOrUpdate($data);
+        $newAppointment = $this->newAppointmentService->createNewAppointment($data);
         if ($newAppointment) {
             $notification = $this->message->success('Appointment', 'New Appointment Added Successfully ');
         } else {
@@ -56,6 +59,19 @@ class NewAppointmentController extends Controller
         return redirect()->back()->with($notification);
 
     }
+    public function oldAppointmentStore(OldAppointmentRequest $request)
+    {
+        $data = $request->all();
+        $appointment = $this->newAppointmentService->createOldAppointment($data);
+        if ($appointment) {
+            $notification = $this->message->success('Appointment', 'New Appointment Added Successfully ');
+        } elseif (null) {
+            $notification = $this->message->success('Appointment', 'No Appointment For Today ');
+        } else {
+            $notification = $this->message->error('Appointment', 'Appointment Field Required');
+        }
+        return redirect()->back()->with($notification);
+    }
 
     /**
      * Display the specified resource.
@@ -63,9 +79,9 @@ class NewAppointmentController extends Controller
      * @param  \App\Models\NewAppointment  $newAppointment
      * @return \Illuminate\Http\Response
      */
-    public function show(NewAppointment $newAppointment)
+    public function show($id)
     {
-        //
+        $this->newAppointmentService->view($id);
     }
 
     /**
