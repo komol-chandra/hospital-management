@@ -24,7 +24,7 @@
 </div>
 <div class="col-sm-4 form-group">
     <label>Blood <span class="text-danger">*</span></label>
-    {!! Form::select('blood', $bloods, $patient['blood'] ?? null ,['placeholder' => 'Select Department',"class"=>"form-control"]) !!}
+    {!! Form::select('blood_id', $bloods, $patient['blood_id'] ?? null ,['placeholder' => 'Select Department',"class"=>"form-control"]) !!}
 </div>
 <div class="col-sm-4 form-group">
     <label>Gender <span class="text-danger">*</span></label>

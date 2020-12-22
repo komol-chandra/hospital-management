@@ -17,7 +17,7 @@ class NewAppointmentService
         $dateTime = new DateTime($date);
         $dateToDay = $dateTime->format('l');
         $findDay = Day::where('name', $dateToDay)->first();
-        $getDoctor = Schedule::where('doctor', $doctor_id)->where('day', $findDay->id)->first();
+        $getDoctor = Schedule::where('doctor_id', $doctor_id)->where('day_id', $findDay->id)->first();
         $doctorAppointmentCount = NewAppointment::where('doctor_id', $doctor_id)->where('date', $date)->count();
         if ($doctorAppointmentCount < $getDoctor->quantity && $getDoctor) {
             $appointment->fill($data)->save();
@@ -44,7 +44,7 @@ class NewAppointmentService
         $dateTime = new DateTime($date);
         $dateToDay = $dateTime->format('l');
         $findDay = Day::where('name', $dateToDay)->first();
-        $getDoctor = Schedule::where('doctor', $doctor_id)->where('day', $findDay->id)->first();
+        $getDoctor = Schedule::where('doctor_id', $doctor_id)->where('day_id', $findDay->id)->first();
         $doctorAppointmentCount = NewAppointment::where('doctor_id', $doctor_id)->where('date', $date)->count();
         if ($doctorAppointmentCount < $getDoctor->quantity && $getDoctor) {
             $appointment->save();

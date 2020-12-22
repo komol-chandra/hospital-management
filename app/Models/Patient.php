@@ -19,13 +19,13 @@ class Patient extends Model
         "phone",
         "birthday",
         "gender",
-        "blood",
+        "blood_id",
         "picture",
         "status",
     ];
     public function blood()
     {
-        return $this->belongsTo("App\Models\Blood", "blood", 'id');
+        return $this->belongsTo("App\Models\Blood", "blood_id", 'id');
     }
 
 }

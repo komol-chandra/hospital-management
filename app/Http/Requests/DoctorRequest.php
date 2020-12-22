@@ -25,20 +25,20 @@ class DoctorRequest extends FormRequest
     {
         $doctor = $this->route('doctor');
         return [
-            "email"       => 'required |unique:doctors,email,' . $doctor . ',id',
-            "name"        => 'required',
-            "designation" => 'nullable',
-            "department"  => 'nullable',
-            "address"     => 'nullable',
-            "mobile"      => 'required',
-            "phone"       => 'nullable',
-            "biography"   => 'nullable',
-            "specialist"  => 'nullable',
-            "birthday"    => 'nullable',
-            "blood"       => 'nullable',
-            "picture"     => 'mimes:png,jpg,jpeg',
-            "gender"      => 'required',
-            "status"      => 'required',
+            "email"         => 'required |unique:doctors,email,' . $doctor . ',id',
+            "name"          => 'required',
+            "designation"   => 'nullable',
+            "department_id" => 'nullable',
+            "address"       => 'nullable',
+            "mobile"        => 'required',
+            "phone"         => 'nullable',
+            "biography"     => 'nullable',
+            "specialist"    => 'nullable',
+            "birthday"      => 'nullable',
+            "blood_id"      => 'nullable',
+            "picture"       => 'mimes:png,jpg,jpeg',
+            "gender"        => 'required',
+            "status"        => 'required',
         ];
     }
 }

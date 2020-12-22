@@ -31,12 +31,12 @@ class FrontendController extends Controller
     }
     public function doctorId($id)
     {
-        $doctors = Doctor::where('department', $id)->get();
+        $doctors = Doctor::where('department_id', $id)->get();
         return response()->json($doctors, 200);
     }
     public function doctorId2($id)
     {
-        $doctors = Doctor::where('department', $id)->get();
+        $doctors = Doctor::where('department_id', $id)->get();
         return response()->json($doctors, 200);
     }
 

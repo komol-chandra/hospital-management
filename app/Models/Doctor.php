@@ -15,7 +15,7 @@ class Doctor extends Model
         "name",
         "email",
         "designation",
-        "department",
+        "department_id",
         "address",
         "mobile",
         "phone",
@@ -23,7 +23,7 @@ class Doctor extends Model
         "specialist",
         "birthday",
         "gender",
-        "blood",
+        "blood_id",
         "education",
         "picture",
         "status",
@@ -31,14 +31,10 @@ class Doctor extends Model
 
     public function blood()
     {
-        return $this->belongsTo("App\Models\Blood", "name");
+        return $this->belongsTo("App\Models\Blood", "blood_id", "id");
     }
     public function departments()
     {
-        return $this->belongsTo("App\Models\DoctorDepartment", "department", "id");
-    }
-    public function user()
-    {
-        return $this->hasOne(User::class, 'parentId', 'id');
+        return $this->belongsTo("App\Models\DoctorDepartment", "department_id", "id");
     }
 }

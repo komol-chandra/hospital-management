@@ -24,12 +24,12 @@ class ScheduleRequest extends FormRequest
     public function rules()
     {
         return [
-            "doctor"   => 'required',
-            "day"      => 'required',
-            "starting" => 'required',
-            "ending"   => 'required',
-            "quantity" => 'required',
-            "status"   => 'required',
+            "doctor_id" => 'required',
+            "day_id"    => 'required',
+            "starting"  => 'required',
+            "ending"    => 'required',
+            "quantity"  => 'required',
+            "status"    => 'required',
         ];
     }
 }

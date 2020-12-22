@@ -17,8 +17,7 @@ class CreateDoctorDepartmentsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
 

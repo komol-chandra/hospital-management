@@ -1,10 +1,10 @@
 <div class="col-sm-6 form-group">
     <label>Doctor Name <span class="text-danger">*</span></label>
-    {!! Form::select('doctor',$doctors,$schedule['doctor'] ?? null ,['placeholder' => 'Select Doctor',"class"=>"form-control"]) !!}
+    {!! Form::select('doctor_id',$doctors,$schedule['doctor_id'] ?? null ,['placeholder' => 'Select Doctor',"class"=>"form-control"]) !!}
 </div>
 <div class="col-sm-6 form-group">
     <label>Available Days <span class="text-danger">*</span></label>
-    {!! Form::select('day',$days, $schedule['day'] ?? null ,['placeholder' => 'Select Day',"class"=>"form-control"]) !!}
+    {!! Form::select('day_id',$days, $schedule['day_id'] ?? null ,['placeholder' => 'Select Day',"class"=>"form-control"]) !!}
 </div>
 <div class="col-sm-6 form-group">
     <label>Starting Time <span class="text-danger">*</span></label>

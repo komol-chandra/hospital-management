@@ -15,10 +15,10 @@ class CreateSchedulesTable extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('doctor')->nullable();
-            $table->foreign('doctor')->references('id')->on('doctors')->onDelete('set null');
-            $table->unsignedBigInteger('day')->nullable();
-            $table->foreign('day')->references('id')->on('days')->onDelete('set null');
+            $table->unsignedBigInteger('doctor_id')->nullable();
+            $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('set null');
+            $table->unsignedBigInteger('day_id')->nullable();
+            $table->foreign('day_id')->references('id')->on('days')->onDelete('set null');
             $table->time('starting');
             $table->time('ending');
             $table->integer('quantity');

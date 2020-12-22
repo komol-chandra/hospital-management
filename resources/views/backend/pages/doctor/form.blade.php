@@ -12,7 +12,7 @@
 </div>
 <div class="col-sm-6 form-group">
     <label>Department <span class="text-danger">*</span></label>
-    {!! Form::select('department', $departments , $doctor['department'] ?? null , ['placeholder' => 'Select Department',"class"=>"form-control"]) !!}
+    {!! Form::select('department_id', $departments , $doctor['department_id'] ?? null , ['placeholder' => 'Select Department',"class"=>"form-control"]) !!}
     
 </div>
 <div class="col-sm-12 form-group">
@@ -59,7 +59,7 @@
 </div>
 <div class="col-sm-6 form-group">
     <label>Blood <span class="text-danger">*</span></label>
-    {!! Form::select('blood', $bloods, $doctor['blood'] ?? null ,['placeholder' => 'Select Department',"class"=>"form-control"]) !!}
+    {!! Form::select('blood_id', $bloods, $doctor['blood_id'] ?? null ,['placeholder' => 'Select Department',"class"=>"form-control"]) !!}
 </div>
 <div class="col-sm-12 form-group">
     <label>Education/Degree</label>
