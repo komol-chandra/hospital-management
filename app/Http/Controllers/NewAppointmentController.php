@@ -81,7 +81,8 @@ class NewAppointmentController extends Controller
      */
     public function show($id)
     {
-        $this->newAppointmentService->view($id);
+        $data = $this->newAppointmentService->view($id);
+        return view('backend.pages.online_appointment.view', compact('data'));
     }
 
     /**

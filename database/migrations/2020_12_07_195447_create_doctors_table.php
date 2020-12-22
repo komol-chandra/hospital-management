@@ -10,17 +10,16 @@ class CreateDoctorsTable extends Migration
      * Run the migrations.
      *
      * @return void
-    */
-     public function up()
-    
+     */
+    public function up()
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
             $table->text('designation')->nullable();
-            $table->unsignedBigInteger('department')->nullable();
-            $table->foreign('department')->references('id')->on('departments')->onDelete('set null');
+            $table->unsignedBigInteger('department_id')->nullable();
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('set null');
             $table->text('address')->nullable();
             $table->string('mobile');
             $table->string('phone')->nullable();
@@ -28,8 +27,8 @@ class CreateDoctorsTable extends Migration
             $table->string('specialist')->nullable();
             $table->string('birthday')->nullable();
             $table->tinyInteger('gender');
-            $table->unsignedBigInteger('blood')->nullable();
-            $table->foreign('blood')->references('id')->on('bloods')->onDelete('set null');
+            $table->unsignedBigInteger('blood_id')->nullable();
+            $table->foreign('blood_id')->references('id')->on('bloods')->onDelete('set null');
             $table->text('education')->nullable();
             $table->text('picture')->nullable();
             $table->tinyInteger('status');

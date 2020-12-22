@@ -33,7 +33,7 @@ class PatientRequest extends FormRequest
             "mobile"   => "required",
             "birthday" => "nullable",
             "gender"   => "required",
-            "blood"    => "nullable",
+            "blood_id" => "nullable",
             "picture"  => "mimes:png,jpg,jpeg",
             "status"   => "required",
         ];

@@ -17,10 +17,10 @@
                     <div class="card">
                         <div class="card-header">
                         </div>
-                        {{-- <div class="card-content">
+                        <div class="card-content">
                             <div class="card-content-member">
-                                <h4 class="m-t-0">{{ $doctor->name }}</h4>
-                                <p class="m-0"><i class="pe-7s-map-marker"></i>{{ $doctor->address }}</p>
+                                <h4 class="m-t-0">{{ $data->name }}</h4>
+                                <p class="m-0"><i class="pe-7s-map-marker"></i></p>
                             </div>
                             <div class="card-content-languages">
                                 <div class="row">
@@ -31,7 +31,7 @@
                                             </div>
                                             <div>
                                                 <ul>
-                                                    <li>{{ $doctor->email }}
+                                                    <li>{{ $data->email }}
                                                         <div class="fluency fluency-4"></div>
                                                     </li>
                                                 </ul>
@@ -39,33 +39,33 @@
                                         </div>
                                         <div class="card-content-languages-group">
                                             <div>
-                                                <h4>Designation:</h4>
+                                                <h4>Mobile:</h4>
                                             </div>
                                             <div>
                                                 <ul>
-                                                    <li>{{ $doctor->designation }}</li>
+                                                    <li>{{ $data->mobile }}</li>
                                                     
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="card-content-languages-group">
                                             <div>
-                                                <h4>Biography:</h4>
+                                                <h4>Date:</h4>
                                             </div>
                                             <div>
                                                 <ul>
-                                                    <li>{{ $doctor->biography }}</li>
+                                                    <li>{{ $data->date }}</li>
                                                     
                                                 </ul>
                                             </div>
                                         </div>
                                         <div class="card-content-languages-group">
                                             <div>
-                                                <h4>Specialist:</h4>
+                                                <h4>message:</h4>
                                             </div>
                                             <div>
                                                 <ul>
-                                                    <li>{{ $doctor->specialist }}</li>
+                                                    <li>{{ $data->message }}</li>
                                                     
                                                 </ul>
                                             </div>
@@ -76,7 +76,19 @@
                                             </div>
                                             <div>
                                                 <ul>
-                                                    <li>{{ $doctor->department }}
+                                                    <li>{{ $data->departments->name }}
+                                                        <div class="fluency fluency-4"></div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="card-content-languages-group">
+                                            <div>
+                                                <h4>Doctor:</h4>
+                                            </div>
+                                            <div>
+                                                <ul>
+                                                    <li>{{ $data->doctors->name }}
                                                         <div class="fluency fluency-4"></div>
                                                     </li>
                                                 </ul>
@@ -85,7 +97,7 @@
                                     </div>
 
 
-                                    <div class="col-sm-6">
+                                    {{-- <div class="col-sm-6">
                                         <div class="card-content-languages-group">
                                             <div>
                                                 <h4>Phone:</h4>
@@ -146,11 +158,11 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>

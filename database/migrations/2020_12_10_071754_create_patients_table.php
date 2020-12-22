@@ -22,8 +22,8 @@ class CreatePatientsTable extends Migration
             $table->string('phone')->nullable();
             $table->string('birthday')->nullable();
             $table->tinyInteger('gender');
-            $table->unsignedBigInteger('blood')->nullable();
-            $table->foreign('blood')->references('id')->on('bloods')->onDelete('set null');
+            $table->unsignedBigInteger('blood_id')->nullable();
+            $table->foreign('blood_id')->references('id')->on('bloods')->onDelete('set null');
             $table->text('picture')->nullable();
             $table->tinyInteger('status');
             $table->unsignedInteger('created_by');
