@@ -20,7 +20,8 @@
 <script src="{{ asset('backend/assets/plugins/datamaps/topojson.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/plugins/datamaps/datamaps.all.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/dist/js/custom.js') }}" type="text/javascript"></script>
-
+<script src="{{ asset('backend/assets/plugins/modals/classie.js')}}" type="text/javascript"></script>
+<script src="{{ asset('backend/assets/plugins/modals/modalEffects.js')}}" type="text/javascript"></script>
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     function printDiv(divName) {

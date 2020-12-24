@@ -21,6 +21,12 @@ class DatabaseSeeder extends Seeder
             DoctorSeeder::class,
             PatientSeeder::class,
             ScheduleSeeder::class,
+            TestSeeder::class,
+            PatientTestSeeder::class,
+            MedicineTypeSeeder::class,
+            GenericSeeder::class,
+            MedicineSeeder::class,
+            ManufacturerSeeder::class,
         ]);
     }
 }
