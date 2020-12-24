@@ -91,39 +91,62 @@
                     <li><a href="{{ url('/admin/new_appointments') }}">Appionment list</a></li>
                 </ul>
             </li>
-            {{-- 
+            <li class="treeview">
+                    <a href="#">
+                    <i class="fa fa-file-text"></i><span>Test</span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('/admin/test') }}">Test Type View</a></li>
+                    <li><a href="{{ url('/admin/patient-test/create') }}">Test Create</a></li>
+                    <li><a href="{{ url('/admin/patient-test') }}">Test View</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="widgets.html">
+                    <i class="fa fa-user-circle-o"></i><span>Medicine</span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('/admin/medicine-type') }}">Medicine Type list</a></li>
+                    <li><a href="{{ url('/admin/generic') }}">Generic list</a></li>
+                    <li><a href="{{ url('/admin/manufacturer') }}">Manufacture list</a></li>
+                    <li><a href="{{ url('/admin/medicine/create') }}">Add Medicine</a></li>
+                    <li><a href="{{ url('/admin/medicine') }}">Medicine list</a></li>                    
+                </ul>
+            </li>
             <li class="treeview">
                 <a href="#">
-                  <i class="fa fa-file-text"></i><span>Report</span>
-                  <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="patient-wise-report.html">Patient wise Report</a></li>
-                <li><a href="doctor-wise-report.html">Doctor wise Report</a></li>
-                <li><a href="total-report.html">Total Report</a></li>
-            </ul>
-        </li>
-        <li class="treeview">
-            <a href="widgets.html">
-                <i class="fa fa-user-circle-o"></i><span>Human Resources</span>
-                <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="add-emp.html">Add Employee</a></li>
-                <li><a href="emp-list.html">employee list</a></li>
-                <li><a href="add-ns.html">Add Nurse</a></li>
-                <li><a href="ns-list.html">Nurse list</a></li>
-                <li><a href="add-ph.html">Add pharmacist</a></li>
-                <li><a href="ph-list.html">pharmacist list</a></li>
-                <li><a href="add-rep.html">Add Representative</a></li>
-                <li><a href="rep-list.html">Representative list</a></li>
-                
-            </ul>
-        </li>
+                    <i class="fa fa-file-text"></i><span>Prescription</span>
+                    <span class="pull-right-container">
+                     <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="register.html">Prescription Add</a></li>
+                    <li><a href="login.html">Prescription List</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-list-alt fw"></i><span>Human Resource</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="calender.html">Employee Type List</a></li>
+                    <li><a href="buttons.html">Add Employee</a></li>
+                    <li><a href="panels.html">Employee List</a></li>                
+                </ul>
+            </li>
+            {{-- 
+            
+        
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-bed"></i><span>Bed Manager</span>

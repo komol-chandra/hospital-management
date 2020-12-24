@@ -5,10 +5,16 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorDepartmentController;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\GenericController;
+use App\Http\Controllers\ManufacturerController;
+use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\MedicineTypeController;
 use App\Http\Controllers\NewAppointmentController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\PatientTestController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -65,6 +71,23 @@ Route::prefix('admin')->group(function () {
         Route::get('/appointment/doctorId/{id}', [AppointmentController::class, 'doctorId']);
         //frontend appointments
         Route::resource('/new_appointments', NewAppointmentController::class);
+        //admin panel test type
+        Route::resource('/test', TestController::class);
+        Route::get('/test/status/{id}', [TestController::class, 'status']);
+        //admin patient test
+        Route::resource('/patient-test', PatientTestController::class);
+        Route::get('/patient-test/status/{id}', [PatientTestController::class, 'status']);
+        //admin medicine -type
+        Route::resource('/medicine-type', MedicineTypeController::class);
+        Route::get('/medicine-type/status/{id}', [MedicineTypeController::class, 'status']);
+        //admin Generic
+        Route::resource('/generic', GenericController::class);
+        Route::get('/generic/status/{id}', [GenericController::class, 'status']);
+        //admin Medicine
+        Route::resource('/medicine', MedicineController::class);
+        //admin Manufacturer
+        Route::resource('/manufacturer', ManufacturerController::class);
+        Route::get('/manufacturer/status/{id}', [ManufacturerController::class, 'status']);
 
     });
 });
