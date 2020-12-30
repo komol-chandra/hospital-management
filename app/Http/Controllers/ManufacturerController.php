@@ -79,9 +79,10 @@ class ManufacturerController extends Controller
      * @param  \App\Models\Manufacturer  $manufacturer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Manufacturer $manufacturer)
+    public function edit($id)
     {
-        //
+        $data = $this->manufacturerService->getById($id);
+        return response()->json($data, 200);
     }
 
     /**
@@ -91,9 +92,22 @@ class ManufacturerController extends Controller
      * @param  \App\Models\Manufacturer  $manufacturer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Manufacturer $manufacturer)
+    public function update(ManufacturerRequest $request)
     {
-        //
+        $data = $request->all();
+        // dd($data);
+        if ($request->hasFile('picture')) {
+            $data['picture'] = $this->ImageUpload($request, 'picture', 'manufacturer/', 'manufacturer_');
+        }
+        $manufacturer = $this->manufacturerService->createOrUpdate($data);
+        if ($manufacturer) {
+            $notification = $this->massage->success('manufacturer', 'manufacturer Updated Successfully');
+        } else {
+            $notification = $this->massage->error('manufacturer', 'Input Filed Required');
+        }
+        $status = 201;
+        return response()->json($notification, $status);
+
     }
 
     /**

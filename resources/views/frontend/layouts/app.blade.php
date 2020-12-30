@@ -7,7 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Creativeitem" name="author" />
-{{-- <link rel="shortcut icon" href="{{ asset('frontend/assets/uploads/system/logo/favicon.png') }}"> --}}
+{{-- <link rel="shortcut icon" href="/{{ $settings->favicon ?? null }}"> --}}
+{{-- <img src="/{{ $settings->favicon ?? null }}" > --}}
+
 <link href="http://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 @include('frontend.layouts.css')
   </head>

@@ -21,6 +21,10 @@ class ManufacturerService
         }
         return $data->save();
     }
+    public function getById($id)
+    {
+        return Manufacturer::findOrFail($id);
+    }
     public function delete($id)
     {
         $manufacturer = Manufacturer::findOrFail($id);

@@ -2,11 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MedicineRequest;
+use App\Http\Requests\MedicineUpdateRequest;
 use App\Models\Medicine;
+use App\Services\MedicineService;
+use App\Services\ResponseService;
+use App\Traits\FileUpload;
 use Illuminate\Http\Request;
+use Str;
 
 class MedicineController extends Controller
 {
+    use FileUpload;
+    protected $medicineService;
+    protected $massage;
+    public function __construct()
+    {
+        $this->medicineService = new MedicineService;
+        $this->massage = new ResponseService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +28,8 @@ class MedicineController extends Controller
      */
     public function index()
     {
-        //
+        $data = $this->medicineService->lists();
+        return view('backend.pages.medicine.index', compact('data'));
     }
 
     /**
@@ -24,7 +39,10 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        //
+        $getMedicineType = $this->medicineService->getMedicineType();
+        $getGeneric = $this->medicineService->getGeneric();
+        $getManufacturer = $this->medicineService->getManufacturer();
+        return view('backend.pages.medicine.create', compact('getMedicineType', 'getGeneric', 'getManufacturer'));
     }
 
     /**
@@ -33,9 +51,20 @@ class MedicineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MedicineRequest $request)
     {
-        //
+        $data = $request->all();
+        $data['sku'] = Str::random(7);
+        if ($request->hasFile('picture')) {
+            $data['picture'] = $this->ImageUpload($request, 'picture', 'medicine/', 'medicine_');
+        }
+        $medicine = $this->medicineService->createOrUpdate($data);
+        if ($medicine) {
+            $notification = $this->massage->success('medicine', 'medicine Added Successfully ');
+        } else {
+            $notification = $this->massage->error('medicine', 'medicine Field Required');
+        }
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -55,9 +84,13 @@ class MedicineController extends Controller
      * @param  \App\Models\Medicine  $medicine
      * @return \Illuminate\Http\Response
      */
-    public function edit(Medicine $medicine)
+    public function edit($id)
     {
-        //
+        $data = $this->medicineService->getById($id);
+        $getMedicineType = $this->medicineService->getMedicineType();
+        $getGeneric = $this->medicineService->getGeneric();
+        $getManufacturer = $this->medicineService->getManufacturer();
+        return view('backend.pages.medicine.edit', compact('data', 'getMedicineType', 'getGeneric', 'getManufacturer'));
     }
 
     /**
@@ -67,9 +100,19 @@ class MedicineController extends Controller
      * @param  \App\Models\Medicine  $medicine
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Medicine $medicine)
+    public function update(MedicineUpdateRequest $request)
     {
-        //
+        $data = $request->all();
+        if ($request->hasFile('picture')) {
+            $data['picture'] = $this->ImageUpload($request, 'picture', 'medicine/', 'medicine_');
+        }
+        $medicine = $this->medicineService->createOrUpdate($data);
+        if ($medicine) {
+            $notification = $this->massage->success('medicine', 'medicine Updated Successfully ');
+        } else {
+            $notification = $this->massage->error('medicine', 'medicine Field Required');
+        }
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -78,8 +121,24 @@ class MedicineController extends Controller
      * @param  \App\Models\Medicine  $medicine
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Medicine $medicine)
+    public function destroy($id)
     {
-        //
+        $data = $this->medicineService->delete($id);
+        if ($data) {
+            $notification = $this->massage->success('Medicine', 'Medicine Deleted Successfully');
+        } else {
+            $notification = $this->massage->error('Medicine', 'System Error');
+        }
+        return redirect()->back()->with($notification);
+    }
+    public function status($id)
+    {
+        $data = $this->medicineService->status($id);
+        if ($data) {
+            $notification = $this->massage->success('Medicine', 'Medicine Status Updated Successfully');
+        } else {
+            $notification = $this->massage->error('Medicine', 'System Error');
+        }
+        return redirect()->back()->with($notification);
     }
 }

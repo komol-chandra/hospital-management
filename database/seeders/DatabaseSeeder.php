@@ -27,6 +27,12 @@ class DatabaseSeeder extends Seeder
             GenericSeeder::class,
             MedicineSeeder::class,
             ManufacturerSeeder::class,
+            EmployeeRollSeeder::class,
+            EmployeeSeeder::class,
+            SettingSeeder::class,
+            AccountTypeSeeder::class,
+            AccountSeeder::class,
+            PaymentSeeder::class,
         ]);
     }
 }

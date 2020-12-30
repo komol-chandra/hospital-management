@@ -127,8 +127,32 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="register.html">Prescription Add</a></li>
-                    <li><a href="login.html">Prescription List</a></li>
+                    <li><a href="{{ url('/admin/prescription/create') }}">Prescription Add</a></li>
+                    <li><a href="{{ url('/admin/prescription') }}">Prescription List</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-file-text-o"></i><span>Account</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('/admin/account') }}">Account List</a></li>
+                    <li><a href="{{ url('/admin/payment') }}">Payment list</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-bed"></i><span>Billing</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="add-bed.html">Add Bed</a></li>
+                    <li><a href="bed-list.html">Bed list</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -139,26 +163,20 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="calender.html">Employee Type List</a></li>
-                    <li><a href="buttons.html">Add Employee</a></li>
-                    <li><a href="panels.html">Employee List</a></li>                
+                    <li><a href="{{ url('/admin/employee-roll') }}">Employee Type List</a></li>
+                    <li><a href="{{ url('/admin/employee/create') }}">Add Employee</a></li>
+                    <li><a href="{{ url('/admin/employee') }}">Employee List</a></li>                
                 </ul>
+            </li>
+            <li>
+                <a href="{{ url('/admin/setting') }}">
+                    <i class="fa fa-window-maximize"></i><span>Settings</span> 
+                </a>
             </li>
             {{-- 
             
         
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-bed"></i><span>Bed Manager</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="add-bed.html">Add Bed</a></li>
-                <li><a href="bed-list.html">Bed list</a></li>
-            </ul>
-        </li>
+        
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-file-text-o"></i><span>Notice</span>
@@ -225,11 +243,7 @@
             
         </ul>
     </li>
-    <li>
-        <a href="modals.html">
-            <i class="fa fa-window-maximize"></i><span> Modals</span> 
-        </a>
-    </li>
+    
     
     <li class="treeview">
         <a href="#">

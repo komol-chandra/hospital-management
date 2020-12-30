@@ -13,26 +13,26 @@ class DoctorService
     {
         return Doctor::with('departments')->orderBy('id', 'DESC')->get();
     }
+
     public function createOrUpdate($data)
     {
         $user_id = Auth::user()->id;
         if (!empty($data["id"])) {
             $doctor = Doctor::findOrFail($data['id']);
-            if ($data['picture']) {
+            if (isset($data['picture'])) {
                 if (File::exists($doctor->picture)) {
                     File::delete($doctor->picture);
                 }
+                $doctor->picture = $data['picture'];
             }
             $doctor->updated_by = $user_id;
         } else {
             $doctor = new Doctor();
             $doctor->created_by = $user_id;
         }
-        if (isset($data['picture'])) {
-            $doctor->picture = $data['picture'];
-        }
         return $doctor->fill($data)->save() ? $doctor : null;
     }
+
     public function getById($id)
     {
         return Doctor::with('departments')->findOrFail($id);

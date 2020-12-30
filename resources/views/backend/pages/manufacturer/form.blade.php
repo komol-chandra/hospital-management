@@ -21,5 +21,6 @@
 </div>
 <div class="col-sm-12 form-group">
     <label> picture</label>
-    {!! Form::file("picture", null, ["class"=>"form-control e_picture"]) !!}
+    <img style="height: 200px; width: 200px; border-radius: 100px;" id='e_picture' src="/backend/files/profile.jpg" alt="image" class='img-responsive e_picture'>
+    {!! Form::file("picture", null, ["class"=>"form-control e_picture","id"=>"e_picture","onchange"=>"readURL(this)"]) !!}
 </div>

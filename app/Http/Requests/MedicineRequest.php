@@ -33,7 +33,7 @@ class MedicineRequest extends FormRequest
             "details"         => "nullable",
             "per_box"         => "nullable",
             "price"           => "required",
-            "picture"         => "nullable|mimes:png,jpg",
+            "picture"         => "mimes:png,jpg,jpeg",
         ];
     }
     public function messages()
@@ -43,7 +43,7 @@ class MedicineRequest extends FormRequest
             'type_id.required'    => 'Type Name Field is Required',
             'generic_id.required' => 'Generic Name Field is Required',
             'price.required'      => 'Price Field is Required',
-            'picture.required'    => 'picture Field support only jpg and png file',
+            'picture.mimes'       => 'picture Field support only png,jpg,jpeg file',
         ];
     }
 }

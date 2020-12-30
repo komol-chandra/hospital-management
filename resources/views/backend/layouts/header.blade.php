@@ -2,11 +2,14 @@
     <a href="{{ url('/admin') }}" class="logo"> <!-- Logo -->
         <span class="logo-mini">
             <!--<b>A</b>H-admin-->
-            <img src="{{ asset ('backend/assets/dist/img/mini-logo.png') }}" alt="">
+            {{-- <img src="{{ asset ('backend/assets/dist/img/mini-logo.png') }}" alt=""> --}}
+            <img src="/{{ $settings->small_logo ?? 'backend/files/logo.png' }}" >
         </span>
         <span class="logo-lg">
             <!--<b>Admin</b>H-admin-->
-            <img src="{{ asset ('backend/assets/dist/img/logo.png') }}" alt="">
+            {{-- <img src="{{ asset ('backend/assets/dist/img/logo.png') }}" alt=""> --}}
+            <img src="/{{ $settings->logo ?? 'backend/files/logo.png' }}" >
+
         </span>
     </a>
     <!-- Header Navbar -->
@@ -17,7 +20,7 @@
         </a>
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
-                
+                <li></li>
                
                 <!-- user -->
                 <li class="dropdown dropdown-user admin-user">
