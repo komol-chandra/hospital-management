@@ -98,7 +98,7 @@
                                         @csrf
                                     </form>
                                     <a class="btn btn-danger btn-xs" onclick="event.preventDefault(); Delete({{ $value->id }});"><i class="fa fa-trash-o"></i></a>
-                                    {{-- <button class="btn btn-info btn-xs edit" data-toggle="modal" type="button" data="{{$value->id}}" data-target="#modal-edit"><i class="fa fa-pencil"></i></button>    --}}
+                                    <button class="btn btn-info btn-xs edit" data-toggle="modal" type="button" data="{{$value->id}}" data-target="#modal-edit"><i class="fa fa-pencil"></i></button>   
                                 </td>
                                 
                             </tr>
@@ -158,15 +158,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h1 class="modal-title">Update Test</h1>
+                <h1 class="modal-title">Update Manufacturer</h1>
             </div>
             <div class="modal-body">
-            {{-- {!! Form::open(['url' => '/admin/manufacturer/'.$data['id'].'','method'=>'put','files'=>true,'id'=>'form_update']) !!} --}}
+            {!! Form::open(['url' => '/admin/manufacturer/'.$value->id.'','method'=>'put','files'=>true,'id'=>'form_update']) !!}
             {!! Form::hidden("id", null, ["class"=>"form-control e_id"]) !!}
-            @include('backend.pages.test.form');
+            @include('backend.pages.manufacturer.form');
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger close2" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger " id="close2" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-success">Update changes</button>
             </div>
             {!! Form::close() !!}

@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorDepartmentController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\EmployeeRollController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GenericController;
 use App\Http\Controllers\ManufacturerController;
@@ -12,8 +15,11 @@ use App\Http\Controllers\MedicineTypeController;
 use App\Http\Controllers\NewAppointmentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientTestController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -85,9 +91,27 @@ Route::prefix('admin')->group(function () {
         Route::get('/generic/status/{id}', [GenericController::class, 'status']);
         //admin Medicine
         Route::resource('/medicine', MedicineController::class);
+        Route::get('/medicine/status/{id}', [MedicineController::class, 'status']);
         //admin Manufacturer
         Route::resource('/manufacturer', ManufacturerController::class);
         Route::get('/manufacturer/status/{id}', [ManufacturerController::class, 'status']);
+        //admin Prescription
+        Route::resource('/prescription', PrescriptionController::class);
+        Route::get('/prescription/status/{id}', [PrescriptionController::class, 'status']);
+
+        Route::resource('/employee-roll', EmployeeRollController::class);
+        Route::get('/employee-roll/status/{id}', [EmployeeRollController::class, 'status']);
+
+        Route::resource('/employee', EmployeeController::class);
+        Route::get('/employee/status/{id}', [EmployeeController::class, 'status']);
+
+        Route::resource('/setting', SettingController::class);
+
+        Route::resource('/account', AccountController::class);
+        Route::get('/account/status/{id}', [AccountController::class, 'status']);
+
+        Route::resource('/payment', PaymentController::class);
+        Route::get('/payment/status/{id}', [PaymentController::class, 'status']);
 
     });
 });

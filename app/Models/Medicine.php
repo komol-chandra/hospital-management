@@ -24,4 +24,24 @@ class Medicine extends Model
         "price",
         "status",
     ];
+    public function user()
+    {
+        return $this->belongsTo("App\Models\User", "created_by", "id");
+    }
+    public function medicineType()
+    {
+        return $this->belongsTo("App\Models\MedicineType", "type_id", "id");
+    }
+    public function generic()
+    {
+        return $this->belongsTo("App\Models\Generic", "generic_id", "id");
+    }
+    public function manufacturer()
+    {
+        return $this->belongsTo("App\Models\Manufacturer", "manufacturer_id", "id");
+    }
+    public function medicineGet()
+    {
+        return $this->hasMany(PrescriptionMedicine::class, 'medicine_id', 'id');
+    }
 }
