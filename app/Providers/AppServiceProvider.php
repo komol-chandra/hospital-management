@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Setting;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -26,13 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Paginator::useBootstrap();
-        // $userProvider = User::
-        // Form::macro('selectTest', function ($name, $selected = null, $options = []) {
-        //     $testService = new TestService();
-        //     $data = $testService->getDropdownList();
-        //     return Form::select($name, $data, $selected, $options);
-        // });
+        Paginator::useBootstrap();
 
         View::composer(["backend.layouts.app"], function ($view) {
 
@@ -59,6 +54,36 @@ class AppServiceProvider extends ServiceProvider
             }));
         });
         View::composer(["backend.pages.prescription.invoice"], function ($view) {
+
+            $view->with("settings", Cache::rememberForever("settings", function () {
+                return Setting::first();
+            }));
+        });
+        View::composer(["backend.pages.account-invoice.create"], function ($view) {
+
+            $view->with("settings", Cache::rememberForever("settings", function () {
+                return Setting::first();
+            }));
+        });
+        View::composer(["backend.pages.account-invoice.form"], function ($view) {
+
+            $view->with("settings", Cache::rememberForever("settings", function () {
+                return Setting::first();
+            }));
+        });
+        View::composer(["backend.pages.account-invoice.view"], function ($view) {
+
+            $view->with("settings", Cache::rememberForever("settings", function () {
+                return Setting::first();
+            }));
+        });
+        View::composer(["frontend.layouts.header"], function ($view) {
+
+            $view->with("settings", Cache::rememberForever("settings", function () {
+                return Setting::first();
+            }));
+        });
+        View::composer(["frontend.layouts.footer"], function ($view) {
 
             $view->with("settings", Cache::rememberForever("settings", function () {
                 return Setting::first();

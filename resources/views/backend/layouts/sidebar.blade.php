@@ -2,7 +2,7 @@
     <div class="sidebar">
         <div class="user-panel">
             <div class="image pull-left">
-                <img src="{{ asset ('backend/files/profile.jpg') }}" class="img-circle" alt="User Image">
+                <img src="/{{ Auth::user()->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image">
             </div>
             <div class="info">
                 <h4>Welcome</h4>
@@ -67,7 +67,7 @@
                     
                 </ul>
             </li>
-            <li class="treeview">
+            {{-- <li class="treeview">
                 <a href="#">
                     <i class="fa fa-check-square-o"></i><span>Appionment</span>
                     <span class="pull-right-container">
@@ -78,7 +78,7 @@
                     <li><a href="{{ url('/admin/appointment/create') }}">Add appoinemnt</a></li>
                     <li><a href="{{ url('/admin/appointment') }}">Appionment list</a></li>
                 </ul>
-            </li>
+            </li> --}}
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-credit-card-alt"></i><span>Online Appionment</span>
@@ -141,6 +141,7 @@
                 <ul class="treeview-menu">
                     <li><a href="{{ url('/admin/account') }}">Account List</a></li>
                     <li><a href="{{ url('/admin/payment') }}">Payment list</a></li>
+                    <li><a href="{{ url('/admin/account-invoice') }}">Account Invoice list</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -151,8 +152,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="add-bed.html">Add Bed</a></li>
-                    <li><a href="bed-list.html">Bed list</a></li>
+                    <li><a href="{{ url('/admin/service') }}">Service</a></li>
+                    <li><a href="{{ url('/admin/payment-method') }}">payment method</a></li>
                 </ul>
             </li>
             <li class="treeview">
@@ -173,22 +174,34 @@
                     <i class="fa fa-window-maximize"></i><span>Settings</span> 
                 </a>
             </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-file-text-o"></i><span>Notice</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="add-notice.html">Add Notice</a></li>
+                    <li><a href="not-list.html">Notice list</a></li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-columns"></i><span> Mail</span>
+                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="layout_fixed.html">Fixed layout</a></li>
+                    <li><a href="layout_boxed.html">Boxed layout</a></li>
+                    <li><a href="layout_collapsed_sidebar.html">collapsed layout</a></li>
+                </ul>
+            </li>
             {{-- 
             
         
         
-        <li class="treeview">
-            <a href="#">
-                <i class="fa fa-file-text-o"></i><span>Notice</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="add-notice.html">Add Notice</a></li>
-                <li><a href="not-list.html">Notice list</a></li>
-            </ul>
-        </li>
+        
         
         <li>
             <a href="mailbox.html">
@@ -245,17 +258,7 @@
     </li>
     
     
-    <li class="treeview">
-        <a href="#">
-            <i class="fa fa-columns"></i><span> Layout</span>
-            <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
-        </a>
-        <ul class="treeview-menu">
-            <li><a href="layout_fixed.html">Fixed layout</a></li>
-            <li><a href="layout_boxed.html">Boxed layout</a></li>
-            <li><a href="layout_collapsed_sidebar.html">collapsed layout</a></li>
-        </ul>
-    </li>                 --}}
+                     --}}
 </ul>
 </div> <!-- /.sidebar -->
 </aside>

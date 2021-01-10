@@ -30,8 +30,8 @@
     <label>Message</label>
     {!! Form::textarea("message", null,["class"=>"form-control"]) !!}
 </div>
-<div class="col-sm-12 form-group">
+{{-- <div class="col-sm-12 form-group">
     <label>Want to Register</label>
     {!! Form::checkbox("checkbox",null,["class"=>"form-control"]) !!}
 
-</div>
+</div> --}}

@@ -2,21 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DoctorDepartmentExport;
 use App\Http\Requests\DoctorDepartmentRequest;
 use App\Models\DoctorDepartment;
 use App\Services\DoctorDepartmentService;
 use App\Services\ResponseService;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Excel;
 
 class DoctorDepartmentController extends Controller
 {
     protected $doctorDepartmentService;
     protected $responseService;
-    public function __construct()
+    protected $excel;
+    public function __construct(Excel $excel)
     {
         $this->doctorDepartmentService = new DoctorDepartmentService;
         $this->responseService = new ResponseService;
-
+        $this->excel = $excel;
+    }
+    public function downloadExcel()
+    {
+        return $this->excel->download(new DoctorDepartmentExport, 'departments.xlsx', Excel::XLSX);
+    }
+    public function downloadPdf()
+    {
+        return $this->excel->download(new DoctorDepartmentExport, 'departments.pdf', Excel::DOMPDF);
+    }
+    public function downloadCVS()
+    {
+        return $this->excel->download(new DoctorDepartmentExport, 'departments.csv', Excel::CSV);
     }
     /**
      * Display a listing of the resource.
@@ -166,4 +181,5 @@ class DoctorDepartmentController extends Controller
         return redirect()->back()->with($notification);
 
     }
+
 }

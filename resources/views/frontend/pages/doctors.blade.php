@@ -37,10 +37,11 @@
                                         <h3 class="h5 mb-4">{{ $value->name }}</h3>
                                     </div>
                                     <div class="d-inline-block">
-                                        <span class="badge badge-primary badge-pill badge-bigger mb-3">Senior Lecturer</span>
+                                        <span class="badge badge-primary badge-pill badge-bigger mb-3">{{ $value->departments->name }}</span>
                                     </div>
                                     <p class="font-size-1">Email: <span>{{ $value->email }}</span></p>
-                                    <p class="font-size-1">{{ $value->biography }}</p>
+                                <p class="font-size-1">Bio: <span>{!! $value->biography !!}</span></p>
+
                                     <ul class="list-inline mt-auto mb-0">
                                         <li class="list-inline-item mx-0">
                                         <a class="btn btn-sm btn-icon btn-soft-secondary"
@@ -67,7 +68,9 @@
                                 <div class="col-sm-5">
                                     <img class="img-fluid rounded mx-auto" src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}"  alt="Alison Frami" style="border-radius: 100px !important;">
                                 </div>
+                                
                             </div>
+                            <a href="{{url('frontend/doctorView/'.$value->id)}}" class="btn btn-info btn-sm mt-3">View Doctor</a>
                         </div>
                     </div>
                 </div>

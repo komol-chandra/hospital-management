@@ -55,7 +55,7 @@
                                                 </div>
                                                 <div>
                                                     <ul>
-                                                        <li>{{ $doctor->biography }}</li>
+                                                        <li>{!! $doctor->biography !!}</li>
                                                         
                                                     </ul>
                                                 </div>
@@ -119,7 +119,7 @@
                                                 </div>
                                                 <div>
                                                     <ul>
-                                                        <li>{{ $doctor->education }}
+                                                        <li>{!! $doctor->education !!}
                                                             <div class="fluency fluency-4"></div>
                                                         </li>
                                                     </ul>

@@ -21,7 +21,6 @@ class Setting extends Model
         "instagram",
         "google",
         "youtube",
-        "instagram",
         "footer_text",
         "footer_year",
         "favicon",
