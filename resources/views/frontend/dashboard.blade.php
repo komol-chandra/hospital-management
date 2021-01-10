@@ -60,9 +60,9 @@
                               <h3 class="h5 mb-4">{{ $value->name }}</h3>
                           </div>
                           <div class="d-inline-block">
-                              <span class="badge badge-primary badge-pill badge-bigger mb-3">{{ $value->name }}</span>
+                              <span class="badge badge-primary badge-pill badge-bigger mb-3">{{ $value->departments->name }}</span>
                           </div>
-                          <p class="font-size-1">{{ $value->biography }}</p>
+                          <p class="font-size-1">{!! $value->biography !!}</p>
                           <ul class="list-inline mt-auto mb-0">
                               <li class="list-inline-item mx-0">
                               <a class="btn btn-sm btn-icon btn-soft-secondary"
@@ -86,7 +86,7 @@
                       </div>
                       <div class="col-sm-6">
                       <img class="img-fluid rounded mx-auto"
-                      src="/{{ $doctor->picture ?? 'backend/files/profile.jpg' }}"
+                      src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}"
                           alt="Alison Frami">
                       </div>
                 </div>
@@ -99,7 +99,7 @@
         <center>
         <a class="btn btn-sm btn-primary btn-wide transition-3d-hover pull-right"
           href="{{ url('/frontend/doctors') }}">
-            Learn More <span class="fas fa-angle-right ml-2"></span></a>
+            View More <span class="fas fa-angle-right ml-2"></span></a>
         </center>
         </div>
         <!-- End Slick Carousel -->

@@ -26,3 +26,6 @@
     </div>
 </div>
 @endsection
+@section('js')
+<script src="{{asset('backend/script/doctor.js')}}"></script>
+@endsection

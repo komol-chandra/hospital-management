@@ -4,12 +4,21 @@ namespace App\Services;
 use App\Models\Day;
 use App\Models\Doctor;
 use App\Models\DoctorDepartment;
+use App\Models\Schedule;
 
 class FrontendService
 {
     public function getActiveDoctors()
     {
         return Doctor::where('status', '1')->orderBy('id', 'DESC')->get();
+    }
+    public function getByDoctorId($id)
+    {
+        return Doctor::findOrFail($id);
+    }
+    public function getByScheduleId($id)
+    {
+        return Schedule::where('doctor_id', $id)->get();
     }
     public function getLimitedDoctors()
     {

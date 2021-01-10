@@ -45,7 +45,7 @@
             <tr>\
                 <td>\
                 <div class='form-group' >\
-                    <label>Blood group</label>\
+                    <label>Medicine Name</label>\
                     <select class='form-control' name='medicine_id[]' style='width: 170px;'>\
                         <option>Select</option>\
                     @foreach($medicineJs as $value)\

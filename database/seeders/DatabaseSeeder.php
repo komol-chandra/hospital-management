@@ -33,6 +33,8 @@ class DatabaseSeeder extends Seeder
             AccountTypeSeeder::class,
             AccountSeeder::class,
             PaymentSeeder::class,
+            ServiceSeeder::class,
+            PaymentMethodSeeder::class,
         ]);
     }
 }

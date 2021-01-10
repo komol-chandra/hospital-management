@@ -26,12 +26,13 @@
                 <li class="dropdown dropdown-user admin-user">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
                     <div class="user-image">
-                    <img src="{{ asset('backend/files/profile.jpg') }}" class="img-circle" height="40" width="40" alt="User Image">
+                    <img src="/{{ Auth::user()->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" height="40" width="40" alt="User Image">
                     </div>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="{{ url('/admin/user-profile') }}"><i class="fa fa-users"></i> User Profile</a></li>
-                        <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
+                        <li><a href="{{ url('/admin/user-profile') }}"><i class="fa fa-users"></i> View Profile</a></li>
+                        <li><a href="{{  url('/admin/user-profile/create')  }}"><i class="fa fa-gear"></i> Change Profile</a></li>
+                        <li><a href="{{  url('/admin/password')  }}"><i class="fa fa-gear"></i> Change Password</a></li>
                         <form method="POST" action="{{ route('logout') }}">@csrf
                         <li><a style="padding-left: 13px;" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); this.closest('form').submit();">

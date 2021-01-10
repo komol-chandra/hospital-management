@@ -7,11 +7,11 @@
           <!-- Address -->
           <address>
             <ul class="list-group list-group-flush list-group-borderless mb-0">
-              <li class="list-group-item">000111222</li>
+              <li class="list-group-item">{{ $settings->contact }}</li>
               <li class="list-group-item">
-                <a href="mailto:damo@example.com">damo@example.com</a>
+                <a href="mailto:{{ $settings->email }}">{{ $settings->email }}</a>
               </li>
-              <li class="list-group-item">4333 Factoria Blvd SE, Bellevue, WA 98006</li>
+              <li class="list-group-item">{{ $settings->address }}</li>
             </ul>
           </address>
           <!-- End Address -->
@@ -37,11 +37,11 @@
                 <!-- List Group -->
                 <ul class="list-group list-group-flush list-group-borderless mb-0">
                   <li><a class="list-group-item list-group-item-action"
-                    href="home/terms_conditions.html">Terms & Conditions</a></li>
+                    href="#">Terms & Conditions</a></li>
                     <li><a class="list-group-item list-group-item-action"
-                      href="home/privacy_policy.html">Privacy Policy</a></li>
+                      href="#">Privacy Policy</a></li>
                       <li><a class="list-group-item list-group-item-action" target="_blank"
-                        href="login.html">Login</a></li>
+                        href="#">Login</a></li>
                       </ul>
                       <!-- End List Group -->
                     </div>
@@ -62,44 +62,44 @@
                     <!-- End Logo -->
   
                     <div class="mb-4">
-                      <p class="small text-muted">© All the rights reserved to Komol</p>
+                      <p class="small text-muted">© All the rights reserved to {{ $settings->footer_text }} form {{ $settings->footer_year }}</p>
                     </div>
   
                     <!-- Social Networks -->
                     <ul class="list-inline mb-0">
                       <li class="list-inline-item mx-0">
                         <a class="btn btn-sm btn-icon btn-soft-secondary rounded-circle"
-                        href="http://www.facebook.com/" target="_blank">
+                        href="{{ $settings->facebook }}" target="_blank">
                         <span class="fab fa-facebook-f btn-icon__inner"></span>
                       </a>
                     </li>
                     <li class="list-inline-item mx-0">
                       <a class="btn btn-sm btn-icon btn-soft-secondary rounded-circle"
-                      href="http://www.instagram.com/" target="_blank">
+                      href="{{ $settings->instagram }}" target="_blank">
                       <span class="fab fa-instagram btn-icon__inner"></span>
                     </a>
                   </li>
                   <li class="list-inline-item mx-0">
                     <a class="btn btn-sm btn-icon btn-soft-secondary rounded-circle"
-                    href="http://www.twitter.com/" target="_blank">
+                    href="{{ $settings->twitter }}" target="_blank">
                     <span class="fab fa-twitter btn-icon__inner"></span>
                   </a>
                 </li>
                 <li class="list-inline-item mx-0">
                   <a class="btn btn-sm btn-icon btn-soft-secondary rounded-circle"
-                  href="http://www.google.com/" target="_blank">
+                  href="{{ $settings->google }}" target="_blank">
                   <span class="fab fa-google btn-icon__inner"></span>
                 </a>
               </li>
               <li class="list-inline-item mx-0">
                 <a class="btn btn-sm btn-icon btn-soft-secondary rounded-circle"
-                href="http://www.youtube.com/" target="_blank">
+                href="{{ $settings->youtube }}" target="_blank">
                 <span class="fab fa-youtube btn-icon__inner"></span>
               </a>
             </li>
             <li class="list-inline-item mx-0">
               <a class="btn btn-sm btn-icon btn-soft-secondary rounded-circle"
-              href="http://www.linkedin.com/" target="_blank">
+              href="{{ $settings->linkedin }}" target="_blank">
               <span class="fab fa-linkedin btn-icon__inner"></span>
             </a>
           </li>

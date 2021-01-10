@@ -29,6 +29,13 @@ class FrontendController extends Controller
         $data = $this->frontendService->getActiveDoctors();
         return view('frontend.pages.doctors', compact('data'));
     }
+    public function doctorView($id)
+    {
+        $doctor = $this->frontendService->getByDoctorId($id);
+        $schedules = $this->frontendService->getByScheduleId($id);
+        // dd($schedules);
+        return view('frontend.pages.doctorView', compact('doctor', 'schedules'));
+    }
     public function doctorId($id)
     {
         $doctors = Doctor::where('department_id', $id)->get();

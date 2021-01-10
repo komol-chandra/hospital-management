@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountInvoiceController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
@@ -16,9 +17,11 @@ use App\Http\Controllers\NewAppointmentController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientTestController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +50,7 @@ Route::prefix('frontend')->group(function () {
     Route::get('/appointment', [FrontendController::class, 'appointment']);
     //view doctors
     Route::get('/doctors', [FrontendController::class, 'getActiveDoctors']);
+    Route::get('/doctorView/{id}', [FrontendController::class, 'doctorView']);
     //to get doctor id under departments
     Route::get('/doctorId/{id}', [FrontendController::class, 'doctorId']);
     //to get doctor id for old patients
@@ -60,9 +64,15 @@ Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
         // admin panel profile
         Route::resource('/user-profile', ProfileController::class);
+        Route::get('/password', [ProfileController::class, 'password']);
+        Route::get('/matchPassword', [ProfileController::class, 'matchPassword']);
+        Route::post('/changePassword', [ProfileController::class, 'changePassword']);
         //admin panel department
         Route::resource('/department', DoctorDepartmentController::class);
         Route::get('/department/status/{id}', [DoctorDepartmentController::class, 'status']);
+        Route::get('/departmentExcel', [DoctorDepartmentController::class, 'downloadExcel']);
+        Route::get('/departmentPdf', [DoctorDepartmentController::class, 'downloadPdf']);
+        Route::get('/downloadCVS', [DoctorDepartmentController::class, 'downloadCVS']);
         //admin panel doctor
         Route::resource('/doctor', DoctorController::class);
         Route::get('/doctor/status/{id}', [DoctorController::class, 'status']);
@@ -112,6 +122,17 @@ Route::prefix('admin')->group(function () {
 
         Route::resource('/payment', PaymentController::class);
         Route::get('/payment/status/{id}', [PaymentController::class, 'status']);
+
+        Route::resource('/account-invoice', AccountInvoiceController::class);
+        Route::get('/account-invoice/status/{id}', [AccountInvoiceController::class, 'status']);
+
+        Route::get('/matchPatient', [AccountInvoiceController::class, 'matchPatient']);
+
+        Route::resource('/service', ServiceController::class);
+        Route::get('/service/status/{id}', [ServiceController::class, 'status']);
+
+        Route::resource('/payment-method', PaymentMethodController::class);
+        Route::get('/payment-method/status/{id}', [PaymentMethodController::class, 'status']);
 
     });
 });
