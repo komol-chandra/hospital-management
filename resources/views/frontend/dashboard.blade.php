@@ -142,3 +142,6 @@
     </div> --}}
   </main>
 @endsection
+@section('js')
+
+@endsection

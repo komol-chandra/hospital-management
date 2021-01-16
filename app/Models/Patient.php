@@ -23,6 +23,7 @@ class Patient extends Model
         "blood_id",
         "picture",
         "status",
+        "today_date",
     ];
     public function blood()
     {

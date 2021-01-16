@@ -39,6 +39,7 @@ class NewAppointmentService
         $appointment->department_id = $data['department_id'];
         $appointment->doctor_id = $data['doctor_id'];
         $appointment->message = $data['message'];
+        $appointment->today_date = $data['today_date'];
         $doctor_id = $data['doctor_id'];
         $date = $data['date'];
         $dateTime = new DateTime($date);

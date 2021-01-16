@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DoctorExport;
 use App\Http\Requests\DoctorRequest;
 use App\Models\Blood;
 use App\Models\Doctor;
@@ -10,17 +11,32 @@ use App\Services\DoctorService;
 use App\Services\ResponseService;
 use App\Traits\FileUpload;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Excel;
 
 class DoctorController extends Controller
 {
     use FileUpload;
     protected $doctorService;
     protected $responseService;
-    public function __construct()
+    protected $excel;
+    public function __construct(Excel $excel)
     {
         $this->doctorService = new DoctorService;
         $this->responseService = new ResponseService;
+        $this->excel = $excel;
+    }
+    public function doctorExcel()
+    {
+        return $this->excel->download(new DoctorExport, 'doctors.xlsx', Excel::XLSX);
 
+    }
+    public function doctorPdf()
+    {
+        return $this->excel->download(new DoctorExport, 'doctors.pdf', Excel::DOMPDF);
+    }
+    public function downloadCVS()
+    {
+        return $this->excel->download(new DoctorExport, 'doctors.csv', Excel::CSV);
     }
     /**
      * Display a listing of the resource.

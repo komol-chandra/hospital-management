@@ -19,6 +19,9 @@ class NewAppointment extends Model
         "department_id",
         "doctor_id",
         "message",
+        "created_at",
+        "today_date",
+
     ];
     public function departments()
     {

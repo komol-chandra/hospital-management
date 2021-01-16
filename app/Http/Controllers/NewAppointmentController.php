@@ -7,6 +7,7 @@ use App\Http\Requests\OldAppointmentRequest;
 use App\Models\NewAppointment;
 use App\Services\NewAppointmentService;
 use App\Services\ResponseService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class NewAppointmentController extends Controller
@@ -50,6 +51,7 @@ class NewAppointmentController extends Controller
     public function store(NewAppointmentRequest $request)
     {
         $data = $request->all();
+        $data['today_date'] = Carbon::now()->format('y-m-d');
         $newAppointment = $this->newAppointmentService->createNewAppointment($data);
         if ($newAppointment) {
             $notification = $this->message->success('Appointment', 'New Appointment Added Successfully ');
@@ -62,6 +64,8 @@ class NewAppointmentController extends Controller
     public function oldAppointmentStore(OldAppointmentRequest $request)
     {
         $data = $request->all();
+        $data['today_date'] = Carbon::now()->format('y-m-d');
+        // dd($data);
         $appointment = $this->newAppointmentService->createOldAppointment($data);
         if ($appointment) {
             $notification = $this->message->success('Appointment', 'New Appointment Added Successfully ');

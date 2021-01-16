@@ -27,6 +27,7 @@ class CreatePatientsTable extends Migration
             $table->text('picture')->nullable();
             $table->tinyInteger('status');
             $table->unsignedInteger('created_by');
+            $table->date('today_date');
             $table->unsignedInteger('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
