@@ -25,8 +25,9 @@ class CreateNewAppointmentsTable extends Migration
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('set null');
             $table->unsignedBigInteger('doctor_id')->nullable();
             $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('set null');
-            $table->string('message');
-            $table->tinyInteger('status')->nullable();
+            $table->string('message')->nullable();
+            $table->tinyInteger('status')->default(1);
+            $table->date('today_date')->nullable();
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
             $table->softDeletes();

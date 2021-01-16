@@ -25,6 +25,7 @@ class CreatePrescriptionsTable extends Migration
             $table->unsignedBigInteger('old_prescription_id')->nullable();
             $table->foreign('old_prescription_id')->references('id')->on('prescriptions')->onDelete('set null');
             $table->tinyInteger('status')->default(1);
+            $table->date('today_date');
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
             $table->softDeletes();

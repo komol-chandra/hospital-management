@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -28,6 +29,8 @@ class PatientSeeder extends Seeder
                 'gender'     => '1',
                 'status'     => '1',
                 'created_by' => '1',
+                'today_date' => Carbon::now()->format('y-m-d'),
+
             ]);
         }
     }

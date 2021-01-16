@@ -24,8 +24,7 @@
 <script src="{{ asset('backend/assets/plugins/modals/modalEffects.js')}}" type="text/javascript"></script>
 
 <script src="{{ asset('ckeditor/ckeditor.js')}}" type="text/javascript"></script>
-
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
 <script>
     function printDiv(divName) {
   var printContents = document.getElementById(divName).innerHTML;

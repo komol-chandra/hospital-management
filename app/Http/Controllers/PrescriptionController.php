@@ -7,6 +7,7 @@ use App\Models\Prescription;
 use App\Models\PrescriptionMedicine;
 use App\Services\PrescriptionService;
 use App\Services\ResponseService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -56,6 +57,7 @@ class PrescriptionController extends Controller
 
         try {
             $data = $request->all();
+            $data['today_date'] = Carbon::now()->format('y-m-d');
             $prescription = new Prescription();
             $user_id = Auth::user()->id;
             $prescription->created_by = $user_id;

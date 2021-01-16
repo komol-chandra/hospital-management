@@ -18,6 +18,7 @@ class Prescription extends Model
         "history",
         "note",
         "old_prescription_id",
+        "today_date",
     ];
     public function user()
     {

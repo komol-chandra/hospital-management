@@ -77,6 +77,15 @@ class AppServiceProvider extends ServiceProvider
                 return Setting::first();
             }));
         });
+        View::composer(["backend.pages.notice.view"], function ($view) {
+
+            $view->with("settings", Cache::rememberForever("settings", function () {
+                return Setting::first();
+            }));
+        });
+
+        //Front End Pages
+
         View::composer(["frontend.layouts.header"], function ($view) {
 
             $view->with("settings", Cache::rememberForever("settings", function () {

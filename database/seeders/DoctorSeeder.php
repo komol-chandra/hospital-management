@@ -37,7 +37,7 @@ class DoctorSeeder extends Seeder
         //     ]);
         // }
 
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 8; $i++) {
             DB::table('doctors')->insert([
                 'name'          => Str::random(10),
                 'email'         => Str::random(10) . '@gmail.com',
@@ -47,10 +47,10 @@ class DoctorSeeder extends Seeder
                 'specialist'    => Str::random(50),
                 'education'     => Str::random(50),
                 // 'birthday'      => rand(strtotime("Jan 01 2015"), strtotime("Nov 01 2016")),
-                'department_id' => '1',
-                'mobile'        => rand(11, 12),
-                'phone'         => rand(11, 12),
-                'gender'        => '1',
+                'department_id' => rand(1, 5),
+                'mobile'        => (+880) . rand(1800000000, 1899999999),
+                'phone'         => rand(1000000, 2000000),
+                'gender'        => rand(1, 2),
                 'status'        => '1',
                 'created_by'    => '1',
             ]);

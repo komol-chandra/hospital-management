@@ -182,8 +182,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="add-notice.html">Add Notice</a></li>
-                    <li><a href="not-list.html">Notice list</a></li>
+                    <li><a href="{{ url('/admin/notice/create') }}">Add Notice</a></li>
+                    <li><a href="{{ url('/admin/notice') }}">Notice list</a></li>
                 </ul>
             </li>
             <li class="treeview">

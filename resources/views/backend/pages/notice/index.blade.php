@@ -1,14 +1,15 @@
 @extends('backend.layouts.app')
 @section('content')
-@section('title','| Account')
-@section('header-title', 'Account')
-@section('breadcrumb', 'Account')
+@section('title', '|  notice')
+@section('header-title', 'notice')
+@section('breadcrumb', ' notice')
 <div class="row">
     <div class="col-sm-12">
         <div class="panel panel-bd lobidrag">
             <div class="panel-heading">
                 <div class="btn-group"> 
-                    <button type="button" class="btn btn-success m-r-2 m-b-5" data-toggle="modal" data-target="#modal-success"><i class="fa fa-plus"></i> Add New  Account</button>                      
+                    <a class="btn btn-success" href="{{ url('/admin/notice/create') }}"> <i class="fa fa-plus"></i> Add notice
+                    </a>  
                 </div>        
             </div>
             <div class="panel-body">
@@ -29,10 +30,10 @@
                             <div class="dataTables_length">
                                 <a class="btn btn-default buttons-copy btn-sm" tabindex="0">
                                     <span>Copy</span></a>
-                                    <a class="btn btn-default buttons-csv buttons-html5 btn-sm" tabindex="0"><span>CSV</span></a>
-                                    <a class="btn btn-default buttons-excel buttons-html5 btn-sm" tabindex="0"><span>Excel</span></a>
-                                    <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" tabindex="0"><span>PDF</span></a>
-                                    <a class="btn btn-default buttons-print btn-sm" tabindex="0"><span>Print</span></a>
+                                    {{-- <a class="btn btn-default buttons-csv buttons-html5 btn-sm" tabindex="0" href="{{ url('/admin/downloadCVS') }}"><span>CSV</span></a> --}}
+                                    <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" tabindex="0" href="{{ url('/admin/doctorPdf') }}"><span>PDF</span></a>
+                                    {{-- <a class="btn btn-default buttons-print btn-sm" tabindex="0"><span>Print</span></a> --}}
+                                    <a class="btn btn-default buttons-excel buttons-html5 btn-sm"  href="{{ url('/admin/doctorExcel') }}"><span>Excel</span></a>
                                     
                                 </div>
                         </div>
@@ -45,7 +46,7 @@
                                             <span class="glyphicon glyphicon-search"></span>
                                         </button>
                                     </span>
-                                </div>
+                                </div><!-- /input-group -->
                             </div>
                         </div>
                     </div>
@@ -54,22 +55,28 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Created By</th>
-                                <th>Type</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Status</th>
+                                <th>created By</th>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>designation</th>
+                                <th>Starting Time</th>
+                                <th>Ending Time</th>
+                                <th>status</th>
                                 <th>action</th>
                             </tr>
                         </thead>
                         <tbody>
-                        
+                    
                             @forelse($data as $key => $value)
                             <tr>
                                 <td>{{ $value->user->name }}</td>
-                                <td>{{ $value->accountType->name }}</td>
+                                <td>
+                                    <img src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="50" width="50">
+                                </td>
                                 <td>{{ $value->name }}</td>
-                                <td>{{ $value->description }}</td>
+                                <td>{!! $value->designation !!}</td>
+                                <td>{{ $value->start_date }}</td>
+                                <td>{{ $value->end_date }}</td>
                                 <td class="text-center">
                                     @if($value->status == 1)
                                     <i class="fa fa-circle" style="color:green"></i>
@@ -79,17 +86,17 @@
                                 </td>
                                 <td>
                                     @if($value->status == 1)
-                                    <a class="btn btn-danger btn-xs" id="status" href="/admin/account/status/{{ $value->id }}"><i class="fa fa-refresh"></i></a>
+                                    <a class="btn btn-danger btn-xs" id="status" href="/admin/notice/status/{{ $value->id }}"><i class="fa fa-refresh"></i></a>
                                     @else
-                                    <a class="btn btn-info btn-xs" id="status" href="/admin/account/status/{{ $value->id }}"><i class="fa fa-refresh"></i></a>
+                                    <a class="btn btn-info btn-xs" id="status" href="/admin/notice/status/{{ $value->id }}"><i class="fa fa-refresh"></i></a>
                                     @endif
                                     <form method="post" id="deleteForm">
                                         @method('delete')
                                         @csrf
                                     </form>
-                                    {{-- <a class="btn btn-info btn-xs" href="{{url('/admin/medicine-type/'.$value->id)}}"><i class="fa fa-eye"></i></a>  --}}
                                     <a class="btn btn-danger btn-xs" onclick="event.preventDefault(); Delete({{ $value->id }});"><i class="fa fa-trash-o"></i></a>
-                                    <button class="btn btn-info btn-xs edit" data-toggle="modal" type="button" data="{{$value->id}}" data-target="#modal-edit"><i class="fa fa-pencil"></i></button>   
+                                    <a class="btn btn-info btn-xs" href="{{url('admin/notice/'.$value->id)}}"><i class="fa fa-eye"></i></a> 
+                                    <a class="btn btn-info btn-xs" href="{{url('admin/notice/'.$value->id.'/edit')}}"><i class="fa fa-pencil"></i></a>   
                                 </td>
                                 
                             </tr>
@@ -99,70 +106,20 @@
                                 <td>NO DATA</td>
                                 <td>NO DATA</td>
                                 <td>NO DATA</td>
-                                <td>NO ACTION</td>
+                                <td>NO DATA</td>
+                                <td>NO Action</td>
+                                
                             </tr>
                             @endforelse
                                 
                             
                         </tbody>
-                       
                     </table>
-                    {{-- {{ $data->links() }} --}}
-
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- Add Modal -->
-<div class="modal fade modal-success" id="modal-success" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h1 class="modal-title">Add Account</h1>
-            </div>
-            <div class="modal-body">
-            {!! Form::open(['url' => '/admin/account','method'=>'post','files'=>true,'id'=>'form_insert']) !!}
-            @include('backend.pages.account.form');
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="close" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success">Save changes</button>
-            </div>
-            {!! Form::close() !!}
-
-        </div>
-    </div>
-</div>
-<!--Edit Modal -->
-<div class="modal fade modal-success" id="modal-edit" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h1 class="modal-title">Update Account</h1>
-            </div>
-            <div class="modal-body">
-            {!! Form::open(['url' => '/admin/account/'.$value->id.'','method'=>'put','files'=>true,'id'=>'form_update']) !!}
-            {!! Form::hidden("id", null, ["class"=>"form-control e_id"]) !!}
-            @include('backend.pages.account.form');
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger " id="close2" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success">Update changes</button>
-            </div>
-            {!! Form::close() !!}
-        </div>
-    </div>
-</div>
-
-
-
-@endsection
-@section('js')
 <script>
     function Delete(id){
     var id=id;
@@ -179,7 +136,7 @@
         buttons: [
             ['<button><b>YES</b></button>', function () {
                 var $form = $("#deleteForm").closest('form');
-                $form.attr('action','/admin/account/'+id);
+                $form.attr('action','/admin/notice/'+id);
                 $form.submit()
             }, true],
             ['<button>NO</button>', function (instance, toast) {
@@ -189,10 +146,4 @@
     });
 }
 </script>
-<script src="{{asset('backend/script/account.js')}}"></script>
-<!-- Javascript Requirements -->
-
-<!-- Laravel Javascript Validation -->
-{!! JsValidator::formRequest('App\Http\Requests\AccountRequest', '#form_insert'); !!}
-{!! JsValidator::formRequest('App\Http\Requests\AccountRequest', '#form_update'); !!}
 @endsection

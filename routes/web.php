@@ -14,6 +14,7 @@ use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\MedicineTypeController;
 use App\Http\Controllers\NewAppointmentController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\PatientTestController;
 use App\Http\Controllers\PaymentController;
@@ -62,6 +63,11 @@ Route::prefix('frontend')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
+        //dashboard
+        Route::get('/percentage', [DashboardController::class, 'percentage']);
+        Route::get('/counters', [DashboardController::class, 'counters']);
+        Route::get('/topDoctors', [DashboardController::class, 'topDoctors']);
+
         // admin panel profile
         Route::resource('/user-profile', ProfileController::class);
         Route::get('/password', [ProfileController::class, 'password']);
@@ -76,6 +82,8 @@ Route::prefix('admin')->group(function () {
         //admin panel doctor
         Route::resource('/doctor', DoctorController::class);
         Route::get('/doctor/status/{id}', [DoctorController::class, 'status']);
+        Route::get('/doctorExcel', [DoctorController::class, 'doctorExcel']);
+        Route::get('/doctorPdf', [DoctorController::class, 'doctorPdf']);
         //admin panel patient
         Route::resource('/patient', PatientController::class);
         Route::get('/patient/status/{id}', [PatientController::class, 'status']);
@@ -133,6 +141,9 @@ Route::prefix('admin')->group(function () {
 
         Route::resource('/payment-method', PaymentMethodController::class);
         Route::get('/payment-method/status/{id}', [PaymentMethodController::class, 'status']);
+
+        Route::resource('/notice', NoticeController::class);
+        Route::get('/notice/status/{id}', [NoticeController::class, 'status']);
 
     });
 });
