@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="panel-header">
                         <div class="col-sm-4 col-xs-12">
-                            <div class="dataTables_length">
+                            {{-- <div class="dataTables_length">
                                 <label>Display 
                                     <select name="example_length">
                                         <option value="10">10</option>
@@ -24,7 +24,7 @@
                                         <option value="50">50</option>
                                         <option value="100">100</option>
                                     </select> records per page</label>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-sm-4 col-xs-12">
                             <div class="dataTables_length">
@@ -38,7 +38,7 @@
                                 </div>
                         </div>
                         <div class="col-sm-4 col-xs-12">
-                            <div class="dataTables_length">
+                            {{-- <div class="dataTables_length">
                                 <div class="input-group custom-search-form">
                                     <input type="search" class="form-control" placeholder="search..">
                                     <span class="input-group-btn">
@@ -47,7 +47,7 @@
                                         </button>
                                     </span>
                                 </div><!-- /input-group -->
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -72,9 +72,9 @@
                                 <td>
                                     <img src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="50" width="50">
                                 </td>
-                                <td>{{ $value->name }}</td>
-                                <td>{{ $value->departments->name ?? '' }}</td>
-                                <td>{{ $value->mobile }}</td>
+                                <td>{{ $value->name ?? null }}</td>
+                                <td>{{ $value->departments->name ?? null }}</td>
+                                <td>{{ $value->mobile ?? null}}</td>
                                 <td class="text-center">
                                     @if($value->status == 1)
                                     <i class="fa fa-circle" style="color:green"></i>

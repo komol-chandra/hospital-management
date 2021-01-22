@@ -16,6 +16,28 @@
                 <a href="{{ url('/admin') }}"><i class="fa fa-hospital-o"></i><span>Dashboard</span>
                 </a>
             </li>
+            @can('RBAC')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-credit-card-alt"></i><span>RBAC</span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    @can('Role')
+                    <li><a href="{{ url('/admin/rbac/role') }}">Role</a></li>
+                    @endcan
+                    @can('User')
+                    <li><a href="{{ url('/admin/rbac/user') }}">User</a></li>
+                    @endcan
+                    @can('User_Access')
+                    <li><a href="{{ url('/admin/rbac/user_access') }}">User Access</a></li>
+                    @endcan
+                </ul>
+            </li>
+            @endcan
+            @can('Department')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-sitemap"></i><span>Department</span>
@@ -24,10 +46,16 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    @can('Department_Add')
                     <li><a href="{{ url('/admin/department/create') }}">Add Department</a></li>
+                    @endcan
+                    @can('Department_List')
                     <li><a href="{{ url('/admin/department') }}">Department list</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
+            @can('Doctor')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-user-md"></i><span>Doctor</span>
@@ -36,11 +64,16 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ url('/admin/doctor/create') }}">Add Doctor</a></li>
+                    @can('Doctor_Add')
+                    <li><a href="{{ url('/admin/doctor/create') }}">Add Doctor</a></li> 
+                    @endcan
+                    @can('Doctor_List')
                     <li><a href="{{ url('/admin/doctor') }}">Doctor list</a></li>
-                    
+                    @endcan
                 </ul>
-            </li>
+            </li> 
+            @endcan
+            @can('Patient')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-user"></i><span>Patient</span>
@@ -49,11 +82,16 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    @can('Patient_Add')
                     <li><a href="{{ url('/admin/patient/create') }}">Add patient</a></li>
+                    @endcan
+                    @can('Patient_List')
                     <li><a href="{{ url('/admin/patient') }}">patient list</a></li>
+                    @endcan
                 </ul>
             </li>
-            
+            @endcan
+            @can('Schedule')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-list-alt"></i> <span>Schedule</span>
@@ -62,11 +100,16 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    @can('Schedule_Add')
                     <li><a href="{{ url('/admin/schedule/create') }}">Add schedule</a></li>
+                    @endcan
+                    @can('Schedule_List')
                     <li><a href="{{ url('/admin/schedule') }}">schedule list</a></li>
-                    
+                    @endcan
                 </ul>
             </li>
+            @endcan
+            
             {{-- <li class="treeview">
                 <a href="#">
                     <i class="fa fa-check-square-o"></i><span>Appionment</span>
@@ -79,6 +122,7 @@
                     <li><a href="{{ url('/admin/appointment') }}">Appionment list</a></li>
                 </ul>
             </li> --}}
+            @can('Appointment')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-credit-card-alt"></i><span>Online Appionment</span>
@@ -88,9 +132,13 @@
                 </a>
                 <ul class="treeview-menu">
                     {{-- <li><a href="add-payment.html">Add payment</a></li> --}}
+                    @can('Appointment_list')
                     <li><a href="{{ url('/admin/new_appointments') }}">Appionment list</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
+            @can('Test')
             <li class="treeview">
                     <a href="#">
                     <i class="fa fa-file-text"></i><span>Test</span>
@@ -99,26 +147,46 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ url('/admin/test') }}">Test Type View</a></li>
-                    <li><a href="{{ url('/admin/patient-test/create') }}">Test Create</a></li>
-                    <li><a href="{{ url('/admin/patient-test') }}">Test View</a></li>
+                    @can('Test_Type')
+                    <li><a href="{{ url('/admin/test') }}">Test Type List</a></li>
+                    @endcan
+                    @can('Test_Add')
+                    <li><a href="{{ url('/admin/patient-test/create') }}">Test Add</a></li>
+                    @endcan
+                    @can('Test_List')
+                    <li><a href="{{ url('/admin/patient-test') }}">Test List</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
+            @can('Medicine')
             <li class="treeview">
-                <a href="widgets.html">
+                <a href="#">
                     <i class="fa fa-user-circle-o"></i><span>Medicine</span>
                     <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    @can('Medicine_Type')
                     <li><a href="{{ url('/admin/medicine-type') }}">Medicine Type list</a></li>
+                    @endcan
+                    @can('Generic_List')
                     <li><a href="{{ url('/admin/generic') }}">Generic list</a></li>
+                    @endcan
+                    @can('Manufacturer_List')
                     <li><a href="{{ url('/admin/manufacturer') }}">Manufacture list</a></li>
+                    @endcan
+                    @can('Add_Medicine')
                     <li><a href="{{ url('/admin/medicine/create') }}">Add Medicine</a></li>
-                    <li><a href="{{ url('/admin/medicine') }}">Medicine list</a></li>                    
+                    @endcan
+                    @can('Medicine_List')
+                    <li><a href="{{ url('/admin/medicine') }}">Medicine list</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
+            @can('Prescription')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-file-text"></i><span>Prescription</span>
@@ -127,10 +195,16 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    @can('Prescription_Add')
                     <li><a href="{{ url('/admin/prescription/create') }}">Prescription Add</a></li>
+                    @endcan
+                    @can('Prescription_List')
                     <li><a href="{{ url('/admin/prescription') }}">Prescription List</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
+            @can('Account')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-file-text-o"></i><span>Account</span>
@@ -139,11 +213,20 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    @can('Account_List')
                     <li><a href="{{ url('/admin/account') }}">Account List</a></li>
+                    @endcan
+                    @can('Payment_List')
                     <li><a href="{{ url('/admin/payment') }}">Payment list</a></li>
+                    @endcan
+                    @can('Account_Invoice_List')
                     <li><a href="{{ url('/admin/account-invoice') }}">Account Invoice list</a></li>
+                    @endcan
+
                 </ul>
             </li>
+            @endcan
+            @can('Billing')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-bed"></i><span>Billing</span>
@@ -152,10 +235,20 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    @can('Service_Billing')
                     <li><a href="{{ url('/admin/service') }}">Service</a></li>
+                    @endcan
+                    @can('Payment_Billing')
                     <li><a href="{{ url('/admin/payment-method') }}">payment method</a></li>
+                    @endcan
+                    @can('Billing_Invoice')
+                    <li><a href="{{ url('/admin') }}">Billing Invoice</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
+            
+            @can('Human_Resource')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-list-alt fw"></i><span>Human Resource</span>
@@ -164,16 +257,26 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    @can('Employee_Type')
                     <li><a href="{{ url('/admin/employee-roll') }}">Employee Type List</a></li>
+                    @endcan
+                    @can('Employee_Add')
                     <li><a href="{{ url('/admin/employee/create') }}">Add Employee</a></li>
-                    <li><a href="{{ url('/admin/employee') }}">Employee List</a></li>                
+                    @endcan
+                    @can('Employee_List')
+                    <li><a href="{{ url('/admin/employee') }}">Employee List</a></li>
+                    @endcan
                 </ul>
             </li>
+            @endcan
+            @can('Settings')
             <li>
                 <a href="{{ url('/admin/setting') }}">
                     <i class="fa fa-window-maximize"></i><span>Settings</span> 
                 </a>
             </li>
+            @endcan
+            @can('Notice')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-file-text-o"></i><span>Notice</span>
@@ -182,21 +285,23 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
+                    @can('Notice_Add')
                     <li><a href="{{ url('/admin/notice/create') }}">Add Notice</a></li>
+                    @endcan
+                    @can('Notice_List')
                     <li><a href="{{ url('/admin/notice') }}">Notice list</a></li>
+                    @endcan
+
                 </ul>
             </li>
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-columns"></i><span> Mail</span>
-                    <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+            @endcan
+            @can('Mail')
+            <li>
+                <a href="{{ url('/admin/mail') }}">
+                    <i class="fa fa-window-maximize"></i><span>Mail</span> 
                 </a>
-                <ul class="treeview-menu">
-                    <li><a href="layout_fixed.html">Fixed layout</a></li>
-                    <li><a href="layout_boxed.html">Boxed layout</a></li>
-                    <li><a href="layout_collapsed_sidebar.html">collapsed layout</a></li>
-                </ul>
             </li>
+            @endcan
             {{-- 
             
         

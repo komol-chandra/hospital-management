@@ -29,5 +29,12 @@ class Patient extends Model
     {
         return $this->belongsTo("App\Models\Blood", "blood_id", 'id');
     }
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('name', 'LIKE', '%' . $search . '%')
+            ->orWhere('code', 'LIKE', '%' . $search . '%')
+            ->orWhere('email', 'LIKE', '%' . $search . '%')
+            ->orWhere('mobile', 'LIKE', '%' . $search . '%');
+    }
 
 }

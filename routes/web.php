@@ -10,6 +10,7 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeRollController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\GenericController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\ManufacturerController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\MedicineTypeController;
@@ -21,10 +22,14 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserAccessController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -61,12 +66,25 @@ Route::prefix('frontend')->group(function () {
     Route::post('/old_appointments', [NewAppointmentController::class, 'oldAppointmentStore']);
 });
 
+Route::prefix('admin/rbac')->group(function () {
+    Route::middleware('auth')->group(function () {
+        Route::resource('/role', RoleController::class);
+        Route::get('/roleList', [RoleController::class, 'roleList']);
+        Route::resource('/role_permission', RoleHasPermissionController::class);
+        Route::resource('/user', UserController::class);
+        Route::get('/userList', [UserController::class, 'userList']);
+        Route::resource('/user_access', UserAccessController::class);
+        Route::get('/userAccessList', [UserAccessController::class, 'userAccessList']);
+
+    });
+});
 Route::prefix('admin')->group(function () {
     Route::middleware('auth')->group(function () {
         //dashboard
         Route::get('/percentage', [DashboardController::class, 'percentage']);
         Route::get('/counters', [DashboardController::class, 'counters']);
         Route::get('/topDoctors', [DashboardController::class, 'topDoctors']);
+        Route::get('/notices', [DashboardController::class, 'notices']);
 
         // admin panel profile
         Route::resource('/user-profile', ProfileController::class);
@@ -87,9 +105,11 @@ Route::prefix('admin')->group(function () {
         //admin panel patient
         Route::resource('/patient', PatientController::class);
         Route::get('/patient/status/{id}', [PatientController::class, 'status']);
+        Route::get('/patientList', [PatientController::class, 'patientList']);
         //admin panel schedule
         Route::resource('/schedule', ScheduleController::class);
         Route::get('/schedule/status/{id}', [ScheduleController::class, 'status']);
+        Route::get('/scheduleList', [ScheduleController::class, 'scheduleList']);
         //admin panel appointment
         Route::resource('/appointment', AppointmentController::class);
         Route::get('/appointment/doctorId/{id}', [AppointmentController::class, 'doctorId']);
@@ -144,6 +164,8 @@ Route::prefix('admin')->group(function () {
 
         Route::resource('/notice', NoticeController::class);
         Route::get('/notice/status/{id}', [NoticeController::class, 'status']);
+
+        Route::resource('/mail', MailController::class);
 
     });
 });

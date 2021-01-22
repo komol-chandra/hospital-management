@@ -13,7 +13,7 @@
             </div>
             <div class="panel-body">
                 <div class="col-sm-12">
-                    {!! Form::open(['url' => '/admin/schedule','method'=>'post']) !!}
+                    {!! Form::open(['url' => '/admin/schedule','method'=>'post',"id"=>"form_insert"]) !!}
                     @include('backend.pages.schedule.form')
                         <div class="col-sm-12 reset-button">
                             <button type="submit" class="btn btn-success">Save</button>
@@ -25,4 +25,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+{!! JsValidator::formRequest('App\Http\Requests\ScheduleRequest', '#form_insert'); !!}
 @endsection

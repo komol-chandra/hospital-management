@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Doctor;
 use App\Models\Employee;
 use App\Models\NewAppointment;
+use App\Models\Notice;
 use App\Models\Patient;
 use App\Models\Prescription;
 use Carbon\Carbon;
@@ -48,5 +49,13 @@ class DashboardController extends Controller
     public function topDoctors()
     {
         // $data['topDoctors']= NewAppointment::where()
+    }
+    public function notices()
+    {
+        $firstDay = Carbon::now()->startOfMonth()->toDateString();
+        $toDay = Carbon::now()->toDateString();
+        $notices = Notice::where('status', '1')->whereBetween('today_date', [$firstDay, $toDay])->get();
+        return view('backend.notice', compact('notices'));
+
     }
 }

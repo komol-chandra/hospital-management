@@ -27,4 +27,11 @@ class Schedule extends Model
     {
         return $this->belongsTo("App\Models\Doctor", "doctor_id", "id");
     }
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('doctor_id', 'LIKE', '%' . $search . '%')
+            ->orWhere('day_id', 'LIKE', '%' . $search . '%')
+            ->orWhere('starting', 'LIKE', '%' . $search . '%')
+            ->orWhere('ending', 'LIKE', '%' . $search . '%');
+    }
 }

@@ -13,7 +13,7 @@
             </div>
             <div class="panel-body">
                 <div class="col-sm-12">
-                    {!! Form::open(['url' => '/admin/patient','method'=>'post','files'=>true]) !!}
+                    {!! Form::open(['url' => '/admin/patient','method'=>'post','files'=>true,"id"=>"form_insert"]) !!}
                     @include('backend.pages.patient.form')
                         <div class="col-sm-12 reset-button">
                             <button type="submit" class="btn btn-success">Save</button>
@@ -25,4 +25,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+{!! JsValidator::formRequest('App\Http\Requests\PatientRequest', '#form_insert'); !!}
 @endsection

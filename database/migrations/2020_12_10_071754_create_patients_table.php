@@ -21,11 +21,11 @@ class CreatePatientsTable extends Migration
             $table->string('mobile');
             $table->string('phone')->nullable();
             $table->string('birthday')->nullable();
-            $table->tinyInteger('gender');
+            $table->tinyInteger('gender')->nullable();
             $table->unsignedBigInteger('blood_id')->nullable();
             $table->foreign('blood_id')->references('id')->on('bloods')->onDelete('set null');
             $table->text('picture')->nullable();
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(1);
             $table->unsignedInteger('created_by');
             $table->date('today_date');
             $table->unsignedInteger('updated_by')->nullable();

@@ -21,7 +21,7 @@
                     </div>
                     <div class="items pull-left">
                         <i class="fa fa-users fa-2x"></i>
-                        <h4>Active Doctors </h4>
+                        <h4>Doctors </h4>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="items pull-left">
                         <i class="fa fa-users fa-2x"></i>
-                        <h4>Active Patients</h4>
+                        <h4>Patients</h4>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="items pull-left">
                         <i class="fa fa-users fa-2x"></i>
-                        <h4>Active accountants</h4>
+                        <h4>accountants</h4>
                     </div>
                 </div>
             </div>
@@ -131,11 +131,11 @@
 
 <div class="row">
     <!-- calender -->
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <div class="panel panel-bd lobidisable">
             <div class="panel-heading">
                 <div class="panel-title">
-                    <h4>Calender</h4>
+                    <h4>This Mounth Top Doctors By Appointments</h4>
                 </div>
             </div>
             <div class="panel-body">
@@ -148,7 +148,7 @@
         </div>
     </div>
         <!-- datamap -->
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 ">  
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 ">  
             <div class="panel panel-bd lobidrag">
                 <div class="panel-heading">
                     <div class="panel-title">
@@ -163,7 +163,7 @@
         </div>
         
         <!-- Bar Chart -->
-        <div class="col-xs-12 col-sm-12 col-md-6">
+        {{-- <div class="col-xs-12 col-sm-12 col-md-6">
             <div class="panel panel-bd lobidisable">
                 <div class="panel-heading">
                     <div class="panel-title">
@@ -171,7 +171,7 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    {{-- <canvas id="barChart" height="200"></canvas> --}}
+                    <canvas id="barChart" height="200"></canvas>
                 </div>
             </div>
         </div>
@@ -184,10 +184,20 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    {{-- <canvas id="radarChart" height="200"></canvas> --}}
+                    <canvas id="radarChart" height="200"></canvas>
                 </div>
             </div>
-        </div>
+        </div> --}}
+        <div class="col-xs-12 col-sm-12">
+            <div class="panel panel-bd lobidrag">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <h4>Notice List of This Mounth </h4>
+                    </div>
+                </div>
+                <div class="noticeList"></div>
+            </div>
+         </div>
          <!-- Basic data map -->
         <div class="col-xs-12 col-sm-6">
             <div class="panel panel-bd lobidrag">
@@ -203,57 +213,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6">
-            <div class="panel panel-bd lobidrag">
-                <div class="panel-heading">
-                    <div class="panel-title">
-                        <h4>DataTables </h4>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <table id="dataTableExample2" class="table table-bordered table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>2011/04/25</td>
-                                    <td>$320,800</td>
-                                </tr>
-                                <tr>
-                                    <td>Garrett Winters</td>
-                                    <td>Accountant</td>
-                                    <td>Tokyo</td>
-                                    <td>63</td>
-                                    <td>2011/07/25</td>
-                                    <td>$170,750</td>
-                                </tr>
-                                <tr>
-                                    <td>Ashton Cox</td>
-                                    <td>Junior Technical Author</td>
-                                    <td>San Francisco</td>
-                                    <td>66</td>
-                                    <td>2009/01/12</td>
-                                    <td>$86,000</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-         </div>
+        
     </div>
 @endsection
 @section('js')
@@ -265,7 +225,20 @@
         // councilorPolarArea();
         counters();
         percentage();
+        noticeList();
     })
+    function noticeList(page_link = "/admin/notices") {
+    let search = $(".search").val();
+    $.ajax({
+        url: page_link,
+        data: { search: search },
+        type: "get",
+        datatype: "html",
+        success: function (response) {
+            $(".noticeList").html(response);
+        },
+    });
+}
     function counters(){
         $.ajax({
             url:"/admin/counters",

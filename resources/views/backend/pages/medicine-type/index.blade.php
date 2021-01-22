@@ -64,7 +64,7 @@
                         
                             @forelse($data as $key => $value)
                             <tr>
-                                <td>{{ $value->name }}</td>
+                                <td>{{ $value->name ?? null}}</td>
                                 {{-- <td>{{ $value->description }}</td> --}}
                                 <td class="text-center">
                                     @if($value->status == 1)

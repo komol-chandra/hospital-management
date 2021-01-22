@@ -66,10 +66,10 @@
                         
                             @forelse($data as $key => $value)
                             <tr>
-                                <td>{{ $value->tests->name }}</td>
-                                <td>{{ $value->doctors->name }}</td>
-                                <td>{{ $value->patients->name }}</td>
-                                <td>{{ $value->details }}</td>
+                                <td>{{ $value->tests->name ?? null}}</td>
+                                <td>{{ $value->doctors->name ?? null }}</td>
+                                <td>{{ $value->patients->name ?? null }}</td>
+                                <td>{{ $value->details ?? null }}</td>
                                 <td class="text-center">
                                     @if($value->status == 1)
                                     <i class="fa fa-circle" style="color:green"></i>

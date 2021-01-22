@@ -41,7 +41,6 @@ class DoctorDepartmentController extends Controller
     public function index()
     {
         $departments = $this->doctorDepartmentService->lists();
-        // dd($departments);
         return view('backend.pages.department.index', compact('departments'));
     }
 
@@ -53,7 +52,6 @@ class DoctorDepartmentController extends Controller
     public function create()
     {
         return view('backend.pages.department.create');
-
     }
 
     /**
@@ -64,8 +62,14 @@ class DoctorDepartmentController extends Controller
      */
     public function store(DoctorDepartmentRequest $request)
     {
-        $data = $request->all();
-        $department = $this->doctorDepartmentService->createOrUpdate($data);
+        $value = $request->all();
+        $data = $this->doctorDepartmentService->createOrUpdate($value);
+        if ($data) {
+            $notification = $this->responseService->success('Department', 'Department  Added Successfully');
+        } else {
+            $notification = $this->responseService->error('Department', 'Input Filed Required');
+        }
+        return redirect()->back()->with($notification);
     }
 
     /**
@@ -93,27 +97,13 @@ class DoctorDepartmentController extends Controller
     }
     public function status($id)
     {
-        // dd($id);
-        $department = $this->doctorDepartmentService->status($id);
-        if (is_null($department) === false) {
-            // $message = ["Department has been successfully created"];
-            $notification = [
-                'title'      => 'Department',
-                'message'    => 'Department Status Updated Successfully!',
-                'alert-type' => 'success',
-            ];
+        $data = $this->doctorDepartmentService->status($id);
+        if ($data) {
+            $notification = $this->responseService->success('Department', 'Department Status Updated Successfully');
         } else {
-            // $message = ["Department has not created", "error"];
-            $notification = [
-                'title'      => 'Department',
-                'message'    => 'Department Field Required!',
-                'alert-type' => 'error',
-            ];
+            $notification = $this->responseService->error('Department', 'System Error');
         }
-
-        // session()->flash("message", $notification);
         return redirect()->back()->with($notification);
-
     }
 
     /**
@@ -126,26 +116,12 @@ class DoctorDepartmentController extends Controller
     public function update(DoctorDepartmentRequest $request)
     {
         $validatedData = $request->all();
-        // dd($validatedData);
-
         $department = $this->doctorDepartmentService->createOrUpdate($validatedData);
-        if (is_null($department) === false) {
-            // $message = ["Department has been successfully created"];
-            $notification = [
-                'title'      => 'Department',
-                'message'    => 'Department Updated Successfully!',
-                'alert-type' => 'success',
-            ];
+        if ($department) {
+            $notification = $this->responseService->success('Department', 'Department  Updated Successfully');
         } else {
-            // $message = ["Department has not created", "error"];
-            $notification = [
-                'title'      => 'Department',
-                'message'    => 'Department Field Required!',
-                'alert-type' => 'error',
-            ];
+            $notification = $this->responseService->error('Department', 'Input Filed Required');
         }
-
-        // session()->flash("message", $notification);
         return redirect()->back()->with($notification);
     }
 
@@ -157,27 +133,12 @@ class DoctorDepartmentController extends Controller
      */
     public function destroy($id)
     {
-        //  dd($id);
-        // $department = $this->doctorDepartmentService->getById($id);
-        // dd($department);
         $department = $this->doctorDepartmentService->delete($id);
-        if (is_null($department) === false) {
-            // $message = ["Department has been successfully created"];
-            $notification = [
-                'title'      => 'Department',
-                'message'    => 'Department Deleted Successfully!',
-                'alert-type' => 'success',
-            ];
+        if ($department) {
+            $notification = $this->responseService->success('Department', 'Department  Deleted Successfully');
         } else {
-            // $message = ["Department has not created", "error"];
-            $notification = [
-                'title'      => 'Department',
-                'message'    => 'System Error!',
-                'alert-type' => 'error',
-            ];
+            $notification = $this->responseService->error('Department', 'System Error');
         }
-
-        // session()->flash("message", $notification);
         return redirect()->back()->with($notification);
 
     }

@@ -9,14 +9,14 @@
         <div class="panel panel-bd lobidrag">
             <div class="panel-heading">
                 <div class="btn-group"> 
-                    <a class="btn btn-success" href="{{ url('/admin/department/create') }}"> <i class="fa fa-plus"></i> Add Doctor
+                    <a class="btn btn-success" href="{{ url('/admin/department/create') }}"> <i class="fa fa-plus"></i> Add Department
                     </a>  
                 </div>        
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="panel-header">
-                        <div class="col-sm-4 col-xs-12">
+                        {{-- <div class="col-sm-4 col-xs-12">
                             <div class="dataTables_length">
                                 <label>Display 
                                     <select name="example_length">
@@ -26,7 +26,7 @@
                                         <option value="100">100</option>
                                     </select> records per page</label>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="col-sm-4 col-xs-12">
                             <div class="dataTables_length">
                                 {{-- <a class="btn btn-default buttons-copy btn-sm" tabindex="0">
@@ -38,7 +38,7 @@
                                 </div>
                         </div>
                         <div class="col-sm-4 col-xs-12">
-                            <div class="dataTables_length">
+                            {{-- <div class="dataTables_length">
                                 <div class="input-group custom-search-form">
                                     <input type="search" class="form-control" placeholder="search..">
                                     <span class="input-group-btn">
@@ -47,7 +47,7 @@
                                         </button>
                                     </span>
                                 </div><!-- /input-group -->
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -55,6 +55,7 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Name</th>
                                 <th>Detail</th>
                                 <th>status</th>
@@ -62,15 +63,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($departments as $value)
+                            @forelse ($departments as $key=>$value)
                             <tr >
-                                <td>{{ $value->name }}</td>
+                                <td>{{ $key+1}}</td>
+                                <td>{{ $value->name ?? null}}</td>
                                 <td>{{ $value->description ?? null }}</td>
-                                <td>
-                                    @if($value->status==1)
-                                    <span class="text-success"> Active</span>
+                                <td class="text-center">
+                                    @if($value->status == 1)
+                                    <i class="fa fa-circle" style="color:green"></i>
                                     @else
-                                    <span class="text-secondary"> Inactive</span>
+                                    <i class="fa fa-circle" style="color:red"></i>
                                     @endif
                                 </td>
                                 <td>
@@ -88,7 +90,12 @@
                                 </td>
                             </tr>
                             @empty
-                                <tr><h2>No Data</h2></tr>
+                                <tr>
+                                    <td>No Data</td>
+                                    <td>No Data</td>
+                                    <td>No Data</td>
+                                    <td>No Action</td>
+                                </tr>
                             @endforelse
                             
                         </tbody>
@@ -98,6 +105,8 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
 <script>
     function Delete(id){
     var id=id;

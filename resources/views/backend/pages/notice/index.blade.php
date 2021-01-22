@@ -56,7 +56,6 @@
                         <thead>
                             <tr>
                                 <th>created By</th>
-                                <th>Image</th>
                                 <th>Title</th>
                                 <th>designation</th>
                                 <th>Starting Time</th>
@@ -70,13 +69,10 @@
                             @forelse($data as $key => $value)
                             <tr>
                                 <td>{{ $value->user->name }}</td>
-                                <td>
-                                    <img src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="50" width="50">
-                                </td>
-                                <td>{{ $value->name }}</td>
-                                <td>{!! $value->designation !!}</td>
-                                <td>{{ $value->start_date }}</td>
-                                <td>{{ $value->end_date }}</td>
+                                <td>{{ $value->name ?? null}}</td>
+                                <td>{!! $value->designation?? null !!}</td>
+                                <td>{{ $value->start_date ?? null}}</td>
+                                <td>{{ $value->end_date ?? null}}</td>
                                 <td class="text-center">
                                     @if($value->status == 1)
                                     <i class="fa fa-circle" style="color:green"></i>
@@ -102,6 +98,8 @@
                             </tr>
                             @empty
                             <tr>
+                                <td>NO DATA</td>
+                                <td>NO DATA</td>
                                 <td>NO DATA</td>
                                 <td>NO DATA</td>
                                 <td>NO DATA</td>

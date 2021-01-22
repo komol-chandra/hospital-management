@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\AccountService;
 use App\Services\PaymentService;
+use App\Services\UserAccessService;
 use Form;
 use Illuminate\Support\ServiceProvider;
 
@@ -34,6 +35,11 @@ class MacroServiceProvider extends ServiceProvider
         Form::macro('selectAccount', function ($name, $selected = null, $options = []) {
             $paymentService = new PaymentService();
             $data = $paymentService->getDropdownList();
+            return Form::select($name, $data, $selected, $options);
+        });
+        Form::macro('selectRole', function ($name, $selected = null, $options = []) {
+            $userAccessService = new UserAccessService();
+            $data = $userAccessService->getDropdownList();
             return Form::select($name, $data, $selected, $options);
         });
     }

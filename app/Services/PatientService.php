@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class PatientService
 {
-    public function lists()
+    public function lists($data)
     {
-        return Patient::orderBy('id', 'DESC')->get();
+        return Patient::orderBy('id', 'DESC')->paginate(10);
     }
     public function createOrUpdate($data)
     {
