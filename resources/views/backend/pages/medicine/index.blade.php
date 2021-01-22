@@ -78,16 +78,16 @@
                                     <img src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="50" width="50">
 
                                 </td>
-                                <td>{{ $value->user->name }}</td>
-                                <td>{{ $value->name }}</td>
-                                <td>{{ $value->medicineType->name ?? "null" }}</td>
-                                <td>{{ $value->generic->name ?? "null" }}</td>
-                                <td>{{ $value->manufacturer->name ?? "null" }}</td>
-                                <td>{{ $value->sku ?? "null" }}</td>
-                                <td>{{ $value->tax ?? "null" }}</td>
+                                <td>{{ $value->user->name ?? null}}</td>
+                                <td>{{ $value->name ?? null}}</td>
+                                <td>{{ $value->medicineType->name ?? null }}</td>
+                                <td>{{ $value->generic->name ?? null}}</td>
+                                <td>{{ $value->manufacturer->name ?? null}}</td>
+                                <td>{{ $value->sku ?? null}}</td>
+                                <td>{{ $value->tax ?? null}}</td>
                                 {{-- <td>{{ $value->details ?? "null" }}</td> --}}
-                                <td>{{ $value->per_box ?? "null" }}</td>
-                                <td>{{ $value->price ?? "null" }}</td>
+                                <td>{{ $value->per_box ?? null}}</td>
+                                <td>{{ $value->price ?? null}}</td>
 
                                 <td class="text-center">
                                     @if($value->status == 1)

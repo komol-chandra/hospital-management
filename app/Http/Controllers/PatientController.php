@@ -7,6 +7,7 @@ use App\Models\Patient;
 use App\Services\PatientService;
 use App\Services\ResponseService;
 use App\Traits\FileUpload;
+use Illuminate\Http\Request;
 use Str;
 
 class PatientController extends Controller
@@ -26,8 +27,7 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = $this->patientService->lists();
-        return view('backend.pages.patient.index', compact('patients'));
+        return view('backend.pages.patient.index');
     }
 
     /**
@@ -39,6 +39,13 @@ class PatientController extends Controller
     {
         $bloods = $this->patientService->getBloods();
         return view('backend.pages.patient.create', compact('bloods'));
+    }
+    public function patientList(Request $request)
+    {
+        $data = $request->all();
+        // $patients = $this->patientService->lists($data);
+        $patients = Patient::search($request->search)->orderBy('id', 'DESC')->paginate(10);
+        return view('backend.pages.patient.dataList', compact('patients'));
     }
 
     /**

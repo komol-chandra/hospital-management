@@ -15,45 +15,86 @@ class DoctorSeeder extends Seeder
      */
     public function run()
     {
-        // $faker = Faker::create();
-        // foreach (range(1, 100) as $index) {
-        //     DB::table('users')->insert([
-        //         'name'          => $faker->name,
-        //         'email'         => $faker->email,
-        //         'designation'   => $faker->designation,
-        //         'address'       => $faker->address,
-        //         'phone'         => $faker->phone,
-        //         'biography'     => $faker->biography,
-        //         'specialist'    => $faker->specialist,
-        //         'birthday'      => $faker->birthday,
-        //         'education'     => $faker->education,
-        //         'mobile'        => $faker->mobile,
-        //         'department_id' => '1',
-        //         'user_id' => factory(App\User::class),
-        //         'gender'        => '1',
-        //         'blood_id'      => '1',
-        //         'status'        => '1',
-        //         'created_by'    => '1',
-        //     ]);
-        // }
+        DB::table('doctors')->insert([
+            'name'          => 'Martin Lara',
+            'email'         => Str::random(10) . '@gmail.com',
+            'designation'   => Str::random(10),
+            'address'       => Str::random(15),
+            'biography'     => Str::random(15),
+            'specialist'    => Str::random(15),
+            'education'     => Str::random(20),
+            // 'birthday'      => rand(strtotime("Jan 01 2015"), strtotime("Nov 01 2016")),
+            'department_id' => '1',
+            'mobile'        => (+880) . rand(1800000000, 1899999999),
+            'phone'         => rand(1000000, 2000000),
+            'gender'        => rand(1, 2),
+            'status'        => '1',
+            'created_by'    => '1',
+        ]);
+        DB::table('doctors')->insert([
+            'name'          => 'Susan Donovan',
+            'email'         => Str::random(10) . '@gmail.com',
+            'designation'   => Str::random(10),
+            'address'       => Str::random(15),
+            'biography'     => Str::random(15),
+            'specialist'    => Str::random(15),
+            'education'     => Str::random(20),
+            // 'birthday'      => rand(strtotime("Jan 01 2015"), strtotime("Nov 01 2016")),
+            'department_id' => '2',
+            'mobile'        => (+880) . rand(1800000000, 1899999999),
+            'phone'         => rand(1000000, 2000000),
+            'gender'        => rand(1, 2),
+            'status'        => '1',
+            'created_by'    => '1',
+        ]);
+        DB::table('doctors')->insert([
+            'name'          => 'Eliana Goodwin',
+            'email'         => Str::random(10) . '@gmail.com',
+            'designation'   => Str::random(10),
+            'address'       => Str::random(15),
+            'biography'     => Str::random(15),
+            'specialist'    => Str::random(15),
+            'education'     => Str::random(20),
+            // 'birthday'      => rand(strtotime("Jan 01 2015"), strtotime("Nov 01 2016")),
+            'department_id' => '3',
+            'mobile'        => (+880) . rand(1800000000, 1899999999),
+            'phone'         => rand(1000000, 2000000),
+            'gender'        => rand(1, 2),
+            'status'        => '1',
+            'created_by'    => '1',
+        ]);
+        DB::table('doctors')->insert([
+            'name'          => 'Kevin paul',
+            'email'         => Str::random(10) . '@gmail.com',
+            'designation'   => Str::random(10),
+            'address'       => Str::random(15),
+            'biography'     => Str::random(15),
+            'specialist'    => Str::random(15),
+            'education'     => Str::random(20),
+            // 'birthday'      => rand(strtotime("Jan 01 2015"), strtotime("Nov 01 2016")),
+            'department_id' => '4',
+            'mobile'        => (+880) . rand(1800000000, 1899999999),
+            'phone'         => rand(1000000, 2000000),
+            'gender'        => rand(1, 2),
+            'status'        => '1',
+            'created_by'    => '1',
+        ]);
+        DB::table('doctors')->insert([
+            'name'          => 'lara paul',
+            'email'         => Str::random(10) . '@gmail.com',
+            'designation'   => Str::random(10),
+            'address'       => Str::random(15),
+            'biography'     => Str::random(15),
+            'specialist'    => Str::random(15),
+            'education'     => Str::random(20),
+            // 'birthday'      => rand(strtotime("Jan 01 2015"), strtotime("Nov 01 2016")),
+            'department_id' => '5',
+            'mobile'        => (+880) . rand(1800000000, 1899999999),
+            'phone'         => rand(1000000, 2000000),
+            'gender'        => rand(1, 2),
+            'status'        => '1',
+            'created_by'    => '1',
+        ]);
 
-        for ($i = 0; $i < 8; $i++) {
-            DB::table('doctors')->insert([
-                'name'          => Str::random(10),
-                'email'         => Str::random(10) . '@gmail.com',
-                'designation'   => Str::random(50),
-                'address'       => Str::random(50),
-                'biography'     => Str::random(50),
-                'specialist'    => Str::random(50),
-                'education'     => Str::random(50),
-                // 'birthday'      => rand(strtotime("Jan 01 2015"), strtotime("Nov 01 2016")),
-                'department_id' => rand(1, 5),
-                'mobile'        => (+880) . rand(1800000000, 1899999999),
-                'phone'         => rand(1000000, 2000000),
-                'gender'        => rand(1, 2),
-                'status'        => '1',
-                'created_by'    => '1',
-            ]);
-        }
     }
 }

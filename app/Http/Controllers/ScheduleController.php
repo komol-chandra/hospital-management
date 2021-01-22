@@ -24,7 +24,7 @@ class ScheduleController extends Controller
      */
     public function index()
     {
-        $schedules = $this->scheduleService->lists();
+        $schedules = Schedule::orderBy('id', 'DESC')->get();
         return view('backend.pages.schedule.index', compact('schedules'));
     }
 
@@ -38,6 +38,11 @@ class ScheduleController extends Controller
         $days = $this->scheduleService->getDays();
         $doctors = $this->scheduleService->getActiveDoctors();
         return view('backend.pages.schedule.create', compact('days', 'doctors'));
+    }
+    public function scheduleList(Request $request)
+    {
+        $schedules = Schedule::search($request->search)->orderBy('id', 'DESC')->paginate(10);
+        return view('backend.pages.schedule.dataList', compact('schedules'));
     }
 
     /**

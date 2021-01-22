@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="panel-header">
                         <div class="col-sm-4 col-xs-12">
-                            <div class="dataTables_length">
+                            {{-- <div class="dataTables_length">
                                 <label>Display 
                                     <select name="example_length">
                                         <option value="10">10</option>
@@ -24,7 +24,7 @@
                                         <option value="50">50</option>
                                         <option value="100">100</option>
                                     </select> records per page</label>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-sm-4 col-xs-12">
                             <div class="dataTables_length">
@@ -40,85 +40,25 @@
                         <div class="col-sm-4 col-xs-12">
                             <div class="dataTables_length">
                                 <div class="input-group custom-search-form">
-                                    <input type="search" class="form-control" placeholder="search..">
-                                    <span class="input-group-btn">
+                                    <input type="search" class="form-control search" placeholder="search..">
+                                    {{-- <span class="input-group-btn">
                                         <button class="btn btn-primary" type="button">
                                             <span class="glyphicon glyphicon-search"></span>
                                         </button>
-                                    </span>
+                                    </span> --}}
                                 </div><!-- /input-group -->
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>SL</th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Code</th>
-                                <th>Mobile</th>
-                                <th>status</th>
-                                <th>action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                    
-                            @forelse($patients as $key => $value)
-                            <tr>
-                                <td>{{ $key+1 }}</td>
-                                <td>
-                                    <img src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="50" width="50">
-                                </td>
-                                <td>{{ $value->name }}</td>
-                                <td>{{ $value->email }}</td>
-                                <td>{{ $value->code }}</td>
-                                <td>{{ $value->mobile }}</td>
-                                <td class="text-center">
-                                    @if($value->status == 1)
-                                    <i class="fa fa-circle" style="color:green"></i>
-                                    @else
-                                    <i class="fa fa-circle" style="color:red"></i>
-                                    @endif
-                                </td>
-                                <td>
-                                    @if($value->status == 1)
-                                    <a class="btn btn-danger btn-xs" id="status" href="/admin/patient/status/{{ $value->id }}"><i class="fa fa-refresh"></i></a>
-                                    @else
-                                    <a class="btn btn-info btn-xs" id="status" href="/admin/patient/status/{{ $value->id }}"><i class="fa fa-refresh"></i></a>
-                                    @endif
-                                    <form method="post" id="deleteForm">
-                                        @method('delete')
-                                        @csrf
-                                    </form>
-                                    <a class="btn btn-danger btn-xs" onclick="event.preventDefault(); Delete({{ $value->id }});"><i class="fa fa-trash-o"></i></a>
-                                    <a class="btn btn-info btn-xs" href="{{url('admin/patient/'.$value->id.'/edit')}}"><i class="fa fa-pencil"></i></a>   
-                                </td>
-                                
-                            </tr>
-                            @empty
-                            <tr>
-                                <td>NO DATA</td>
-                                <td>NO DATA</td>
-                                <td>NO DATA</td>
-                                <td>NO DATA</td>
-                                <td>NO DATA</td>
-                                <td>NO ACTION</td>
-                                
-                            </tr>
-                            @endforelse
-                                
-                            
-                        </tbody>
-                    </table>
-                </div>
+                <div class="dataList"></div>
             </div>
         </div>
     </div>
 </div>
+
+@endsection
+@section('js')
 <script>
     function Delete(id){
     var id=id;
@@ -145,4 +85,5 @@
     });
 }
 </script>
+<script src="{{asset('backend/script/patient.js')}}"></script>
 @endsection

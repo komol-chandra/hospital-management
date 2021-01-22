@@ -14,7 +14,7 @@
             </div>
             <div class="panel-body">
                 <div class="col-sm-12">
-                    {!! Form::open(['url' => '/admin/department/'.$department['id'].'','method'=>'put']) !!}
+                    {!! Form::open(['url' => '/admin/department/'.$department['id'].'','method'=>'put',"id"=>"form_update"]) !!}
             @include('backend.pages.department.form',$department)
             {!! Form::hidden('id',$department['id']) !!}
                         <div class="col-sm-12 reset-button">
@@ -27,4 +27,8 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+{!! JsValidator::formRequest('App\Http\Requests\DoctorDepartmentRequest', '#form_insert'); !!}
+{!! JsValidator::formRequest('App\Http\Requests\DoctorDepartmentRequest', '#form_update'); !!}
 @endsection

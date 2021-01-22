@@ -13,7 +13,7 @@
             </div>
             <div class="panel-body">
                 <div class="col-sm-12">
-                    {!! Form::open(['url' => '/admin/schedule/'.$schedule['id'].'','method'=>'put']) !!}
+                    {!! Form::open(['url' => '/admin/schedule/'.$schedule['id'].'','method'=>'put',"id"=>"form_update"]) !!}
                     @include('backend.pages.schedule.form',['doctors'=>$doctors,'days'=>$days,'schedule'=>$schedule])
                     {!! Form::hidden('id',$schedule['id']) !!}
                         <div class="col-sm-12 reset-button">
@@ -26,4 +26,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('js')
+{!! JsValidator::formRequest('App\Http\Requests\ScheduleRequest', '#form_update'); !!}
 @endsection

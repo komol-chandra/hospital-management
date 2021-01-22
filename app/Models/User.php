@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -18,6 +19,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use SoftDeletes;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -40,6 +42,11 @@ class User extends Authenticatable
         'email_verified_at',
         'email_verification_token',
     ];
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('name', 'LIKE', '%' . $search . '%')
+            ->where('email', 'LIKE', '%' . $search . '%');
+    }
 
     /**
      * The attributes that should be hidden for arrays.

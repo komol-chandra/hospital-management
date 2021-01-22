@@ -72,15 +72,15 @@
                         
                             @forelse($data as $key => $value)
                             <tr>
-                                <td>{{ $value->user->name }}</td>
-                                <td>{{ $value->date }}</td>
-                                <td>{{ $value->patient->code }}</td>
-                                <td>{{ $value->total }}</td>
-                                <td>{{ $value->vat }}</td>
-                                <td>{{ $value->discount }}</td>
-                                <td>{{ $value->grand_total }}</td>
-                                <td>{{ $value->paid }}</td>
-                                <td>{{ $value->due }}</td>
+                                <td>{{ $value->user->name ??null }}</td>
+                                <td>{{ $value->date ??null }}</td>
+                                <td>{{ $value->patient->code ??null }}</td>
+                                <td>{{ $value->total ??null }}</td>
+                                <td>{{ $value->vat ??null }}</td>
+                                <td>{{ $value->discount ??null }}</td>
+                                <td>{{ $value->grand_total ??null }}</td>
+                                <td>{{ $value->paid ??null }}</td>
+                                <td>{{ $value->due ??null}}</td>
                                 <td class="text-center">
                                     @if($value->status == 1)
                                     <i class="fa fa-circle" style="color:green"></i>

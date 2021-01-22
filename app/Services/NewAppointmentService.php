@@ -6,12 +6,22 @@ use App\Models\NewAppointment;
 use App\Models\Patient;
 use App\Models\Schedule;
 use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 class NewAppointmentService
 {
     public function createNewAppointment($data)
     {
+        $userId = Auth::user()->id;
         $appointment = new NewAppointment();
+        $patient = new Patient();
+        $patient->created_by = $userId;
+        $patient->name = $data['name'];
+        $patient->email = $data['email'];
+        $patient->mobile = $data['mobile'];
+        $patient->today_date = $data['today_date'];
+        $patient->code = $data['code'];
+        // dd($patient->toArray());
         $doctor_id = $data['doctor_id'];
         $date = $data['date'];
         $dateTime = new DateTime($date);
@@ -21,6 +31,8 @@ class NewAppointmentService
         $doctorAppointmentCount = NewAppointment::where('doctor_id', $doctor_id)->where('date', $date)->count();
         if ($doctorAppointmentCount < $getDoctor->quantity && $getDoctor) {
             $appointment->fill($data)->save();
+            $patient->save();
+
             return $appointment;
         } else {
             return null;

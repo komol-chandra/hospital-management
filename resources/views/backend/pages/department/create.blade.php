@@ -15,7 +15,7 @@
             </div>
             <div class="panel-body">
                 <div class="col-sm-12">
-                    {!! Form::open(['url' => '/admin/department','method'=>'post']) !!}
+                    {!! Form::open(['url' => '/admin/department','method'=>'post',"id"=>"form_insert"]) !!}
                         @include('backend.pages.department.form')
                         <div class="col-sm-12 reset-button">
                             <button type="submit" class="btn btn-success">Save</button>
@@ -27,5 +27,8 @@
         </div>
     </div>
 </div>
-   
+@endsection
+@section('js')
+{!! JsValidator::formRequest('App\Http\Requests\DoctorDepartmentRequest', '#form_insert'); !!}
+{!! JsValidator::formRequest('App\Http\Requests\DoctorDepartmentRequest', '#form_update'); !!}
 @endsection

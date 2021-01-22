@@ -69,13 +69,13 @@
                             @forelse($data as $key => $value)
                             <tr>
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ $value->name }}</td>
-                                <td>{{ $value->email }}</td>
-                                <td>{{ $value->mobile }}</td>
-                                <td>{{ $value->date }}</td>
-                                <td>{{ $value->departments->name ?? "" }}</td>
-                                <td>{{ $value->doctors->name ?? "" }}</td>
-                                <td>{{ $value->message }}</td>
+                                <td>{{ $value->name ?? null}}</td>
+                                <td>{{ $value->email ?? null}}</td>
+                                <td>{{ $value->mobile ?? null}}</td>
+                                <td>{{ $value->date ?? null}}</td>
+                                <td>{{ $value->departments->name ?? null}}</td>
+                                <td>{{ $value->doctors->name ?? null}}</td>
+                                <td>{{ $value->message ?? null}}</td>
                                 <td>
                                     <a class="btn btn-info btn-xs" href="{{url('admin/new_appointments/'.$value->id)}}"><i class="fa fa-eye"></i></a>   
                                 </td>

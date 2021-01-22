@@ -76,12 +76,12 @@
                                 <td>
                                     <img src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="50" width="50">
                                 </td>
-                                <td>{{ $value->name }}</td>
-                                <td>{{ $value->email }}</td>
-                                <td>{{ $value->mobile }}</td>
-                                <td>{{ $value->blood->name }}</td>
-                                <td>{{ $value->employeeRoll->name }}</td>
-                                <td>{{ $value->user->name }}</td>
+                                <td>{{ $value->name ?? null}}</td>
+                                <td>{{ $value->email ?? null}}</td>
+                                <td>{{ $value->mobile ?? null}}</td>
+                                <td>{{ $value->blood->name ?? null}}</td>
+                                <td>{{ $value->employeeRoll->name ?? null}}</td>
+                                <td>{{ $value->user->name ?? null}}</td>
                                 <td class="text-center">
                                     @if($value->status == 1)
                                     <i class="fa fa-circle" style="color:green"></i>

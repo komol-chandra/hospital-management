@@ -15,7 +15,7 @@
             </div>
             <div class="panel-body">
                 <div class="col-sm-12">
-                    {!! Form::open(['url' => '/admin/doctor','method'=>'post','files'=>true]) !!}
+                    {!! Form::open(['url' => '/admin/doctor','method'=>'post','files'=>true,"id"=>"form_insert"]) !!}
                         @include('backend.pages.doctor.form')
                         <div class="col-sm-12 reset-button">
                             <button type="submit" class="btn btn-success">Save</button>
@@ -30,4 +30,5 @@
 @endsection
 @section('js')
 <script src="{{asset('backend/script/doctor.js')}}"></script>
+{!! JsValidator::formRequest('App\Http\Requests\DoctorRequest', '#form_insert'); !!}
 @endsection

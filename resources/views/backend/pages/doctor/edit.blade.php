@@ -13,7 +13,7 @@
             </div>
             <div class="panel-body">
                 <div class="col-sm-12"> 
-                    {!! Form::open(['url' => '/admin/doctor/'.$doctor['id'].'','method'=>'put','files'=>true]) !!}
+                    {!! Form::open(['url' => '/admin/doctor/'.$doctor['id'].'','method'=>'put','files'=>true,"id"=>"form_update"]) !!}
                         @include('backend.pages.doctor.form',[ 'doctor'=> $doctor,'departments' => $departments, 'bloods' => $bloods])
                         {!! Form::hidden('id',$doctor['id']) !!}    
                     <div class="col-sm-12 reset-button">
@@ -28,4 +28,5 @@
 @endsection
 @section('js')
 <script src="{{asset('backend/script/doctor.js')}}"></script>
+{!! JsValidator::formRequest('App\Http\Requests\DoctorRequest', '#form_update'); !!}
 @endsection
