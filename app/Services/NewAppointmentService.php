@@ -40,8 +40,9 @@ class NewAppointmentService
     }
     public function createOldAppointment($data)
     {
-        $code = $data['code'];
-        $patient = Patient::where('code', '=', $code)->first();
+        $mobile = $data['mobile'];
+        $patient = Patient::where('mobile', $mobile)->first();
+
         $appointment = new NewAppointment();
         $appointment->patient_id = $patient['patient_id'];
         $appointment->name = $patient['name'];
@@ -52,12 +53,14 @@ class NewAppointmentService
         $appointment->doctor_id = $data['doctor_id'];
         $appointment->message = $data['message'];
         $appointment->today_date = $data['today_date'];
+
         $doctor_id = $data['doctor_id'];
         $date = $data['date'];
         $dateTime = new DateTime($date);
         $dateToDay = $dateTime->format('l');
         $findDay = Day::where('name', $dateToDay)->first();
         $getDoctor = Schedule::where('doctor_id', $doctor_id)->where('day_id', $findDay->id)->first();
+        // dd($getDoctor);
         $doctorAppointmentCount = NewAppointment::where('doctor_id', $doctor_id)->where('date', $date)->count();
         if ($doctorAppointmentCount < $getDoctor->quantity && $getDoctor) {
             $appointment->save();

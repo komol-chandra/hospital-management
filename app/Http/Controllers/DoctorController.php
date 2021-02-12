@@ -28,7 +28,6 @@ class DoctorController extends Controller
     public function doctorExcel()
     {
         return $this->excel->download(new DoctorExport, 'doctors.xlsx', Excel::XLSX);
-
     }
     public function doctorPdf()
     {

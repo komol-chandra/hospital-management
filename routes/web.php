@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AccountInvoiceController;
-use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorDepartmentController;
@@ -64,6 +63,9 @@ Route::prefix('frontend')->group(function () {
     //to post the new appointment form
     Route::resource('/new_appointments', NewAppointmentController::class);
     Route::post('/old_appointments', [NewAppointmentController::class, 'oldAppointmentStore']);
+    Route::get('/matchPatientMobile', [NewAppointmentController::class, 'matchPatientMobile']);
+    Route::get('/matchAppointmentQuantity', [NewAppointmentController::class, 'matchAppointmentQuantity']);
+
 });
 
 Route::prefix('admin/rbac')->group(function () {
@@ -75,7 +77,6 @@ Route::prefix('admin/rbac')->group(function () {
         Route::get('/userList', [UserController::class, 'userList']);
         Route::resource('/user_access', UserAccessController::class);
         Route::get('/userAccessList', [UserAccessController::class, 'userAccessList']);
-
     });
 });
 Route::prefix('admin')->group(function () {
@@ -106,13 +107,18 @@ Route::prefix('admin')->group(function () {
         Route::resource('/patient', PatientController::class);
         Route::get('/patient/status/{id}', [PatientController::class, 'status']);
         Route::get('/patientList', [PatientController::class, 'patientList']);
+        Route::get('/patientExcel', [PatientController::class, 'patientExcel']);
+        Route::get('/patientCsv', [PatientController::class, 'patientCsv']);
+        Route::get('/patientPdf', [PatientController::class, 'patientPdf']);
+        Route::post('/patientImport', [PatientController::class, 'patientImport']);
+
         //admin panel schedule
         Route::resource('/schedule', ScheduleController::class);
         Route::get('/schedule/status/{id}', [ScheduleController::class, 'status']);
         Route::get('/scheduleList', [ScheduleController::class, 'scheduleList']);
         //admin panel appointment
-        Route::resource('/appointment', AppointmentController::class);
-        Route::get('/appointment/doctorId/{id}', [AppointmentController::class, 'doctorId']);
+        // Route::resource('/appointment', AppointmentController::class);
+        // Route::get('/appointment/doctorId/{id}', [AppointmentController::class, 'doctorId']);
         //frontend appointments
         Route::resource('/new_appointments', NewAppointmentController::class);
         //admin panel test type

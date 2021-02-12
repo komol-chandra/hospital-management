@@ -32,10 +32,11 @@ class AccountInvoiceController extends Controller
         $data = $this->accountInvoiceService->lists();
         return view('backend.pages.account-invoice.index', compact('data'));
     }
+
     public function matchPatient(Request $request)
     {
-        $code = $request->patientId;
-        $match = Patient::where('code', $code)->first();
+        $id = $request->patientId;
+        $match = Patient::where('mobile', $id)->first();
         return response()->json($match, 200);
     }
 
@@ -63,8 +64,8 @@ class AccountInvoiceController extends Controller
         $invoice = new AccountInvoice();
         $user_id = Auth::user()->id;
         $invoice->created_by = $user_id;
-        $code = $request->code;
-        $patient = Patient::where('code', $code)->first()->toArray();
+        $code = $request->mobile;
+        $patient = Patient::where('mobile', $code)->first()->toArray();
         $patientId = $patient['id'];
         $data = $request->all();
         $invoice->patient_id = $patientId;

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PatientExport;
 use App\Http\Requests\PatientRequest;
+use App\Imports\PatientImport;
 use App\Models\Patient;
 use App\Services\PatientService;
 use App\Services\ResponseService;
 use App\Traits\FileUpload;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Str;
 
 class PatientController extends Controller
@@ -15,10 +19,12 @@ class PatientController extends Controller
     use FileUpload;
     protected $patientService;
     protected $message;
-    public function __construct()
+    protected $excel;
+    public function __construct(Excel $excel)
     {
         $this->patientService = new PatientService;
         $this->message = new ResponseService;
+        $this->excel = $excel;
     }
     /**
      * Display a listing of the resource.
@@ -29,7 +35,39 @@ class PatientController extends Controller
     {
         return view('backend.pages.patient.index');
     }
+    public function patientExcel()
+    {
+        return $this->excel->download(new PatientExport, 'patient.xlsx');
+    }
+    public function patientCsv()
+    {
+        return $this->excel->download(new PatientExport, 'patient.csv');
+    }
+    public function patientPdf()
+    {
+        return $this->excel->download(new PatientExport, 'patient.pdf', Excel::DOMPDF);
+    }
+    public function patientImport(Request $request)
+    {
+        $data = $request->file('file');
+        $import = new PatientImport;
+        $patient = $import->import($data);
+        $error = ($import->errors());
+        if ($patient) {
+            $notification = $this->message->success('Patient', 'Patient Import Successfully ');
+        } else {
+            if (isset($errors) && $errors->any()) {
+                foreach ($error->all() as $item) {
+                    $notification = $this->message->error('Patient', $item);
+                }
+            } else {
+                $notification = $this->message->error('Patient', 'Patient Field Required');
+            }
 
+        }
+        return redirect()->back()->with($notification);
+
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -58,6 +96,7 @@ class PatientController extends Controller
     {
         $data = $request->all();
         $data['code'] = Str::random(7);
+        $data['today_date'] = Carbon::now()->format('y-m-d');
         if ($request->hasFile('picture')) {
             $data['picture'] = $this->ImageUpload($request, 'picture', 'patient/', 'patient_');
         }

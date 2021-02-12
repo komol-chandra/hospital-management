@@ -18,8 +18,10 @@ class DatabaseSeeder extends Seeder
             BloodSeeder::class,
             DaySeeder::class,
             DepartmentSeeder::class,
-            DoctorSeeder::class,
-            PatientSeeder::class,
+        ]);
+        \App\Models\Doctor::factory(20)->create();
+        \App\Models\Patient::factory(2000)->create();
+        $this->call([
             ScheduleSeeder::class,
             TestSeeder::class,
             PatientTestSeeder::class,

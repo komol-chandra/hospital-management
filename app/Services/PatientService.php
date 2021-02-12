@@ -10,7 +10,7 @@ class PatientService
 {
     public function lists($data)
     {
-        return Patient::orderBy('id', 'DESC')->paginate(10);
+        return Patient::search($data->search)->orderBy('id', 'DESC')->paginate(10);
     }
     public function createOrUpdate($data)
     {

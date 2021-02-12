@@ -30,7 +30,7 @@ class PatientRequest extends FormRequest
             "name"     => "required",
             "address"  => "nullable",
             "phone"    => "nullable",
-            "mobile"   => "required",
+            "mobile"   => "required |unique:patients,mobile,' . $patient . ',id",
             "birthday" => "nullable",
             "gender"   => "required",
             "blood_id" => "nullable",

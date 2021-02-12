@@ -77,6 +77,7 @@
                 @empty
                     <h2>no Doctor</h2>
                 @endforelse
+                {{ $data->links() }}
 
                 
             </div>

@@ -27,7 +27,7 @@
                 <div class="tab-pane fade active show" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="card">
                         <div class="card-body">
-                            {!! Form::open(['url' => '/frontend/new_appointments','method'=>'post','files'=>true]) !!}
+                            {!! Form::open(['url' => '/frontend/new_appointments','method'=>'post','files'=>true,'id'=>'new']) !!}
                                 @include('frontend.pages.appointment.new_patient')
                                 <div class="col-sm-12 reset-button">
                                     <button type="submit" class="btn btn-success">Book Now</button>
@@ -40,7 +40,7 @@
                 <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                     <div class="card">
                         <div class="card-body">
-                            {!! Form::open(['url' => '/frontend/old_appointments','method'=>'post','files'=>true]) !!}
+                            {!! Form::open(['url' => '/frontend/old_appointments','method'=>'post','files'=>true,'id'=>'old']) !!}
                                 @include('frontend.pages.appointment.old_patient')
                                 <div class="col-sm-12 reset-button">
                                     <button type="submit" class="btn btn-success">Book Now</button>
@@ -57,6 +57,52 @@
 @endsection
 @section('js')
 <script>
+    $(document).ready(function(){
+
+
+        $(".patientId").keyup(function () {
+            let patientId = $(this).val();
+            console.log(patientId);
+            $.ajax({
+                url: "/frontend/matchPatientMobile",
+                type: "get",
+                data: { patientId: patientId },
+                dataType: "json",
+                success: function (response) {
+                    if (response.name) {
+                    $(".icon").html("your Mobile Number Matched");
+                    $(".fullName").val(response.name);
+                    $(".email").val(response.email);
+                    $(".address").val(response.address);
+                    } else {
+                        $(".icon").html("your Mobile Number Did not Match");
+                    }
+                },
+            });
+        });
+
+        $(".date").change(function () {
+            let date = $(this).val();
+            let doctor_id = $(".doctor_two").val();
+            $.ajax({
+                url: "/frontend/matchAppointmentQuantity",
+                type: "get",
+                data: { date: date ,
+                        doctor_id:doctor_id},
+                dataType: "json",
+                success: function (response) {
+                    console.log("response");
+                    if (response == "Ok") {
+                    $(".appointment").html("Appointment on now");
+                    } else {
+                        $(".appointment").html("Appointment Off for The day");
+                    }
+                },
+            });
+        });
+
+
+    });
     function getDoctor(){
         let id = $(department).val();
         $.ajax({
@@ -71,8 +117,6 @@
             }
         })
     };
-</script>
-<script>
     function getDoctorTwo(){
         let id = $(department_two).val();
         $.ajax({
@@ -87,5 +131,6 @@
         })
     }
 </script>
-
+{!! JsValidator::formRequest('App\Http\Requests\OldAppointmentRequest', '#old'); !!}
+{!! JsValidator::formRequest('App\Http\Requests\NewAppointmentRequest', '#new'); !!}
 @endsection

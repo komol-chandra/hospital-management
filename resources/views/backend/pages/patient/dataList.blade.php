@@ -4,6 +4,7 @@
             <tr>
                 <th>Image</th>
                 <th>Name</th>
+                <th>Blood</th>
                 <th>Email</th>
                 <th>Code</th>
                 <th>Mobile</th>
@@ -19,6 +20,8 @@
                     <img src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="50" width="50">
                 </td>
                 <td>{{ $value->name ?? null}}</td>
+                <td>{{ $value->blood->name ?? null}}</td>
+
                 <td>{{ $value->email ?? null}}</td>
                 <td>{{ $value->code ?? null}}</td>
                 <td>{{ $value->mobile ?? null}}</td>
@@ -46,6 +49,8 @@
             </tr>
             @empty
             <tr>
+                <td>NO DATA</td>
+                <td>NO DATA</td>
                 <td>NO DATA</td>
                 <td>NO DATA</td>
                 <td>NO DATA</td>

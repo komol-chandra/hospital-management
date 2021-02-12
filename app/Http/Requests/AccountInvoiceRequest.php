@@ -24,7 +24,7 @@ class AccountInvoiceRequest extends FormRequest
     public function rules()
     {
         return [
-            "code"        => "required",
+            "mobile"      => "required",
             "date"        => "required",
             "account_id"  => "required",
             "description" => "nullable",

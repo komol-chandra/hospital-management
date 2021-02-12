@@ -30,55 +30,54 @@ class AppServiceProvider extends ServiceProvider
         Paginator::useBootstrap();
 
         View::composer(["backend.layouts.app"], function ($view) {
-
             $view->with("settings", Cache::rememberForever("settings", function () {
                 return Setting::first();
             }));
         });
+
         View::composer(["backend.layouts.header"], function ($view) {
-
             $view->with("settings", Cache::rememberForever("settings", function () {
                 return Setting::first();
             }));
         });
+
         View::composer(["backend.layouts.footer"], function ($view) {
-
             $view->with("settings", Cache::rememberForever("settings", function () {
                 return Setting::first();
             }));
         });
+
         View::composer(["backend.layouts.app"], function ($view) {
-
             $view->with("settings", Cache::rememberForever("settings", function () {
                 return Setting::first();
             }));
         });
+
         View::composer(["backend.pages.prescription.invoice"], function ($view) {
-
             $view->with("settings", Cache::rememberForever("settings", function () {
                 return Setting::first();
             }));
         });
+
         View::composer(["backend.pages.account-invoice.create"], function ($view) {
-
             $view->with("settings", Cache::rememberForever("settings", function () {
                 return Setting::first();
             }));
         });
+
         View::composer(["backend.pages.account-invoice.form"], function ($view) {
-
             $view->with("settings", Cache::rememberForever("settings", function () {
                 return Setting::first();
             }));
         });
+
         View::composer(["backend.pages.account-invoice.view"], function ($view) {
-
             $view->with("settings", Cache::rememberForever("settings", function () {
                 return Setting::first();
             }));
         });
-        View::composer(["backend.pages.notice.view"], function ($view) {
 
+        View::composer(["backend.pages.notice.view"], function ($view) {
             $view->with("settings", Cache::rememberForever("settings", function () {
                 return Setting::first();
             }));

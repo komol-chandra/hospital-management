@@ -10,7 +10,7 @@ class FrontendService
 {
     public function getActiveDoctors()
     {
-        return Doctor::where('status', '1')->orderBy('id', 'DESC')->get();
+        return Doctor::where('status', '1')->orderBy('id', 'DESC')->paginate(4);
     }
     public function getByDoctorId($id)
     {

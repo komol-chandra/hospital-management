@@ -10,8 +10,8 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="col-sm-12 form-group">
-                <label>Patient Code <span class="text-danger">*</span></label>
-                <input type='text' name='code' class='form-control patientId'>
+                <label>Patient Mobile No. <span class="text-danger">*</span></label>
+                <input type='text' name='mobile' class='form-control patientId'>
                 <span class="icon"></span>              
             </div>
             <div class="col-sm-12 form-group">
@@ -30,7 +30,7 @@
                 <td width="50%" class="text-right">
                 <ul class="list-unstyled">
                 
-                    <li>Date:<span class="text-danger">*</span><input class="form-control datepicker-input hasDatepicker"  name="date" type="date" id="dp1610302529495"></li>
+                    <li>Date:<span class="text-danger">*</span><input class="form-control datepicker-input hasDatepicker today"  name="date" type="date" id=""></li>
                 <li><strong>{{ $settings->title }}</strong></li>
                 <li>{{ $settings->address }}</li>
                 <li>{{ $settings->email }}</li>
