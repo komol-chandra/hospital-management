@@ -5,6 +5,7 @@
 <div class="col-sm-6 form-group">
     <label>Available Days <span class="text-danger">*</span></label>
     {!! Form::select('day_id',$days, $schedule['day_id'] ?? null ,['placeholder' => 'Select Day',"class"=>"form-control"]) !!}
+    {{-- {!! Form::select('day_id',$days, null ,['placeholder' => 'Select Day',"class"=>"form-control"]) !!} --}}
 </div>
 <div class="col-sm-6 form-group">
     <label>Starting Time <span class="text-danger">*</span></label>
@@ -16,7 +17,7 @@
 </div>
 <div class="col-sm-6 form-group">
     <label>Quantity of Patient<span class="text-danger">*</span></label>
-    {!! Form::number("quantity",$schedule['quantity'] ?? null,["class"=>"form-control"]) !!}
+    <input type="text" name="quantity" value="30" class="form-control" placeholder="30 defult value" readonly>
 </div>
 <div class="col-sm-6 form-group">
     <label>Status <span class="text-danger">*</span></label>

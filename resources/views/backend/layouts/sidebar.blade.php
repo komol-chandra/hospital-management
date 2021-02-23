@@ -16,7 +16,6 @@
                 <a href="{{ url('/admin') }}"><i class="fa fa-hospital-o"></i><span>Dashboard</span>
                 </a>
             </li>
-            @can('RBAC')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-credit-card-alt"></i><span>RBAC</span>
@@ -25,18 +24,11 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    @can('Role')
                     <li><a href="{{ url('/admin/rbac/role') }}">Role</a></li>
-                    @endcan
-                    @can('User')
                     <li><a href="{{ url('/admin/rbac/user') }}">User</a></li>
-                    @endcan
-                    @can('User_Access')
                     <li><a href="{{ url('/admin/rbac/user_access') }}">User Access</a></li>
-                    @endcan
                 </ul>
             </li>
-            @endcan
             @can('Department')
             <li class="treeview">
                 <a href="#">
@@ -109,6 +101,18 @@
                 </ul>
             </li>
             @endcan
+
+            <li class="treeview">
+                    <a href="#">
+                    <i class="fa fa-file-text"></i><span>Report</span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('/admin/doctor-report') }}">Doctor Report</a></li>
+                </ul>
+            </li>
             
             {{-- <li class="treeview">
                 <a href="#">
@@ -133,7 +137,7 @@
                 <ul class="treeview-menu">
                     {{-- <li><a href="add-payment.html">Add payment</a></li> --}}
                     @can('Appointment_list')
-                    <li><a href="{{ url('/admin/new_appointments') }}">Appionment list</a></li>
+                    <li><a href="{{ url('/admin/online-appointment') }}">Appionment list</a></li>
                     @endcan
                 </ul>
             </li>
@@ -150,12 +154,15 @@
                     @can('Test_Type')
                     <li><a href="{{ url('/admin/test') }}">Test Type List</a></li>
                     @endcan
-                    @can('Test_Add')
+                    {{-- @can('Test_Bill') --}}
+                    <li><a href="{{ url('/admin/test-bill') }}">Test Bill List</a></li>
+                    {{-- @endcan --}}
+                    {{-- @can('Test_Add')
                     <li><a href="{{ url('/admin/patient-test/create') }}">Test Add</a></li>
                     @endcan
                     @can('Test_List')
                     <li><a href="{{ url('/admin/patient-test') }}">Test List</a></li>
-                    @endcan
+                    @endcan --}}
                 </ul>
             </li>
             @endcan

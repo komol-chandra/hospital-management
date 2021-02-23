@@ -44,15 +44,7 @@
       <table>\
             <tr>\
                 <td>\
-                <div class='form-group' >\
-                    <label>Medicine Name</label>\
-                    <select class='form-control' name='medicine_id[]' style='width: 170px;'>\
-                        <option>Select</option>\
-                    @foreach($medicineJs as $value)\
-                    <option value='{{ $value->id }}'>{{ $value->name }}</option>\
-                    @endforeach\
-                </select>\
-                </div>\
+                <input type='text' name='medicine[]' class='form-control' style=' width:170px;' placeholder='name'>\
                 </td>\
                 <td>\
                 <input type='text' name='duration[]' class='form-control' style='margin-left: 9px; width:170px;' placeholder='100mg'>\

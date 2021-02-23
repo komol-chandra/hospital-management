@@ -4,64 +4,113 @@ namespace App\Services;
 use App\Models\Blood;
 use App\Models\Doctor;
 use App\Models\DoctorDepartment;
+use App\Models\FrontendUser;
+use App\Models\User;
 use File;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DoctorService
 {
     public function lists()
     {
-        return Doctor::with('departments')->orderBy('id', 'DESC')->get();
+        return (Doctor::with('departments')->orderBy('id', 'DESC')->get());
     }
 
-    public function createOrUpdate($data)
+    public function create($data)
     {
         $user_id = Auth::user()->id;
-        if (!empty($data["id"])) {
-            $doctor = Doctor::findOrFail($data['id']);
-            if (isset($data['picture'])) {
-                if (File::exists($doctor->picture)) {
-                    File::delete($doctor->picture);
-                }
-                $doctor->picture = $data['picture'];
+        $doctor = new Doctor();
+        $doctor->created_by = $user_id;
+        $doctor->fill($data)->save();
+
+        $user = new FrontendUser();
+        $user->type = 'doctor';
+        $user->parentId = $doctor->id;
+        $user->password = Hash::make($data['password']);
+        $user->name = $data['name'];
+        $user->full_name = $data['full_name'];
+        $user->email = $data['email'];
+        $user->address = $data['address'];
+        $user->mobile = $data['mobile'];
+        $user->birthday = $data['birthday'];
+        $user->picture = isset($data['picture']) ? $data['picture'] : 'backend/files/profile.jpg';
+        $user->blood_id = $data['blood_id'];
+        $user->gender = $data['gender'];
+        $user->save();
+        return $doctor ? $doctor : null;
+    }
+
+    public function update($data, $id)
+    {
+        $user_id = Auth::user()->id;
+        $doctor = Doctor::findOrFail($id);
+        // dd($doctor);
+        $user = FrontendUser::where('type', 'doctor')->where('parentId', $doctor['id'])->first();
+        if (isset($data['picture'])) {
+            if (File::exists($user->picture)) {
+                File::delete($user->picture);
             }
-            $doctor->updated_by = $user_id;
-        } else {
-            $doctor = new Doctor();
-            $doctor->created_by = $user_id;
         }
-        return $doctor->fill($data)->save() ? $doctor : null;
+        $doctor->updated_by = $user_id;
+        $doctor->fill($data)->save();
+
+        $user->full_name = $data['full_name'];
+        $user->address = $data['address'];
+        $user->mobile = $data['mobile'];
+        $user->birthday = $data['birthday'];
+
+        if (!empty($data['picture'])) {
+            $user->picture = $data['picture'];
+        }
+
+        $user->blood_id = $data['blood_id'];
+        $user->gender = $data['gender'];
+        $user->save();
+        return $doctor ? $doctor : null;
     }
 
     public function getById($id)
     {
-        return Doctor::with('departments')->findOrFail($id);
+        return Doctor::with('departments', 'users')->findOrFail($id);
     }
+
+    public function getUserById($id)
+    {
+        $doctorId = Doctor::findOrFail($id)->toArray();
+        return FrontendUser::where('type', 'doctor')->where('parentId', $doctorId['id'])->first();
+    }
+
     public function getDeterment()
     {
         return DoctorDepartment::where('status', '1')->pluck('name', 'id');
     }
+
     public function getBloods()
     {
         return Blood::all()->pluck('name', 'id');
 
     }
+
     public function getByIdWithUser($id)
     {
         return Doctor::with('user')->findOrFail($id);
     }
+
     public function delete($id)
     {
         $doctor = Doctor::findOrFail($id);
-        if ($doctor) {
-            if (File::exists($doctor->picture)) {
-                File::delete($doctor->picture);
+        $user = FrontendUser::where('type', 0)->where('parentId', $doctor['id'])->first();
+        if ($user) {
+            if (File::exists($user->picture)) {
+                File::delete($user->picture);
             }
         }
+        $user->delete();
         $doctor->delete();
         return $doctor;
-
     }
+
     public function status($id)
     {
         $doctor = Doctor::findOrFail($id);

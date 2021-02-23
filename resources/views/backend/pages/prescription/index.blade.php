@@ -68,8 +68,8 @@
                             @forelse($data as $key => $value)
                             <tr>
                                 <td>{{ $value->user->name ?? null}}</td>
-                                <td>{{ $value->doctor->name ?? null}}</td>
-                                <td>{{ $value->patient->name ?? null}}</td>
+                                <td>{{ $value->doctor->full_name ?? null}}</td>
+                                <td>{{ $value->patient->full_name ?? null}}</td>
                                 <td>{{ $value->date ?? null}}</td>
                                 <td class="text-center">
                                     @if($value->status == 1)

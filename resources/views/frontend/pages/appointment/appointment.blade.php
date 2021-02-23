@@ -14,21 +14,41 @@
   <div class="bg-light">
     <div class="container space-2 space-md-2">
         <div class="m-t-25">
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="true">new patient </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false">old patient</a>
-                </li>
-            </ul>
-            <div class="tab-content" id="pills-tabContent">
-                {{-- Profile View --}}
                 <div class="tab-pane fade active show" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="card">
                         <div class="card-body">
-                            {!! Form::open(['url' => '/frontend/new_appointments','method'=>'post','files'=>true,'id'=>'new']) !!}
-                                @include('frontend.pages.appointment.new_patient')
+                            {!! Form::open(['url' => '/frontend/appointment','method'=>'post','files'=>true,'id'=>'new']) !!}
+                            <input type="hidden" name="patient_id" value="{{ Auth::guard('admin')->user()->id }}">    
+                            <div class="row">
+                                <div class="col-sm-6 form-group">
+                                    <label> Appointment Status<span class="text-danger">*</span></label>
+                                    <select name="type" class="select2 form-control custom-select " id="">
+                                        <option value="1">New</option>
+                                        <option value="2">In 30 Days</option>
+                                        <option value="3">Report</option>
+                                    </select>
+                                    <span class="icon"></span>  
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label>Department <span class="text-danger">*</span></label>
+                                    {!! Form::select('department_id',$departments , null , ['placeholder' => 'Select Department',"class"=>"form-control","onchange"=>"getDoctor()","id"=>"department"]) !!}
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label>Doctor <span class="text-danger">*</span></label>
+                                    <select name="doctor_id" class="select2 form-control custom-select doctor" id="doctor_id">
+                                        <option selected disabled hidden>Select</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6 form-group">
+                                    <label>Date</label>
+                                    {!! Form::date("date", null, ["class"=>"form-control date"]) !!}
+                                </div>
+                               
+                                <div class="col-sm-12 form-group">
+                                    <label>Message</label>
+                                    {!! Form::text("message", null,["class"=>"form-control"]) !!}
+                                </div>
+                            </div>
                                 <div class="col-sm-12 reset-button">
                                     <button type="submit" class="btn btn-success">Book Now</button>
                                 </div>
@@ -36,19 +56,7 @@
                         </div>
                     </div>
                 </div>
-                {{-- Update Profile --}}
-                <div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                    <div class="card">
-                        <div class="card-body">
-                            {!! Form::open(['url' => '/frontend/old_appointments','method'=>'post','files'=>true,'id'=>'old']) !!}
-                                @include('frontend.pages.appointment.old_patient')
-                                <div class="col-sm-12 reset-button">
-                                    <button type="submit" class="btn btn-success">Book Now</button>
-                                </div>
-                            {!! Form::close() !!}      
-                        </div>
-                    </div>
-                </div>
+                
             </div>
         </div>
     </div>
@@ -58,29 +66,6 @@
 @section('js')
 <script>
     $(document).ready(function(){
-
-
-        $(".patientId").keyup(function () {
-            let patientId = $(this).val();
-            console.log(patientId);
-            $.ajax({
-                url: "/frontend/matchPatientMobile",
-                type: "get",
-                data: { patientId: patientId },
-                dataType: "json",
-                success: function (response) {
-                    if (response.name) {
-                    $(".icon").html("your Mobile Number Matched");
-                    $(".fullName").val(response.name);
-                    $(".email").val(response.email);
-                    $(".address").val(response.address);
-                    } else {
-                        $(".icon").html("your Mobile Number Did not Match");
-                    }
-                },
-            });
-        });
-
         $(".date").change(function () {
             let date = $(this).val();
             let doctor_id = $(".doctor_two").val();
@@ -100,36 +85,22 @@
                 },
             });
         });
-
-
     });
     function getDoctor(){
         let id = $(department).val();
+        console.log(id);
         $.ajax({
-            url:`/frontend/doctorId/${id}`,
+            url:`/frontend/getDoctorId/${id}`,
             type:"get",
             dataType:"json",
             success:function(response){
                 response.forEach(function(value,index){
-                    $('.doctor').append(`<option class="selectDoctor"  value="${value.id}" >${value.name}</option>`);
+                    $('.doctor').append(`<option class="selectDoctor"  value="${value.id}" >${value.full_name}</option>`);
 
                 })
             }
         })
     };
-    function getDoctorTwo(){
-        let id = $(department_two).val();
-        $.ajax({
-            url:`/frontend/doctorId2/${id}`,
-            type:'get',
-            dataType:'json',
-            success:function(response){
-                response.forEach(function(value,index){
-                    $('.doctor_two').append(`<option class="selectDoctor2" value="${value.id}">${value.name}</option>`)
-                })
-            }
-        })
-    }
 </script>
 {!! JsValidator::formRequest('App\Http\Requests\OldAppointmentRequest', '#old'); !!}
 {!! JsValidator::formRequest('App\Http\Requests\NewAppointmentRequest', '#new'); !!}

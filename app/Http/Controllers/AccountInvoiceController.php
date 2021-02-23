@@ -82,7 +82,7 @@ class AccountInvoiceController extends Controller
             ];
         }
         $invoiceDetail = AccountInvoicedetail::insert($detailData);
-        // dd($invoiceDetail);
+
         if ($invoiceDetail && $invoice) {
             $notification = $this->message->success('Account Invoice', 'Account Invoice Added Successfully ');
         } else {

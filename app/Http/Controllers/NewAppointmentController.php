@@ -40,14 +40,19 @@ class NewAppointmentController extends Controller
 
     public function store(NewAppointmentRequest $request)
     {
-        $data = $request->all();
-        $data['today_date'] = Carbon::now()->format('y-m-d');
-        $data['code'] = Str::random(7);
-        $newAppointment = $this->newAppointmentService->createNewAppointment($data);
-        if ($newAppointment) {
-            $notification = $this->message->success('Appointment', 'New Appointment Added Successfully ');
-        } else {
-            $notification = $this->message->error('Appointment', 'Appointment Field Required');
+        try {
+            $data = $request->all();
+            $data['today_date'] = Carbon::today()->toDateString();
+            $data['code'] = Str::random(7);
+            $newAppointment = $this->newAppointmentService->createNewAppointment($data);
+            if ($newAppointment) {
+                $notification = $this->message->success('Appointment', 'New Appointment Added Successfully ');
+            } else {
+                $notification = $this->message->error('Appointment', 'Appointment Field Required');
+            }
+
+        } catch (Exception $e) {
+            echo 'Caught exception: ', $e->getMessage(), "\n";
         }
         return redirect()->back()->with($notification);
 

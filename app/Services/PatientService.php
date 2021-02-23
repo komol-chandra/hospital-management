@@ -2,38 +2,48 @@
 namespace App\Services;
 
 use App\Models\Blood;
-use App\Models\Patient;
+use App\Models\FrontendUser;
 use File;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class PatientService
 {
-    public function lists($data)
+
+    public function create($data)
     {
-        return Patient::search($data->search)->orderBy('id', 'DESC')->paginate(10);
+        $user_id = Auth::user()->id;
+
+        $user = new FrontendUser();
+        $user->type = 'patient';
+        $user->password = Hash::make($data['password']);
+        $user->name = $data['name'];
+        $user->full_name = $data['full_name'];
+        $user->email = $data['email'];
+        $user->address = $data['address'];
+        $user->mobile = $data['mobile'];
+        $user->birthday = $data['birthday'];
+        $user->picture = isset($data['picture']) ? $data['picture'] : 'backend/files/profile.jpg';
+        $user->blood_id = $data['blood_id'];
+        $user->gender = $data['gender'];
+        return $user->save() ? $user : null;
     }
-    public function createOrUpdate($data)
+
+    public function update($data, $id)
     {
-        $userId = Auth::user()->id;
-        if (isset($data['id'])) {
-            $patient = Patient::findOrFail($data['id']);
-            if (isset($data['picture'])) {
-                if (File::exists($patient->picture)) {
-                    File::delete($patient->picture);
-                }
-                $patient->picture = $data['picture'];
+        $user_id = Auth::user()->id;
+        $user = FrontendUser::where('type', 'patient')->findOrFail($id);
+        if (isset($data['picture'])) {
+            if (File::exists($user->picture)) {
+                File::delete($user->picture);
             }
-            $patient->updated_by = $userId;
-        } else {
-            $patient = new Patient();
-            $patient->created_by = $userId;
         }
-        $patient->fill($data)->save() ? $patient : null;
-        return $patient ?? null;
+        return $user->fill($data)->save() ? $user : null;
     }
+
     public function getById($id)
     {
-        return Patient::findOrFail($id);
+        return FrontendUser::where('type', 'patient')->findOrFail($id);
     }
     public function getBloods()
     {
@@ -41,7 +51,7 @@ class PatientService
     }
     public function delete($id)
     {
-        $patient = Patient::findOrFail($id);
+        $patient = FrontendUser::findOrFail($id);
         if ($patient) {
             if (File::exists($patient->picture)) {
                 File::delete($patient->picture);
@@ -53,7 +63,7 @@ class PatientService
     }
     public function status($id)
     {
-        $patient = Patient::findOrFail($id);
+        $patient = FrontendUser::findOrFail($id);
         if ($patient->status == 1) {
             $patient->status = 0;
         } else {

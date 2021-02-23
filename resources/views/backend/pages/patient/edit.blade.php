@@ -28,5 +28,5 @@
 </div>
 @endsection
 @section('js')
-{!! JsValidator::formRequest('App\Http\Requests\PatientRequest', '#form_update'); !!}
+{!! JsValidator::formRequest('App\Http\Requests\PatientUpdateRequest', '#form_update'); !!}
 @endsection

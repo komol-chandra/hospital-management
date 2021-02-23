@@ -28,7 +28,7 @@ class ScheduleRequest extends FormRequest
             "day_id"    => 'required',
             "starting"  => 'required',
             "ending"    => 'required',
-            "quantity"  => 'required',
+            "quantity"  => 'nullable',
             "status"    => 'required',
         ];
     }

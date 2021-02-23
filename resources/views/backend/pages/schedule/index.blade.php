@@ -62,6 +62,7 @@
                                 <th>Starting Time</th>
                                 <th>Ending Time</th>
                                 <th>Quantity</th>
+                                <th>Per Patient Time</th>
                                 <th>status</th>
                                 <th>action</th>
                             </tr>
@@ -70,11 +71,13 @@
                             @forelse($schedules as $key => $value)
                             <tr>
                                 <td>{{ $key+1 }}</td>
-                                <td>{{ $value->doctors->name ?? null}}</td>
+                                <td>{{ $value->doctors->full_name ?? null}}</td>
                                 <td>{{ $value->days->name ?? null}}</td>
                                 <td>{{ $value->starting ?? null}}</td>
                                 <td>{{ $value->ending ?? null}}</td>
                                 <td>{{ $value->quantity ?? null}}</td>
+                                <td>{{ $value->per_patient_time .' Minute' ?? null}}</td>
+
                                 <td class="text-center">
                                     @if($value->status == 1)
                                     <i class="fa fa-circle" style="color:green"></i>

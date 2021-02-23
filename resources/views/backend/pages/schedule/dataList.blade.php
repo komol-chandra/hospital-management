@@ -8,6 +8,7 @@
                 <th>Starting Time</th>
                 <th>Ending Time</th>
                 <th>Quantity</th>
+                <th>Per Patient Time</th>
                 <th>status</th>
                 <th>action</th>
             </tr>
@@ -21,6 +22,7 @@
                 <td>{{ $value->starting ?? null}}</td>
                 <td>{{ $value->ending ?? null}}</td>
                 <td>{{ $value->quantity ?? null}}</td>
+                <td>{{ $value->per_patient_time .'minute' ?? null}}</td>
                 <td class="text-center">
                     @if($value->status == 1)
                     <i class="fa fa-circle" style="color:green"></i>

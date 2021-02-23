@@ -57,7 +57,7 @@
                   <div class="row">
                       <div class="col-sm-6 d-sm-flex align-content-sm-start flex-sm-column text-center text-sm-left mb-7 mb-sm-0">
                           <div class="w-100">
-                              <h3 class="h5 mb-4">{{ $value->name }}</h3>
+                              <h3 class="h5 mb-4">{{ $value->users->name }}</h3>
                           </div>
                           <div class="d-inline-block">
                               <span class="badge badge-primary badge-pill badge-bigger mb-3">{{ $value->departments->name }}</span>
@@ -85,8 +85,8 @@
                           </ul>
                       </div>
                       <div class="col-sm-6">
-                      <img class="img-fluid rounded mx-auto"
-                      src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}"
+                      <img class="img-fluid rounded mx-auto" 
+                      src="/{{ $value->users->picture }} " style="height: 150px; width: 150px;"
                           alt="Alison Frami">
                       </div>
                 </div>
@@ -98,7 +98,7 @@
         </div>
         <center>
         <a class="btn btn-sm btn-primary btn-wide transition-3d-hover pull-right"
-          href="{{ url('/frontend/doctors') }}">
+          href="{{ url('/frontend/doctor-view') }}">
             View More <span class="fas fa-angle-right ml-2"></span></a>
         </center>
         </div>

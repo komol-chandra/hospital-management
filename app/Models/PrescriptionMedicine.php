@@ -12,7 +12,7 @@ class PrescriptionMedicine extends Model
     protected $primaryKey = "id";
     protected $fillable = [
         "prescription_id",
-        "medicine_id",
+        "medicine",
         "duration",
         "sequence",
         "day",

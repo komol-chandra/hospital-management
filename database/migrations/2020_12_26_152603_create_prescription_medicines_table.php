@@ -17,8 +17,7 @@ class CreatePrescriptionMedicinesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('prescription_id');
             $table->foreign('prescription_id')->references('id')->on('prescriptions')->onDelete('cascade');
-            $table->unsignedBigInteger('medicine_id');
-            $table->foreign('medicine_id')->references('id')->on('medicines')->onDelete('cascade');
+            $table->string('medicine');
             $table->string('duration');
             $table->string('sequence');
             $table->tinyInteger('day');

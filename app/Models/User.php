@@ -29,13 +29,14 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'full_name',
+        'email',
+        'password',
         'address',
         'mobile',
         'birthday',
         'gender',
         'picture',
-        'email',
-        'password',
+        'blood_id',
         'type',
         'parentId',
         'email_verified',
@@ -46,6 +47,19 @@ class User extends Authenticatable
     {
         return $query->where('name', 'LIKE', '%' . $search . '%')
             ->where('email', 'LIKE', '%' . $search . '%');
+    }
+
+    public function blood()
+    {
+        return $this->belongsTo("App\Models\Blood", "blood_id", "id");
+    }
+    public function users()
+    {
+        return $this->belongsTo("App\Models\User", "parentId", "id");
+    }
+    public function roll()
+    {
+        return $this->belongsTo('App\Models\UserRoll');
     }
 
     /**

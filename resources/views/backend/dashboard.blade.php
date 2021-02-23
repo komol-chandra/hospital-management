@@ -228,10 +228,8 @@
         noticeList();
     })
     function noticeList(page_link = "/admin/notices") {
-    let search = $(".search").val();
     $.ajax({
         url: page_link,
-        data: { search: search },
         type: "get",
         datatype: "html",
         success: function (response) {

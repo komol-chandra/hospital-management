@@ -8,7 +8,7 @@ trait FileUpload
     {
         if ($request->hasFile($fieldname)) {
             $filetype = $request->file($fieldname)->getClientOriginalExtension();
-            $path = 'backend/files/' . $path;
+            $path = 'storage/app/public/' . $path;
             $image = $name . time() . '.' . $filetype;
             $request->file($fieldname)->move($path, $image);
             $image_name = $path . $image;

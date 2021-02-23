@@ -14,22 +14,17 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            UserSeeder::class,
             BloodSeeder::class,
             DaySeeder::class,
+            UserSeeder::class,
             DepartmentSeeder::class,
-        ]);
-        \App\Models\Doctor::factory(20)->create();
-        \App\Models\Patient::factory(2000)->create();
-        $this->call([
-            ScheduleSeeder::class,
+            EmployeeRollSeeder::class,
+            PermisionSeeder::class,
             TestSeeder::class,
-            PatientTestSeeder::class,
             MedicineTypeSeeder::class,
             GenericSeeder::class,
             MedicineSeeder::class,
             ManufacturerSeeder::class,
-            EmployeeRollSeeder::class,
             EmployeeSeeder::class,
             SettingSeeder::class,
             AccountTypeSeeder::class,
@@ -37,7 +32,6 @@ class DatabaseSeeder extends Seeder
             PaymentSeeder::class,
             ServiceSeeder::class,
             PaymentMethodSeeder::class,
-            PermisionSeeder::class,
         ]);
     }
 }
