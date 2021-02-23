@@ -12,26 +12,22 @@ class Doctor extends Model
     protected $table = "doctors";
     protected $primaryKey = "id";
     protected $fillable = [
-        "name",
-        "email",
+        "full_name",
         "designation",
         "department_id",
-        "address",
-        "mobile",
         "phone",
         "biography",
         "specialist",
-        "birthday",
-        "gender",
-        "blood_id",
         "education",
-        "picture",
+        "feeNew",
+        "feeInMonth",
+        "feeReport",
+        "salary",
         "status",
     ];
-
-    public function blood()
+    public function users()
     {
-        return $this->belongsTo("App\Models\Blood", "blood_id", "id");
+        return $this->hasOne("App\Models\FrontendUser", 'parentId', 'id');
     }
     public function departments()
     {

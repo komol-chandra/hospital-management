@@ -29,12 +29,19 @@ class Patient extends Model
     {
         return $this->belongsTo("App\Models\Blood", "blood_id", 'id');
     }
+    public function user()
+    {
+        return $this->belongsTo("App\Models\User", "created_by", 'id');
+    }
     public function scopeSearch($query, $search)
     {
         return $query->where('name', 'LIKE', '%' . $search . '%')
             ->orWhere('code', 'LIKE', '%' . $search . '%')
             ->orWhere('email', 'LIKE', '%' . $search . '%')
-            ->orWhere('mobile', 'LIKE', '%' . $search . '%');
+            ->orWhere('mobile', 'LIKE', '%' . $search . '%')
+            ->orWhereHas('blood', function ($query) use ($search) {
+                $query->Where("name", "LIKE", "%" . $search . "%");
+            });
     }
 
 }

@@ -16,6 +16,7 @@ class Schedule extends Model
         "starting",
         "ending",
         "quantity",
+        "per_patient_time",
         "status",
     ];
 
@@ -26,6 +27,10 @@ class Schedule extends Model
     public function doctors()
     {
         return $this->belongsTo("App\Models\Doctor", "doctor_id", "id");
+    }
+    public function users()
+    {
+        return $this->hasMany("App\Models\FrontendUser");
     }
     public function scopeSearch($query, $search)
     {

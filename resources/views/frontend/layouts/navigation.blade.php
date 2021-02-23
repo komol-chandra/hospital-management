@@ -10,11 +10,32 @@
         </li>
       <li class="nav-item u-header__nav-item ">
         <a class="nav-link u-header__nav-link"
-        href="{{ url('/frontend/doctors') }}">Doctors</a>
+        href="{{ url('/frontend/doctor-view') }}">Doctors</a>
       </li>
-      <li class="nav-item u-header__nav-item ">
-        <a class="nav-link u-header__nav-link"
-        href="{{ url('/login') }}">Login</a>
-      </li>
+      
+        @if(Auth::guard('admin')->check())
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{Auth::guard('admin')->user()->name}}
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ url('/user/view-profile') }}">View Profile</a>
+              <a class="dropdown-item" href="#">change Profile</a>
+              <a class="dropdown-item" href="#">change Password</a>
+              <a class="dropdown-item" href="{{ url('user/logout') }}">Logout</a>
+            </div>
+          </li>
+        @else
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Login/Register
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ url('/login') }}">Admin Login</a>
+              <a class="dropdown-item" href="{{ url('/user/login-view') }}">User Login</a>
+              <a class="dropdown-item" href="{{ url('/user/register') }}">User register</a>
+            </div>
+          </li>
+        @endif
     </ul>
   </div>

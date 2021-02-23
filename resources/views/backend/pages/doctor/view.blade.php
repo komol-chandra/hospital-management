@@ -16,12 +16,12 @@
                 <div class="col-sm-12"> 
                         <div class="card">
                             <div class="card-header">
-                                <img src="/{{ $doctor->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="150" width="150">
+                                <img src="/{{ $doctor->users->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="150" width="150">
                             </div>
                             <div class="card-content">
                                 <div class="card-content-member">
-                                    <h4 class="m-t-0">{{ $doctor->name }}</h4>
-                                    <p class="m-0"><i class="pe-7s-map-marker"></i>{{ $doctor->address }}</p>
+                                    <h4 class="m-t-0">{{ $doctor->users->name ?? null }}</h4>
+                                    <p class="m-0"><i class="pe-7s-map-marker"></i>{{ $doctor->users->address ?? null }}</p>
                                 </div>
                                 <div class="card-content-languages">
                                     <div class="row">
@@ -32,7 +32,7 @@
                                                 </div>
                                                 <div>
                                                     <ul>
-                                                        <li>{{ $doctor->email }}
+                                                        <li>{{ $doctor->users->email }}
                                                             <div class="fluency fluency-4"></div>
                                                         </li>
                                                     </ul>
@@ -105,7 +105,7 @@
                                                 </div>
                                                 <div>
                                                     <ul>
-                                                        <li>{{ $doctor->mobile }}</li>
+                                                        <li>{{ $doctor->users->mobile }}</li>
                                                         
                                                     </ul>
                                                 </div>
@@ -131,7 +131,7 @@
                                                 </div>
                                                 <div>
                                                     <ul>
-                                                        <li>{{ $doctor->birthday }}</li>
+                                                        <li>{{ $doctor->users->birthday }}</li>
                                                         
                                                     </ul>
                                                 </div>
@@ -143,7 +143,17 @@
                                                 </div>
                                                 <div>
                                                     <ul>
-                                                        <li>{{ $doctor->gender == '1' ? 'Male' : 'Female' }}</li>
+                                                        <li>{{ $doctor->users->gender == '1' ? 'Male' : 'Female' }}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="card-content-languages-group">
+                                                <div>
+                                                    <h4>Blood Group:</h4>
+                                                </div>
+                                                <div>
+                                                    <ul>
+                                                        {{-- <li>{{ $doctor->users->blood ? $doctor->users->blood->name : null  }}</li> --}}
                                                     </ul>
                                                 </div>
                                             </div>

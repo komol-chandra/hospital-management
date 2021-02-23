@@ -21,9 +21,10 @@ class CreateSchedulesTable extends Migration
             $table->foreign('day_id')->references('id')->on('days')->onDelete('set null');
             $table->time('starting');
             $table->time('ending');
-            $table->integer('quantity');
-            $table->tinyInteger('status');
-            $table->unsignedInteger('created_by');
+            $table->tinyInteger('per_patient_time')->nullable();
+            $table->integer('quantity')->default(30);
+            $table->tinyInteger('status')->default(1);
+            $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();

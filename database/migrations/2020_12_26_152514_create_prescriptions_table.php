@@ -17,7 +17,7 @@ class CreatePrescriptionsTable extends Migration
             $table->id();
             $table->string('date');
             $table->unsignedBigInteger('patient_id')->nullable();
-            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('set null');
+            $table->foreign('patient_id')->references('id')->on('frontend_users')->onDelete('set null');
             $table->unsignedBigInteger('doctor_id')->nullable();
             $table->foreign('doctor_id')->references('id')->on('doctors')->onDelete('set null');
             $table->string('history')->nullable();

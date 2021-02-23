@@ -70,11 +70,11 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
-                                    <img src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="50" width="50">
+                                    <img src="/{{ $value->users->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="50" width="50">
                                 </td>
-                                <td>{{ $value->name ?? null }}</td>
+                                <td>{{ $value->users->name ?? null }}</td>
                                 <td>{{ $value->departments->name ?? null }}</td>
-                                <td>{{ $value->mobile ?? null}}</td>
+                                <td>{{ $value->users->mobile ?? null}}</td>
                                 <td class="text-center">
                                     @if($value->status == 1)
                                     <i class="fa fa-circle" style="color:green"></i>
@@ -100,6 +100,7 @@
                             </tr>
                             @empty
                             <tr>
+                                <td>NO DATA</td>
                                 <td>NO DATA</td>
                                 <td>NO DATA</td>
                                 <td>NO DATA</td>

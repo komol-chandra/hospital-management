@@ -18,20 +18,25 @@ class ScheduleService
     }
     public function getActiveDoctors()
     {
-        return Doctor::where('status', '1')->pluck('name', 'id');
+        return Doctor::with('users')->where('status', '1')->pluck('full_name', 'id');
     }
     public function createOrUpdate($data)
     {
         $userId = Auth::user()->id;
         if (!empty($data["id"])) {
             $schedule = Schedule::findOrFail($data["id"]);
-            // dd($schedule);
             $schedule->updated_by = $userId;
         } else {
             $schedule = new Schedule();
             $schedule->created_by = $userId;
         }
-        // dd($schedule);
+        $patient = $data['quantity'];
+        $starting = strtotime($data['starting']);
+        $ending = strtotime($data['ending']);
+        //time in minute
+        $different = (($ending - $starting) / 60);
+        $perPatientTime = ($different / $patient);
+        $data['per_patient_time'] = $perPatientTime;
         return $schedule->fill($data)->save() ? $schedule : null;
     }
     public function delete($id)

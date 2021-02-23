@@ -15,24 +15,20 @@ class CreateDoctorsTable extends Migration
     {
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->text('full_name')->nullable();
             $table->text('designation')->nullable();
             $table->unsignedBigInteger('department_id')->nullable();
             $table->foreign('department_id')->references('id')->on('departments')->onDelete('set null');
-            $table->text('address')->nullable();
-            $table->string('mobile');
             $table->string('phone')->nullable();
             $table->text('biography')->nullable();
             $table->string('specialist')->nullable();
-            $table->string('birthday')->nullable();
-            $table->tinyInteger('gender');
-            $table->unsignedBigInteger('blood_id')->nullable();
-            $table->foreign('blood_id')->references('id')->on('bloods')->onDelete('set null');
             $table->text('education')->nullable();
-            $table->text('picture')->nullable();
-            $table->tinyInteger('status');
-            $table->unsignedInteger('created_by');
+            $table->integer('feeNew')->nullable();
+            $table->integer('feeInMonth')->nullable();
+            $table->integer('feeReport')->nullable();
+            $table->integer('salary')->nullable();
+            $table->tinyInteger('status')->default(1);
+            $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
             $table->softDeletes();
             $table->timestamps();

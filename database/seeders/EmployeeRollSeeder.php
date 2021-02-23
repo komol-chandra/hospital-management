@@ -33,7 +33,7 @@ class EmployeeRollSeeder extends Seeder
             'created_by'  => '1',
         ]);
         DB::table('employee_rolls')->insert([
-            'name'        => 'Laboratorist',
+            'name'        => 'Laboratorian',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis',
             'status'      => '1',
             'created_by'  => '1',

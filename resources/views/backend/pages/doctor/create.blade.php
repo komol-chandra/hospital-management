@@ -16,7 +16,10 @@
             <div class="panel-body">
                 <div class="col-sm-12">
                     {!! Form::open(['url' => '/admin/doctor','method'=>'post','files'=>true,"id"=>"form_insert"]) !!}
+                    
+                    @include('backend.pages.doctor.user-form')
                         @include('backend.pages.doctor.form')
+                        {{-- @include('backend.pages.doctor.user-form') --}}
                         <div class="col-sm-12 reset-button">
                             <button type="submit" class="btn btn-success">Save</button>
                         </div>

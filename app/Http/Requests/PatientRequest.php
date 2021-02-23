@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PatientRequest extends FormRequest
 {
@@ -23,19 +24,19 @@ class PatientRequest extends FormRequest
      */
     public function rules()
     {
-        $patient = $this->route('patient');
         return [
-            "email"    => 'required |unique:patients,email,' . $patient . ',id',
-            "code"     => 'unique:patients,code,' . $patient . ',id',
-            "name"     => "required",
-            "address"  => "nullable",
-            "phone"    => "nullable",
-            "mobile"   => "required",
-            "birthday" => "nullable",
-            "gender"   => "required",
-            "blood_id" => "nullable",
-            "picture"  => "mimes:png,jpg,jpeg",
-            "status"   => "required",
+            "full_name" => 'required',
+            "name"      => ['required', Rule::unique('users', 'name')->ignore($this->patient, 'id')],
+            "email"     => ['required', Rule::unique('users', 'email')->ignore($this->patient, 'id')],
+            "mobile"    => ['required', Rule::unique('users', 'mobile')->ignore($this->patient, 'id')],
+            // "email"         => 'required |unique:users,email,' . $doctor . ',id',
+            "password"  => 'required',
+            "address"   => 'nullable',
+            // "mobile"        => 'required|unique:users,mobile' . $doctor . ',id',
+            "birthday"  => 'nullable',
+            "gender"    => 'nullable',
+            "picture"   => 'mimes:png,jpg,jpeg',
+            "blood_id"  => 'nullable',
         ];
     }
 }

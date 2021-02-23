@@ -24,7 +24,7 @@ class OldAppointmentRequest extends FormRequest
     public function rules()
     {
         return [
-            "code"          => "required",
+            "mobile"        => "required",
             "date"          => "required",
             "department_id" => "required",
             "doctor_id"     => "required",

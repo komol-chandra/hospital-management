@@ -20,17 +20,17 @@ class Prescription extends Model
         "old_prescription_id",
         "today_date",
     ];
-    public function user()
+    public function patient()
     {
-        return $this->belongsTo("App\Models\User", "created_by", "id");
+        return $this->belongsTo("App\Models\FrontendUser", "patient_id", "id");
     }
     public function doctor()
     {
-        return $this->belongsTo("App\Models\Doctor", "doctor_id", "id");
+        return $this->belongsTo("App\Models\FrontendUser", "doctor_id", "id");
     }
-    public function patient()
+    public function user()
     {
-        return $this->belongsTo("App\Models\Patient", "patient_id", "id");
+        return $this->belongsTo("App\Models\User", "created_by", "id");
     }
 
 }

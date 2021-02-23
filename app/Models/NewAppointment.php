@@ -23,6 +23,10 @@ class NewAppointment extends Model
         "today_date",
 
     ];
+
+    protected $casts = [
+        'created_at' => 'date:Y-m-d',
+    ];
     public function departments()
     {
         return $this->belongsTo("App\Models\DoctorDepartment", "department_id", 'id');

@@ -21,7 +21,8 @@
 <div class="row">
     <div class="col-sm-2 form-group">
         <label>Medicine Name<span class="text-danger">*</span></label>
-        {!! Form::select('medicine_id[]',$medicines, null ,['placeholder' => 'Select Medicine',"class"=>"form-control"]) !!}
+        {!! Form::text('medicine[]',  null ,['placeholder' => 'name',"class"=>"form-control"]) !!}
+        {{-- {!! Form::select('medicine_id[]',$medicines, null ,['placeholder' => 'Select Medicine',"class"=>"form-control"]) !!} --}}
     </div>
     <div class="col-sm-2 form-group">
         <label>Duration <span class="text-danger">*</span></label>
