@@ -15,5 +15,3 @@ yarn-error.log
 /start
 /docker-compose.yml
 /docker
-/.env
-/.gitignore
