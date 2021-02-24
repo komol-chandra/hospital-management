@@ -67,20 +67,20 @@
                         </thead>
                         <tbody>
                     
-                            @forelse($data as $key => $value)
+                            @forelse($data as $key => $value ?? '')
                             <tr>
-                                <td>{{ $value->users->full_name ?? null}}</td>
-                                <td>{{ $value->reference ?? null}}</td>
-                                <td>{{ $value->patient->full_name ?? null}}</td>
-                                <td>{{ $value->date ?? null}}</td>
-                                <td>{{ $value->grand_total ?? null}}</td>
-                                <td>{{ $value->paid ?? null}}</td>
-                                <td>{{ $value->due ?? null}}</td>
+                                <td>{{ $value ?? ''->users->full_name ?? null}}</td>
+                                <td>{{ $value ?? ''->reference ?? null}}</td>
+                                <td>{{ $value ?? ''->patient->full_name ?? null}}</td>
+                                <td>{{ $value ?? ''->date ?? null}}</td>
+                                <td>{{ $value ?? ''->grand_total ?? null}}</td>
+                                <td>{{ $value ?? ''->paid ?? null}}</td>
+                                <td>{{ $value ?? ''->due ?? null}}</td>
                                 
                                 <td>
-                                    <a class="btn btn-info btn-xs" href="{{url('admin/test-bill/'.$value->id)}}"><i class="fa fa-eye"></i></a>
-                                    @if(!($value->due ==0))
-                                    <button class="btn btn-info btn-xs edit" data-toggle="modal" type="button" data="{{$value->id}}" data-target="#modal-edit"><i class="fa fa-dollar"></i></button>  
+                                    <a class="btn btn-info btn-xs" href="{{url('admin/test-bill/'.$value ?? ''->id)}}"><i class="fa fa-eye"></i></a>
+                                    @if(!($value ?? ''->due ==0))
+                                    <button class="btn btn-info btn-xs edit" data-toggle="modal" type="button" data="{{$value ?? ''->id}}" data-target="#modal-edit"><i class="fa fa-dollar"></i></button>  
                                     @endif
                                 </td>
                                 
@@ -116,7 +116,7 @@
                 <h1 class="modal-title">Update Test-Bill</h1>
             </div>
             <div class="modal-body">
-            {!! Form::open(['url' => '/admin/test-bill/'.$value->id.'','method'=>'put','files'=>true,'id'=>'form_update']) !!}
+            {!! Form::open(['url' => '/admin/test-bill/'.$value ?? ''->id.'','method'=>'put','files'=>true,'id'=>'form_update']) !!}
             {!! Form::hidden("id", null, ["class"=>"form-control e_id"]) !!}
             @include('backend.pages.test-bill.update-form');
             </div>
