@@ -12,8 +12,8 @@ yarn-error.log
 /.vscode
 /resources/views/vendor/
 /public/vendor/
-start
-docker-compose.yml
-docker
-.env
-.gitignore
+/start
+/docker-compose.yml
+/docker
+/.env
+/.gitignore
