@@ -11,7 +11,7 @@
                     <a class="btn btn-success" href="{{ url('/admin/doctor/create') }}"> <i class="fa fa-plus"></i> Add Doctor
                     </a>  
                 </div>        
-            </div>
+            </div>  
             <div class="panel-body">
                 <div class="row">
                     <div class="panel-header">
