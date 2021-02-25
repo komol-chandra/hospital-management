@@ -22,7 +22,15 @@ class FrontendUserFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'      => $this->faker->name,
+            'full_name' => $this->faker->name,
+            'email'     => $this->faker->email,
+            'password'  => '12345678',
+            'mobile'    => $this->faker->phoneNumber,
+            'birthday'  => $this->faker->date,
+            'blood_id'  => $this->faker->numberBetween(1, 2),
+            'gender'    => $this->faker->numberBetween(1, 2),
+            'address'   => $this->faker->address,
         ];
     }
 }

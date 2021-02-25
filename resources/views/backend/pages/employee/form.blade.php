@@ -1,36 +1,37 @@
 <div class="col-sm-4 form-group">
+    <label >Picture upload</label>
+    {!! Form::file("picture", null,["class"=>"form-control"]) !!}
+</div>
+
+<div class="col-sm-4 form-group">
     <label>Name <span class="text-danger">*</span></label>
-    {!! Form::text("name",$data['name'] ?? null, ["class"=>"form-control"]) !!}
+    {!! Form::text("full_name", $data['full_name'] ?? null, ["class"=>"form-control"]) !!}
 </div>
 <div class="col-sm-4 form-group">
     <label>Employee Type <span class="text-danger">*</span></label>
-    {!! Form::select('roll_id', $getEmployeeRoll, $data['roll_id'] ?? null ,['placeholder' => 'Select Blood',"class"=>"form-control"]) !!}
+    {!! Form::selectRollName('type', $data['type'] ?? null ,['placeholder' => 'Select Roll',"class"=>"form-control"]) !!}
 </div>
 <div class="col-sm-4 form-group">
     <label>Blood <span class="text-danger">*</span></label>
-    {!! Form::select('blood_id', $bloods, $data['blood_id'] ?? null ,['placeholder' => 'Select Blood',"class"=>"form-control"]) !!}
+    {!! Form::selectBlood('blood_id', $data['blood_id'] ??  null ,['placeholder' => 'Select Blood',"class"=>"form-control"]) !!}
 </div>
-<div class="col-sm-4 form-group">
-    <label>Phone</label>
-    {!! Form::number("phone", $data['phone'] ?? null,["class"=>"form-control"]) !!}
-</div>
+
 <div class="col-sm-4 form-group">
     <label>Mobile <span class="text-danger">*</span></label>
-    {!! Form::number("mobile",$data['mobile'] ?? null,["class"=>"form-control"]) !!}
-</div>
-<div class="col-sm-4 form-group">
-    <label>Email <span class="text-danger">*</span></label>
-    {!! Form::email("email", $data['email'] ?? null, ["class"=>"form-control"]) !!}
-</div>
-<div class="col-sm-12 form-group">
-    <label>Address</label>
-    {!! Form::text("address",$data['address'] ?? null,["class"=>"form-control"]) !!}
+    {!! Form::number("mobile", $data['mobile'] ?? null,["class"=>"form-control"]) !!}
 </div>
 
 <div class="col-sm-4 form-group">
     <label>Date of Birth <span class="text-danger">*</span></label>
-    {!! Form::date("birthday", $data['birthday'] ?? null,["class"=>"form-control datepicker-input"]) !!}
+    {!! Form::date("birthday", $data['birthday'] ??  null,["class"=>"form-control datepicker-input"]) !!}
 </div>
+
+<div class="col-sm-12 form-group">
+    <label>Address</label>
+    {!! Form::text("address", $data['address'] ?? null,["class"=>"form-control"]) !!}
+</div>
+
+
 
 <div class="col-sm-4 form-group">
     <label>Gender <span class="text-danger">*</span></label>
@@ -70,7 +71,4 @@
         @endif
     </div>
 </div>
-<div class="col-sm-6 form-group">
-    <label >Picture upload</label>
-    {!! Form::file("picture", null,["class"=>"form-control"]) !!}
-</div>
+

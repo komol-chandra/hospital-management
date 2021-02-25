@@ -97,7 +97,7 @@ class PatientController extends Controller
     {
         $data = $request->all();
         if ($request->hasFile('picture')) {
-            $data['picture'] = $this->ImageUpload($request, 'picture', 'user/', 'user_');
+            $data['picture'] = $this->ImageUpload($request, 'picture', 'frontend-user/', 'user_');
         }
         $patient = $this->patientService->create($data);
         if ($patient) {
@@ -143,7 +143,7 @@ class PatientController extends Controller
     {
         $data = $request->all();
         if ($request->hasFile('picture')) {
-            $data['picture'] = $this->ImageUpload($request, 'picture', 'patient/', 'patient_');
+            $data['picture'] = $this->ImageUpload($request, 'picture', 'frontend-user/', 'user_');
         }
         $patient = $this->patientService->update($data, $id);
         if ($patient) {

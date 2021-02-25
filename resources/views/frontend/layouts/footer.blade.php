@@ -22,11 +22,11 @@
           <!-- List Group -->
           <ul class="list-group list-group-flush list-group-borderless mb-0">
             <li><a class="list-group-item list-group-item-action"
-              href="home/about.html">About</a></li>
+              href="#">About</a></li>
               <li><a class="list-group-item list-group-item-action"
-                href="home/teachers.html">Teachers </a></li>
+                href="#">Doctors </a></li>
                 <li><a class="list-group-item list-group-item-action"
-                  href="home/gallery.html">Gallery </a></li>
+                  href="#">Gallery </a></li>
                 </ul>
                 <!-- End List Group -->
               </div>

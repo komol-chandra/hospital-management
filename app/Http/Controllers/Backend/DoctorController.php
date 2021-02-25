@@ -74,7 +74,7 @@ class DoctorController extends Controller
     {
         $data = $request->all();
         if ($request->hasFile('picture')) {
-            $data['picture'] = $this->ImageUpload($request, 'picture', 'user/', 'user_');
+            $data['picture'] = $this->ImageUpload($request, 'picture', 'frontend-user/', 'user_');
         }
         $doctor = $this->doctorService->create($data);
         if ($doctor) {
@@ -128,7 +128,7 @@ class DoctorController extends Controller
         $validatedData = $request->all();
         // dd($validatedData);
         if ($request->hasFile('picture')) {
-            $validatedData['picture'] = $this->ImageUpload($request, 'picture', 'user/', 'user_');
+            $validatedData['picture'] = $this->ImageUpload($request, 'picture', 'frontend-user/', 'user_');
         }
         $doctor = $this->doctorService->update($validatedData, $id);
         if ($doctor) {

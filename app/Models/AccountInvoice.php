@@ -25,7 +25,7 @@ class AccountInvoice extends Model
 
     public function patient()
     {
-        return $this->belongsTo("App\Models\Patient", "patient_id", "id");
+        return $this->belongsTo("App\Models\FrontendUser", "patient_id", "id");
     }
     public function account()
     {

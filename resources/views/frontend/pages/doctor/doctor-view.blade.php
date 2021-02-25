@@ -75,10 +75,17 @@
                                     </thead>
                                     <tbody>
                                         @forelse($schedules as $key => $value)
+                                        @php
+                                            $start = $value['starting'];
+                                            $startTime = date('h:i a', strtotime($start));
+
+                                            $end = $value['ending'];
+                                            $endTime = date('h:i a', strtotime($end));
+                                        @endphp
                                         <tr>
                                             <td>{{ $value->days->name }}</td>
-                                            <td>{{ $value['starting'] }}</td>
-                                            <td>{{ $value['ending'] }}</td>
+                                            <td>{{ $startTime ?? null}}</td>
+                                            <td>{{ $endTime ?? null}}</td>
                                             <td>{{ $value['quantity'] }} Personal</td>
                                         </tr>  
                                         @empty

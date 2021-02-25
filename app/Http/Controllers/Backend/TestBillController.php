@@ -14,7 +14,6 @@ use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class TestBillController extends Controller
 {
@@ -65,7 +64,7 @@ class TestBillController extends Controller
     public function store(TestBillRequest $request)
     {
         try {
-            DB::beginTransaction();
+            // DB::beginTransaction();
 
             //to save data in TestBill Table
 
@@ -78,6 +77,7 @@ class TestBillController extends Controller
             $data = $request->all();
             $bill->patient_id = $patientId;
             $bill->fill($data)->save();
+            // dd($billSave);
 
             //to save data in income Table
 
@@ -108,12 +108,11 @@ class TestBillController extends Controller
             } else {
                 $notification = $this->message->error('Test Bill', ' Field Required');
             }
-            DB::commit();
+            // DB::commit();
         } catch (\Exception $e) {
             $notification = $this->message->error('Test Bill', $e->getMessage());
         }
         return redirect()->back()->with($notification);
-
     }
 
     /**
@@ -122,9 +121,11 @@ class TestBillController extends Controller
      * @param  \App\Models\TestBill  $testBill
      * @return \Illuminate\Http\Response
      */
-    public function show(TestBill $testBill)
+    public function show($id)
     {
-        //
+        $data = TestBill::findOrFail($id);
+        $detail = TestBillInfo::where('test_bill_id', $data->id)->get();
+        return view('backend.pages.test-bill.invoice', compact('data', 'detail'));
     }
 
     /**
@@ -149,7 +150,7 @@ class TestBillController extends Controller
     public function update(Request $request)
     {
         try {
-            DB::beginTransaction();
+            // DB::beginTransaction();
 
             //to save data in TestBill Table
             $user_id = Auth::user()->id;
@@ -182,7 +183,7 @@ class TestBillController extends Controller
             } else {
                 $notification = $this->message->error('Test Bill', ' Field Required');
             }
-            DB::commit();
+            // DB::commit();
         } catch (\Exception $e) {
             $notification = $this->message->error('Test Bill', $e->getMessage());
         }

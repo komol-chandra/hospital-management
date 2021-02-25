@@ -26,7 +26,7 @@ class Prescription extends Model
     }
     public function doctor()
     {
-        return $this->belongsTo("App\Models\FrontendUser", "doctor_id", "id");
+        return $this->belongsTo("App\Models\Doctor", "doctor_id", "id");
     }
     public function user()
     {

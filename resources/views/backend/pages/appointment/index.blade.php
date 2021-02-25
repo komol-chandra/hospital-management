@@ -70,10 +70,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                    
+                            @php
+                            $i = ($data->currentpage()-1)* $data->perpage() + 1;
+                            @endphp
                             @forelse($data as $key => $value)
                             <tr>
-                                <td>{{ $key+1 }}</td>
+                                <td>{{ $i++ }}</td>
                                 <td>@if($value->type==1){{ 'New' }}
                                     @elseif($value->type==2){{ 'In 30 Days' }}
                                     @else{{ 'Report' }}
@@ -130,6 +132,8 @@
                             
                         </tbody>
                     </table>
+                    {{ $data->links() }}
+
                 </div>
                 {{-- <div class="data-lists"></div> --}}
             </div>

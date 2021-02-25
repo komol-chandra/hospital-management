@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AccountInvoiceRequest;
 use App\Models\AccountInvoice;
 use App\Models\AccountInvoicedetail;
-use App\Models\Patient;
+use App\Models\FrontendUser;
 use App\Services\AccountInvoiceService;
 use App\Services\ResponseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class AccountInvoiceController extends Controller
 {
@@ -36,7 +35,7 @@ class AccountInvoiceController extends Controller
     public function matchPatient(Request $request)
     {
         $id = $request->patientId;
-        $match = Patient::where('mobile', $id)->first();
+        $match = FrontendUser::where('mobile', $id)->first();
         return response()->json($match, 200);
     }
 
@@ -59,40 +58,41 @@ class AccountInvoiceController extends Controller
      */
     public function store(AccountInvoiceRequest $request)
     {
-        // try {
-        DB::beginTransaction();
-        $invoice = new AccountInvoice();
-        $user_id = Auth::user()->id;
-        $invoice->created_by = $user_id;
-        $code = $request->mobile;
-        $patient = Patient::where('mobile', $code)->first()->toArray();
-        $patientId = $patient['id'];
-        $data = $request->all();
-        $invoice->patient_id = $patientId;
-        $invoice->fill($data)->save();
+        try {
+            // DB::beginTransaction();
+            $invoice = new AccountInvoice();
+            $user_id = Auth::user()->id;
+            $invoice->created_by = $user_id;
+            $mobile = $request->mobile;
+            $patient = FrontendUser::where('mobile', $mobile)->first()->toArray();
+            $patientId = $patient['id'];
+            $data = $request->all();
+            $invoice->patient_id = $patientId;
+            $invoice->fill($data)->save();
 
-        foreach ($request->account_id as $key => $value) {
-            $detailData[] = [
-                'account_invoice_id' => $invoice->id,
-                'account_id'         => $value,
-                'description'        => $request->description[$key],
-                'quantity'           => $request->quantity[$key],
-                'price'              => $request->price[$key],
-                'sub_total'          => $request->sub_total[$key],
-            ];
-        }
-        $invoiceDetail = AccountInvoicedetail::insert($detailData);
+            foreach ($request->account_id as $key => $value) {
+                $detailData[] = [
+                    'account_invoice_id' => $invoice->id,
+                    'account_id'         => $value,
+                    'description'        => $request->description[$key],
+                    'quantity'           => $request->quantity[$key],
+                    'price'              => $request->price[$key],
+                    'sub_total'          => $request->sub_total[$key],
+                ];
+            }
+            $invoiceDetail = AccountInvoicedetail::insert($detailData);
 
-        if ($invoiceDetail && $invoice) {
-            $notification = $this->message->success('Account Invoice', 'Account Invoice Added Successfully ');
-        } else {
-            $notification = $this->message->error('Account Invoice', 'Account Invoice Field Required');
+            if ($invoiceDetail && $invoice) {
+                $notification = $this->message->success('Account Invoice', 'Account Invoice Added Successfully ');
+            } else {
+                $notification = $this->message->error('Account Invoice', 'Account Invoice Field Required');
+            }
+            // DB::commit();
+        } catch (\Exception $e) {
+            // return redirect()->back()->with("status", "message=" . $e->getMessage());
+            $notification = $this->message->error('Test Bill', $e->getMessage());
         }
-        DB::commit();
         return redirect()->back()->with($notification);
-        // } catch (\Exception $e) {
-        //     return redirect()->back()->with("status", "message=" . $e->getMessage());
-        // }
     }
 
     /**

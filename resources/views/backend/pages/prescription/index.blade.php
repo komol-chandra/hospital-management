@@ -91,7 +91,6 @@
                                     <a class="btn btn-danger btn-xs" onclick="event.preventDefault(); Delete({{ $value->id }});"><i class="fa fa-trash-o"></i></a>
                                     <a class="btn btn-info btn-xs" href="{{url('admin/prescription/'.$value->id)}}"><i class="fa fa-eye"></i></a> 
                                     {{-- <a class="btn btn-info btn-xs" href="{{url('admin/prescription/'.$value->id.'/edit')}}"><i class="fa fa-eye"></i></a>    --}}
-                                    <a class="btn btn-info btn-xs" href="{{url('admin/prescription/'.$value->id.'/edit')}}"><i class="fa fa-pencil"></i></a>   
                                 </td>
                                 
                             </tr>

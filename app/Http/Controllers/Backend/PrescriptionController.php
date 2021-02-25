@@ -76,19 +76,13 @@ class PrescriptionController extends Controller
      */
     public function show($id)
     {
-        $doctors = $this->prescriptionService->getDoctors();
-        $patients = $this->prescriptionService->getPatients();
-        $medicines = $this->prescriptionService->getMedicines();
-        $medicineJs = $this->prescriptionService->getMedicineJs();
+
         $data = $this->prescriptionService->getById($id);
-        // dd($data->toArray());
         $birthday = $data->patient['birthday'];
-        // dd($birthday);
         $age = $this->prescriptionService->getAgeAttribute($birthday);
-        // dd($age);
         $medicineData = $this->prescriptionService->getByIdMedicine($id);
-        // dd($medicineData->toArray());
-        return view('backend.pages.prescription.invoice', compact('data', 'doctors', 'patients', 'medicines', 'medicineJs', 'medicineData', 'age'));
+
+        return view('backend.pages.prescription.invoice', compact('data', 'medicineData', 'age'));
     }
 
     /**

@@ -28,12 +28,11 @@
                         </div>
                         <div class="col-sm-4 col-xs-12">
                             <div class="dataTables_length">
-                                <a class="btn btn-default buttons-copy btn-sm" tabindex="0">
-                                    <span>Copy</span></a>
+                                {{-- <a class="btn btn-default buttons-copy btn-sm" tabindex="0"><span>Copy</span></a> --}}
                                     {{-- <a class="btn btn-default buttons-csv buttons-html5 btn-sm" tabindex="0" href="{{ url('/admin/downloadCVS') }}"><span>CSV</span></a> --}}
-                                    <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" tabindex="0" href="{{ url('/admin/doctorPdf') }}"><span>PDF</span></a>
+                                    {{-- <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" tabindex="0" href="{{ url('/admin/doctorPdf') }}"><span>PDF</span></a> --}}
                                     {{-- <a class="btn btn-default buttons-print btn-sm" tabindex="0"><span>Print</span></a> --}}
-                                    <a class="btn btn-default buttons-excel buttons-html5 btn-sm"  href="{{ url('/admin/doctorExcel') }}"><span>Excel</span></a>
+                                    {{-- <a class="btn btn-default buttons-excel buttons-html5 btn-sm"  href="{{ url('/admin/doctorExcel') }}"><span>Excel</span></a> --}}
                                     
                                 </div>
                         </div>

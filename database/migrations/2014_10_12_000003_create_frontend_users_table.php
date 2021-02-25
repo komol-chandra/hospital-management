@@ -25,7 +25,7 @@ class CreateFrontendUsersTable extends Migration
             $table->string('mobile')->unique();
             $table->string('birthday')->nullable();
             $table->tinyInteger('gender')->nullable();
-            $table->string('picture')->default('backend/files/profile.jpg');
+            $table->string('picture')->nullable();
             $table->unsignedBigInteger('blood_id')->nullable();
             $table->foreign('blood_id')->references('id')->on('bloods')->onDelete('set null');
             $table->unsignedInteger('created_by')->nullable();

@@ -15,7 +15,6 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->integer('role_id')->default(0);
             $table->string('full_name');
             $table->string('name')->unique();
             $table->string('email')->unique();
@@ -24,12 +23,15 @@ class CreateUsersTable extends Migration
             $table->string('mobile')->unique();
             $table->string('birthday')->nullable();
             $table->tinyInteger('gender')->nullable();
-            $table->string('picture')->default('storage/app/public/profile.jpg');
+            $table->string('picture')->nullable();
             $table->unsignedBigInteger('blood_id')->nullable();
             $table->foreign('blood_id')->references('id')->on('bloods')->onDelete('set null');
 
-            $table->tinyInteger('type')->default(-1)->nullable();
+            $table->string('type')->nullable();
             $table->integer('parentId')->nullable();
+            $table->integer('status')->default(1);
+            $table->unsignedInteger('created_by')->nullable();
+            $table->unsignedInteger('updated_by')->nullable();
             $table->foreignId('current_team_id')->nullable();
             $table->tinyInteger('email_verified')->default(0);
             $table->timestamp('email_verified_at')->nullable();

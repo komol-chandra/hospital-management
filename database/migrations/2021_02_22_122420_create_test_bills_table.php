@@ -15,7 +15,7 @@ class CreateTestBillsTable extends Migration
     {
         Schema::create('test_bills', function (Blueprint $table) {
             $table->id();
-            $table->string('doctor')->nullable();
+            $table->string('reference')->nullable();
             $table->unsignedBigInteger('patient_id')->nullable();
             $table->foreign('patient_id')->references('id')->on('frontend_users')->onDelete('set null');
             $table->string('total');

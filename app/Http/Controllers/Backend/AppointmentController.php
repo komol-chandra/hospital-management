@@ -7,7 +7,6 @@ use App\Models\Appointment;
 use App\Services\AppointmentService;
 use App\Services\ResponseService;
 use Carbon\Carbon;
-use DateTime;
 use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
@@ -26,16 +25,15 @@ class AppointmentController extends Controller
      */
     public function index(Request $request)
     {
-        $data = [];
         $doctors = $this->appointmentService->getByDoctors();
-        if (isset($request->doctor_id)) {
+        $today = Carbon::now()->format('Y-m-d');
 
-            // have error to get real time base on location like bd.
-            $today = Carbon::now();
-            $date = new DateTime($today);
-            $format = $date->format('Y-m-d');
-            $data = Appointment::with('users')->where('doctor_id', $request->doctor_id)->where('date', $format)->get();
+        if (isset($request->doctor_id)) {
+            $data = Appointment::with('users')->where('doctor_id', $request->doctor_id)->where('date', $today)->paginate(5);
+        } else {
+            $data = Appointment::with('users')->where('date', $today)->paginate(5);
         }
+
         return view('backend.pages.appointment.index', compact('doctors', 'data'));
     }
 
@@ -51,17 +49,26 @@ class AppointmentController extends Controller
     }
     public function paymentStatus($id)
     {
-        try {
-            $data = $this->appointmentService->payment($id);
-            if ($data) {
-                $notification = $this->message->success('Appointment', 'Payment Done Successfully ');
-            } else {
-                $notification = $this->message->error('Appointment', ' System Error');
-            }
-        } catch (\Exception $e) {
-            $notification = $this->message->error('Appointment', $e->getMessage());
+
+        $data = $this->appointmentService->payment($id);
+        if ($data) {
+            $notification = $this->message->success('Appointment', 'Payment Done Successfully ');
+        } else {
+            $notification = $this->message->error('Appointment', ' System Error');
         }
         return redirect()->back()->with($notification);
+
+        // try {
+        //     $data = $this->appointmentService->payment($id);
+        //     if ($data) {
+        //         $notification = $this->message->success('Appointment', 'Payment Done Successfully ');
+        //     } else {
+        //         $notification = $this->message->error('Appointment', ' System Error');
+        //     }
+        // } catch (\Exception $e) {
+        //     $notification = $this->message->error('Appointment', $e->getMessage());
+        // }
+        // return redirect()->back()->with($notification);
     }
 
     /**

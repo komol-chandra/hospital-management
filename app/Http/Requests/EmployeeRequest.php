@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EmployeeRequest extends FormRequest
 {
@@ -23,19 +24,19 @@ class EmployeeRequest extends FormRequest
      */
     public function rules()
     {
-        $employee = $this->route('employee');
         return [
-            "email"    => 'required |unique:employees,email,' . $employee . ',id',
-            "roll_id"  => "required",
-            "name"     => "required",
-            "address"  => "nullable",
-            "phone"    => "nullable",
-            "mobile"   => "required",
-            "birthday" => "nullable",
-            "gender"   => "required",
-            "blood_id" => "nullable",
-            "picture"  => "mimes:png,jpg,jpeg",
-            "status"   => "required",
+            "full_name" => 'required',
+            "name"      => ['required', Rule::unique('users', 'name')->ignore($this->employee, 'id')],
+            "email"     => ['required', Rule::unique('users', 'email')->ignore($this->employee, 'id')],
+            "mobile"    => ['required', Rule::unique('users', 'mobile')->ignore($this->employee, 'id')],
+            "password"  => 'required',
+            "type"      => 'required',
+            "address"   => 'nullable',
+            "birthday"  => 'nullable',
+            "gender"    => 'nullable',
+            "picture"   => 'mimes:png,jpg,jpeg',
+            "blood_id"  => 'nullable',
+            "status"    => 'nullable',
         ];
     }
 }

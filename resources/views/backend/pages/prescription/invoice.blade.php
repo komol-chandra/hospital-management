@@ -78,7 +78,6 @@
     <thead>
     <tr class="bg-info header-2">
     <th>Medicine Name</th>
-    <th>Type</th>
     <th width="80">duration</th>
     <th width="80">sequence</th>
     <th width="80">Days</th>
@@ -90,9 +89,7 @@
 
     @forelse($medicineData as $key => $value)
     <tr>
-        {{-- <td>{{ $value->name }}</td> --}}
-        <td>{{ $value->medicines->name }}</td>
-        <td>{{ $value->medicines->medicineType->name }}</td>
+        <td>{{ $value->medicine }}</td>
         <td>{{ $value->duration }}</td>
         <td>{{ $value->sequence }}</td>
         <td>{{ $value->day }} Days</td>

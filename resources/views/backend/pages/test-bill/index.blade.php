@@ -79,9 +79,6 @@
                                 
                                 <td>
                                     <a class="btn btn-info btn-xs" href="{{url('admin/test-bill/'.$value->id)}}"><i class="fa fa-eye"></i></a>
-                                    @if(!($value->due ==0))
-                                    <button class="btn btn-info btn-xs edit" data-toggle="modal" type="button" data="{{$value->id}}" data-target="#modal-edit"><i class="fa fa-dollar"></i></button>  
-                                    @endif
                                 </td>
                                 
                             </tr>
@@ -107,27 +104,7 @@
 </div>
 
 
-<!--Edit Modal -->
-<div class="modal fade modal-success" id="modal-edit" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h1 class="modal-title">Update Test-Bill</h1>
-            </div>
-            <div class="modal-body">
-            {!! Form::open(['url' => '/admin/test-bill/'.$value->id.'','method'=>'put','files'=>true,'id'=>'form_update']) !!}
-            {!! Form::hidden("id", null, ["class"=>"form-control e_id"]) !!}
-            @include('backend.pages.test-bill.update-form');
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger close2" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success">Update changes</button>
-            </div>
-            {!! Form::close() !!}
-        </div>
-    </div>
-</div>
+
 @endsection
 @section('js')
 <script>
@@ -155,51 +132,5 @@
         ],
     });
 }
-</script>
-<script>
-    $(document).ready(function () {
-    $(document).on("click", ".edit", function () {
-        let data = $(this).attr("data");
-        $.ajax({
-            url: `/admin/test-bill/${data}/edit`,
-            type: "get",
-            dataType: "json",
-            success: function (response) {
-                $(".e_id").val(response.id);
-                $(".e_grand_total").val(response.grand_total);
-                $(".e_paid").val(response.paid);
-                $(".e_due").val(response.due);
-            },
-        });
-    });
-    $(document).on("submit", "#form_update", function (e) {
-        e.preventDefault();
-        let id = $(".e_id").val();
-        let data = $(this).serializeArray();
-        console.log(data);
-        console.log(id);
-
-        $.ajax({
-            url: `/admin/test-bill/${id}`,
-            data: data,
-            type: "PUT",
-            dataType: "json",
-            success: function (response) {
-                console.log(response);
-                iziToast.success({
-                    title: response.title,
-                    message: response.message,
-                    position: "topRight",
-                });
-
-                $(".close2").click();
-                $("#form_update").trigger("reset");
-            },
-            error: function (error) {
-                console.log(error);
-            },
-        });
-    });
-});
 </script>
 @endsection

@@ -98,9 +98,9 @@ class AppointmentService
         $format = $date->format('Y-m-d');
         $income->date = $format;
         $income->amount = $data->payment_amount;
-        $income->type = "AppointmentBill";
+        $income->type = "Appointment Bill";
         $income->patient_id = $data->patient_id;
-        $income->updated_by = $user_id;
+        $income->created_by = $user_id;
         $income->save();
 
         if ($data && $income) {
@@ -109,6 +109,44 @@ class AppointmentService
             return null;
         }
 
+    }
+
+    public function payments($id)
+    {
+
+        $data = Appointment::findOrFail($id);
+        $status = $this->savePaymentStatus($data);
+        $payment = $this->savePayment($data);
+
+        if ($status && $payment) {
+            return $status;
+        } else {
+            return null;
+        }
+
+    }
+    public function savePaymentStatus($data)
+    {
+        if ($data->payment_status == 0) {
+            $data->payment_status = 1;
+        }
+        return $data->save();
+    }
+
+    public function savePayment($data)
+    {
+        $user_id = Auth::user()->id;
+        $income = new Income();
+        $income->invoice_id = $data->id;
+        $today = Carbon::today();
+        $date = new DateTime($today);
+        $format = $date->format('Y-m-d');
+        $income->date = $format;
+        $income->amount = $data->payment_amount;
+        $income->type = "Appointment Bill";
+        $income->patient_id = $data->patient_id;
+        $income->updated_by = $user_id;
+        $income->save();
     }
 
 }

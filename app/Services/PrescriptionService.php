@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 
 class PrescriptionService
 {
+    public function patientById($id)
+    {
+        return FrontendUser::findOrFail($id);
+    }
 
     public function create($data)
     {
@@ -63,7 +67,7 @@ class PrescriptionService
     }
     public function getByIdMedicine($id)
     {
-        return PrescriptionMedicine::with('medicines', 'medicines.medicineType')->where('prescription_id', $id)->get();
+        return PrescriptionMedicine::where('prescription_id', $id)->get();
     }
     public function getAgeAttribute($birthday)
     {
