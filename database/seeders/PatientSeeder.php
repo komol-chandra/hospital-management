@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\FrontendUser;
 use Illuminate\Database\Seeder;
 
 class PatientSeeder extends Seeder
@@ -14,7 +15,7 @@ class PatientSeeder extends Seeder
     public function run()
     {
 
-        // \App\Models\Patient::factory(2000)->create();
+        FrontendUser::factory(200)->create();
 
     }
 }

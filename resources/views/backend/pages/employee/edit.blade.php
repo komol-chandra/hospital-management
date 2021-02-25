@@ -14,7 +14,7 @@
             <div class="panel-body">
                 <div class="col-sm-12">
                     {!! Form::open(['url' => '/admin/employee/'.$data['id'].'','method'=>'put','files'=>true]) !!}
-                    @include('backend.pages.employee.form',['data'=>$data,'bloods'=>$bloods])
+                    @include('backend.pages.employee.form',['data'=>$data])
                     {!! Form::hidden('id',$data['id']) !!}
                         <div class="col-sm-12 reset-button">
                             <button type="submit" class="btn btn-success">Update</button>

@@ -10,10 +10,10 @@
                 <div class="btn-group"> 
                     <a class="btn btn-success" href="{{ url('/admin/patient/create') }}"> <i class="fa fa-plus"></i> Add Patient
                     </a>
-                    <form action="/admin/patientImport" method="post" enctype="multipart/form-data">@csrf
+                    {{-- <form action="/admin/patientImport" method="post" enctype="multipart/form-data">@csrf
                         <input type="file" name="file">
                         <button class=" btn btn-info" type="submit"> Import</button>
-                    </form>
+                    </form> --}}
                 </div>        
             </div>
             <div class="panel-body">
@@ -32,12 +32,12 @@
                         </div>
                         <div class="col-sm-4 col-xs-12">
                             <div class="dataTables_length">
-                                <a class="btn btn-default buttons-copy btn-sm" tabindex="0">
+                                {{-- <a class="btn btn-default buttons-copy btn-sm" tabindex="0">
                                     <span>Copy</span></a>
                                     <a class="btn btn-default buttons-csv buttons-html5 btn-sm" tabindex="0" href="{{ url('/admin/patientCsv') }}"><span>CSV</span></a>
                                     <a class="btn btn-default buttons-excel buttons-html5 btn-sm"  href="{{ url('/admin/patientExcel') }}"><span>Excel</span></a>
                                     <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" tabindex="0" href="{{ url('/admin/patientPdf') }}"><span>PDF</span></a>
-                                    <a class="btn btn-default buttons-print btn-sm" tabindex="0"><span>Print</span></a>
+                                    <a class="btn btn-default buttons-print btn-sm" tabindex="0"><span>Print</span></a> --}}
                                     
                                 </div>
                         </div>

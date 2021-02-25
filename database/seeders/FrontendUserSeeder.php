@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\FrontendUser;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class FrontendUserSeeder extends Seeder
 {
@@ -15,18 +14,20 @@ class FrontendUserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('frontend_users')->insert([
-            'name'                     => 'admin',
-            'full_name'                => 'admin',
-            'email'                    => 'admin@example.com',
-            'mobile'                   => '01874303467',
-            'blood_id'                 => 1,
-            'password'                 => Hash::make('admin@example.com'),
-            'type'                     => 1,
-            'parentId'                 => 1,
-            'email_verified'           => 1,
-            'email_verified_at'        => \Carbon\Carbon::now(),
-            'email_verification_token' => '',
-        ]);
+        // DB::table('frontend_users')->insert([
+        //     'name'                     => 'komol',
+        //     'full_name'                => 'komol',
+        //     'email'                    => 'komol@example.com',
+        //     'mobile'                   => '01874303467',
+        //     'blood_id'                 => 1,
+        //     'password'                 => Hash::make('komol@example.com'),
+        //     'type'                     => "patient",
+        //     'parentId'                 => 1,
+        //     'email_verified'           => 1,
+        //     'email_verified_at'        => \Carbon\Carbon::now(),
+        //     'email_verification_token' => '',
+        // ]);
+        FrontendUser::factory(600)->create();
+
     }
 }

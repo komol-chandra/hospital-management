@@ -11,7 +11,6 @@
             </tr>
         </thead>
         <tbody>
-    
             @forelse($patients as $key => $value)
             <tr>
                 <td>

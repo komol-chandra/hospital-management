@@ -18,7 +18,9 @@ class Income extends Model
         "type",
         "patient_id",
     ];
-
+    protected $casts = [
+        'created_at' => 'date:Y-m-d',
+    ];
     public function patient()
     {
         return $this->belongsTo("App\Models\FrontendUser", "patient_id", "id");

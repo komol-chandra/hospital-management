@@ -14,6 +14,7 @@
             <div class="panel-body">
                 <div class="col-sm-12">
                     {!! Form::open(['url' => '/admin/employee','method'=>'post','files'=>true]) !!}
+                    @include('backend.pages.employee.user-form')
                     @include('backend.pages.employee.form')
                         <div class="col-sm-12 reset-button">
                             <button type="submit" class="btn btn-success">Save</button>

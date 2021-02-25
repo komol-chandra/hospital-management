@@ -18,8 +18,4 @@ class PrescriptionMedicine extends Model
         "day",
         "instruction",
     ];
-    public function medicines()
-    {
-        return $this->belongsTo("App\Models\Medicine", "medicine_id");
-    }
 }

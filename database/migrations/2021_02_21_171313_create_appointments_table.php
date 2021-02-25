@@ -26,7 +26,7 @@ class CreateAppointmentsTable extends Migration
             $table->string('date');
             $table->string('time')->nullable();
             $table->string('message')->nullable();
-            $table->tinyInteger('payment_amount')->nullable();
+            $table->integer('payment_amount')->nullable();
             $table->tinyInteger('payment_status')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->unsignedInteger('created_by')->nullable();

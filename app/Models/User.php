@@ -39,6 +39,9 @@ class User extends Authenticatable
         'blood_id',
         'type',
         'parentId',
+        'status',
+        'created_by',
+        'updated_by',
         'email_verified',
         'email_verified_at',
         'email_verification_token',
@@ -55,7 +58,7 @@ class User extends Authenticatable
     }
     public function users()
     {
-        return $this->belongsTo("App\Models\User", "parentId", "id");
+        return $this->belongsTo("App\Models\User", 'created_by', 'id');
     }
     public function roll()
     {

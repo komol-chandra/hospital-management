@@ -27,6 +27,7 @@
             </div> --}}
             <div class="row">
                 @forelse($data as $value)
+                
                 <div class="col-md-6" style="padding: 30px;">
                     <div class="js-slick-carousel u-slick u-slick--gutters-3"
                     data-slides-show="1"

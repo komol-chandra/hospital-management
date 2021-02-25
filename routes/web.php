@@ -5,15 +5,19 @@ use App\Http\Controllers\AccountInvoiceController;
 use App\Http\Controllers\Auth\User\HomeController;
 use App\Http\Controllers\Auth\User\RegisterController;
 use App\Http\Controllers\Backend\AppointmentController as BackendAppointmentController;
+use App\Http\Controllers\Backend\AppointmentReportController;
 use App\Http\Controllers\Backend\DoctorController;
+use App\Http\Controllers\Backend\EmployeeController;
+use App\Http\Controllers\Backend\ExpenseBillController;
+use App\Http\Controllers\Backend\ExpenseController;
+use App\Http\Controllers\Backend\IncomeReportController;
 use App\Http\Controllers\Backend\PatientController;
 use App\Http\Controllers\Backend\PrescriptionController;
+use App\Http\Controllers\Backend\ProfitLossReportController;
 use App\Http\Controllers\Backend\ScheduleController;
 use App\Http\Controllers\Backend\TestBillController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorDepartmentController;
-use App\Http\Controllers\DoctorReportController;
-use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\EmployeeRollController;
 use App\Http\Controllers\Frontend\AppointmentController;
 use App\Http\Controllers\Frontend\DoctorViewController;
@@ -111,9 +115,17 @@ Route::prefix('admin')->group(function () {
         Route::resource('/schedule', ScheduleController::class);
         Route::get('/schedule/status/{id}', [ScheduleController::class, 'status']);
         Route::get('/scheduleList', [ScheduleController::class, 'scheduleList']);
+
         //report
-        Route::resource('/doctor-report', DoctorReportController::class);
-        Route::post('/doctor-report/search', [DoctorReportController::class, 'search']);
+
+        Route::resource('/income-report', IncomeReportController::class);
+        Route::resource('/appointment-report', AppointmentReportController::class);
+
+        Route::resource('/expense', ExpenseController::class);
+        Route::resource('/expense-bill', ExpenseBillController::class);
+        Route::get('/expense-report', [ExpenseBillController::class, 'expense']);
+        Route::resource('/profit-loss-report', ProfitLossReportController::class);
+
         //admin panel appointment
         // Route::resource('/appointment', AppointmentController::class);
         // Route::get('/appointment/doctorId/{id}', [AppointmentController::class, 'doctorId']);
