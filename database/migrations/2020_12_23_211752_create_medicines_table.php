@@ -22,6 +22,16 @@ class CreateMedicinesTable extends Migration
             $table->foreign('generic_id')->references('id')->on('generics')->onDelete('set null');
             $table->unsignedBigInteger('manufacturer_id')->nullable();
             $table->foreign('manufacturer_id')->references('id')->on('manufacturers')->onDelete('set null');
+
+            $table->string('dosage')->nullable();
+            $table->string('vat')->nullable();
+            $table->unsignedBigInteger('unit_type_id')->nullable();
+            $table->foreign('unit_type_id')->references('id')->on('unit_types')->onDelete('set null');
+            $table->string('single_unit_weight')->nullable();
+            $table->string('box_weight')->nullable();
+            $table->string('minimum_unit')->nullable();
+            $table->string('unit_location')->nullable();
+
             $table->string('sku')->nullable();
             $table->string('tax')->nullable();
             $table->string('details')->nullable();

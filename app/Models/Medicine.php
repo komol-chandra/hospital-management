@@ -22,6 +22,13 @@ class Medicine extends Model
         "picture",
         "per_box",
         "price",
+        "dosage",
+        "vat",
+        "unit_type_id",
+        "single_unit_weight",
+        "box_weight",
+        "minimum_unit",
+        "unit_location",
         "status",
     ];
     public function user()

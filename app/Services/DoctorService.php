@@ -8,7 +8,6 @@ use App\Models\FrontendUser;
 use App\Models\User;
 use File;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class DoctorService
 {
@@ -23,22 +22,8 @@ class DoctorService
         $doctor = new Doctor();
         $doctor->created_by = $user_id;
         $doctor->fill($data)->save();
-
-        $user = new FrontendUser();
-        $user->type = 'doctor';
-        $user->parentId = $doctor->id;
-        $user->password = Hash::make($data['password']);
-        $user->name = $data['name'];
-        $user->full_name = $data['full_name'];
-        $user->email = $data['email'];
-        $user->address = $data['address'];
-        $user->mobile = $data['mobile'];
-        $user->birthday = $data['birthday'];
-        $user->picture = isset($data['picture']) ? $data['picture'] : 'backend/files/profile.jpg';
-        $user->blood_id = $data['blood_id'];
-        $user->gender = $data['gender'];
-        $user->save();
         return $doctor ? $doctor : null;
+
     }
 
     public function update($data, $id)

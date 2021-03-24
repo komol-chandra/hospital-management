@@ -99,7 +99,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $totalAmount = 0;
+                                        @endphp
                                         @forelse($income as $incomeKey => $incomeValue)
+                                        @php
+                                            $totalAmount += $incomeValue->amount;
+                                        @endphp
                                         <tr>
                                             <td>{{ $incomeKey +1 }}</td>
                                             <td>{{ $incomeValue->date ?? null}}</td>
@@ -117,7 +123,7 @@
                                 <div class="col-sm-12 " >
                                     <table class="table table-bordered table-hover" style="color:green;">
                                     <td>Total Income</td>
-                                    <td>{{ $incomeAmount }}</td>
+                                    <td>{{ $totalAmount }}</td>
                                     </table>
                                 </div>
                             </div>

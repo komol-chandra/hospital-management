@@ -5,6 +5,7 @@ use App\Models\Generic;
 use App\Models\Manufacturer;
 use App\Models\Medicine;
 use App\Models\MedicineType;
+use App\Models\UnitType;
 use File;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,6 +42,10 @@ class MedicineService
     public function getMedicineType()
     {
         return MedicineType::where('status', '1')->pluck('name', 'id');
+    }
+    public function getUnitType()
+    {
+        return UnitType::where('status', '1')->pluck('name', 'id');
     }
     public function getGeneric()
     {

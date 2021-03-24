@@ -50,8 +50,9 @@
            }]'>
 
             
-
             @foreach($data as $key => $value)
+            {{-- {{ $value->users }} --}}
+
             <div class="js-slide px-3">
                 <!-- Team -->
                   <div class="row">
@@ -87,7 +88,7 @@
                       <div class="col-sm-6">
                       <img class="img-fluid rounded mx-auto" 
                       src="/{{ $value->users->picture }} " style="height: 150px; width: 150px;"
-                          alt="Alison Frami">
+                          alt="Doctor Image">
                       </div>
                 </div>
                 <!-- End Team -->

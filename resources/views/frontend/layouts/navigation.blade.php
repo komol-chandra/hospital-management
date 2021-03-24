@@ -12,14 +12,38 @@
         <a class="nav-link u-header__nav-link"
         href="{{ url('/frontend/doctor-view') }}">Doctors</a>
       </li>
-      
         @if(Auth::guard('admin')->check())
+        {{-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notification
+                <bold class="badge badge-light">
+                    @php
+                        // $doctor = ;
+                    @endphp
+                    @if(Auth::guard('admin')->user()->type('doctor'))
+                    {{ auth('admin')->user()->unreadnotifications->count() }}
+                    @endif
+                </bold>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{{ url('/user/view-profile') }}">View Profile</a>
+              <a class="dropdown-item" href="{{ url('/user/view-dashboard') }}">View dashboard</a>
+              <a class="dropdown-item" href="#">change Profile</a>
+              <a class="dropdown-item" href="#">change Password</a>
+              <a class="dropdown-item" href="{{ url('user/logout') }}">Logout</a>
+              <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </li> --}}
+
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{-- <img src="..." alt="..." class="img-thumbnail"> --}}
+                {{-- <img src="/{{ Auth::guard('admin')->user()->picture ?? 'backend/files/profile.jpg' }}" class="rounded-circle" height="40" width="40" alt="User Image"> --}}
                 {{Auth::guard('admin')->user()->name}}
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{{ url('/user/view-profile') }}">View Profile</a>
+              <a class="dropdown-item" href="{{ url('/user/view-dashboard') }}">View dashboard</a>
               <a class="dropdown-item" href="#">change Profile</a>
               <a class="dropdown-item" href="#">change Password</a>
               <a class="dropdown-item" href="{{ url('user/logout') }}">Logout</a>

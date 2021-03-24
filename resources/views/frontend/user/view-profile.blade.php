@@ -11,6 +11,7 @@
             </div>
         </div>
     </div>
+    
     <div class="bg-light">
         <div class="container space-2 space-md-2">
             <div class="col-md-12" style="padding: 30px;">
@@ -70,42 +71,6 @@
                                     </li>
                                 </ul>
                             </div>
-
-                            <div class="col-sm-6 d-sm-flex align-content-sm-start flex-sm-column text-center text-sm-left mb-7 mb-sm-0">
-                                <table class="table table-bordered table-hover text-sm">
-                                    <h4 class="text-center">Schedule Table</h4>
-                                    <thead>
-                                        <tr>
-                                            <th>Day</th>
-                                            <th>Starting Time</th>
-                                            <th>Ending Time</th>
-                                            <th>Par Day Patient</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {{-- @forelse($schedules as $key => $value)
-                                        <tr>
-                                            <td>{{ $value->days->name }}</td>
-                                            <td>{{ $value['starting'] }}</td>
-                                            <td>{{ $value['ending'] }}</td>
-                                            <td>{{ $value['quantity'] }} Personal</td>
-                                        </tr>  
-                                        @empty
-                                            <tr>
-                                                <td>No Data</td>
-                                                <td>No Data</td>
-                                                <td>No Data</td>
-                                                <td>No Data</td>
-                                            </tr>
-                                        @endforelse --}}
-                                        
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                            
-
-                            
                         </div>
                     </div>
                 </div>

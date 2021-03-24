@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             MedicineTypeSeeder::class,
             GenericSeeder::class,
             ManufacturerSeeder::class,
+            UnitTypeSeeder::class,
             MedicineSeeder::class,
             SettingSeeder::class,
             AccountTypeSeeder::class,

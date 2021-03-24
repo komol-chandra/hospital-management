@@ -16,14 +16,16 @@ use App\Http\Controllers\Backend\PrescriptionController;
 use App\Http\Controllers\Backend\ProfitLossReportController;
 use App\Http\Controllers\Backend\ScheduleController;
 use App\Http\Controllers\Backend\TestBillController;
+use App\Http\Controllers\Backend\UnitTypeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorDepartmentController;
 use App\Http\Controllers\EmployeeRollController;
 use App\Http\Controllers\Frontend\AppointmentController;
-use App\Http\Controllers\Frontend\DoctorViewController;
 // use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\DoctorViewController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\UserController as FrontendUserController;
+use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\GenericController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ManufacturerController;
@@ -68,6 +70,9 @@ Route::prefix('user')->group(function () {
     Route::get('/logout', [RegisterController::class, 'logout']);
     Route::get('/home', [HomeController::class, 'index']);
     Route::resource('/view-profile', FrontendUserController::class);
+    Route::resource('/view-dashboard', UserDashboardController::class);
+    Route::get('/view-dashboard', [FrontendUserController::class, 'create']);
+    Route::get('/prescription-invoice', [FrontendUserController::class, 'prescriptionView']);
 
 });
 
@@ -84,7 +89,7 @@ Route::prefix('admin')->group(function () {
         //dashboard
         Route::get('/percentage', [DashboardController::class, 'percentage']);
         Route::get('/counters', [DashboardController::class, 'counters']);
-        Route::get('/topDoctors', [DashboardController::class, 'topDoctors']);
+        Route::get('/top-doctor', [DashboardController::class, 'topDoctors']);
         Route::get('/notices', [DashboardController::class, 'notices']);
         // admin panel profile
         Route::resource('/user-profile', ProfileController::class);
@@ -110,39 +115,28 @@ Route::prefix('admin')->group(function () {
         Route::get('/patientCsv', [PatientController::class, 'patientCsv']);
         Route::get('/patientPdf', [PatientController::class, 'patientPdf']);
         Route::post('/patientImport', [PatientController::class, 'patientImport']);
-
         //admin panel schedule
         Route::resource('/schedule', ScheduleController::class);
         Route::get('/schedule/status/{id}', [ScheduleController::class, 'status']);
         Route::get('/scheduleList', [ScheduleController::class, 'scheduleList']);
-
         //report
-
         Route::resource('/income-report', IncomeReportController::class);
         Route::resource('/appointment-report', AppointmentReportController::class);
-
         Route::resource('/expense', ExpenseController::class);
         Route::resource('/expense-bill', ExpenseBillController::class);
         Route::get('/expense-report', [ExpenseBillController::class, 'expense']);
         Route::resource('/profit-loss-report', ProfitLossReportController::class);
-
-        //admin panel appointment
-        // Route::resource('/appointment', AppointmentController::class);
-        // Route::get('/appointment/doctorId/{id}', [AppointmentController::class, 'doctorId']);
         //frontend appointments
         Route::resource('/online-appointment', BackendAppointmentController::class);
         Route::post('/online-appointment/search', [BackendAppointmentController::class, 'search']);
         Route::get('/appointmentList', [BackendAppointmentController::class, 'appointmentList']);
         Route::get('/online-appointment/status/{id}', [BackendAppointmentController::class, 'status']);
         Route::get('/online-appointment/payment-status/{id}', [BackendAppointmentController::class, 'paymentStatus']);
-
         //admin panel test type
         Route::resource('/test', TestController::class);
         Route::get('/test/status/{id}', [TestController::class, 'status']);
-
         Route::resource('/test-bill', TestBillController::class);
         Route::get('/matchPatientBill', [TestBillController::class, 'matchPatient']);
-
         //admin patient test
         Route::resource('/patient-test', PatientTestController::class);
         Route::get('/patient-test/status/{id}', [PatientTestController::class, 'status']);
@@ -152,6 +146,9 @@ Route::prefix('admin')->group(function () {
         //admin Generic
         Route::resource('/generic', GenericController::class);
         Route::get('/generic/status/{id}', [GenericController::class, 'status']);
+        //unit type
+        Route::resource('/unit-type', UnitTypeController::class);
+
         //admin Medicine
         Route::resource('/medicine', MedicineController::class);
         Route::get('/medicine/status/{id}', [MedicineController::class, 'status']);

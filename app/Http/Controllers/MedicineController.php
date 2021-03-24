@@ -40,9 +40,10 @@ class MedicineController extends Controller
     public function create()
     {
         $getMedicineType = $this->medicineService->getMedicineType();
+        $getUnitType = $this->medicineService->getUnitType();
         $getGeneric = $this->medicineService->getGeneric();
         $getManufacturer = $this->medicineService->getManufacturer();
-        return view('backend.pages.medicine.create', compact('getMedicineType', 'getGeneric', 'getManufacturer'));
+        return view('backend.pages.medicine.create', compact('getMedicineType', 'getUnitType', 'getGeneric', 'getManufacturer'));
     }
 
     /**

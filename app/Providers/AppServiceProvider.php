@@ -95,6 +95,12 @@ class AppServiceProvider extends ServiceProvider
             }));
         });
 
+        View::composer(["frontend.user.prescription-invoice"], function ($view) {
+            $view->with("settings", Cache::rememberForever("settings", function () {
+                return Setting::first();
+            }));
+        });
+
         //Front End Pages
 
         View::composer(["frontend.layouts.header"], function ($view) {

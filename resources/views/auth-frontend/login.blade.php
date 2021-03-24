@@ -65,28 +65,22 @@
                     <thead>
                         <tr>
                             <th>Email</th>
+                            <th>type</th>
                             <th>password</th>
                         </tr>
                     </thead>
-                    {{-- <tbody>
+                    <tbody>
                         <tr>
+                            <td>komol@example.com</td>
+                            <td>patient</td>
+                            <td>komol@example.com</td>
+                        </tr>
+                        <tr>
+                            <td>riqy@mailinator.com</td>
+                            <td>doctor</td>
                             <td>admin@example.com</td>
-                            <td>admin@example.com</td>
                         </tr>
-                        <tr>
-                            <td>doctor@example.com</td>
-                            <td>doctor@example.com</td>
-                        </tr>
-                        <tr>
-                            <td>accountant@example.com</td>
-                            <td>accountant@example.com</td>
-                        </tr>
-                        <tr>
-                            <td>receptionist@example.com</td>
-                            <td>receptionist@example.com</td>
-                        </tr>
-                        
-                    </tbody> --}}
+                    </tbody>
                 </table>
             </div>
         </div>
