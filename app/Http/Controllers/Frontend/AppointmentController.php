@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AppointmentRequest;
 use App\Models\Appointment;
 use App\Models\Doctor;
+use App\Models\FrontendUser;
+use App\Notifications\AppointmentCreateForDoctorNotification;
 use App\Services\AppointmentService;
 use App\Services\ResponseService;
 use Auth;
@@ -66,6 +68,11 @@ class AppointmentController extends Controller
             $data = $request->all();
             $appointment = $this->appointmentService->create($data);
             if ($appointment) {
+                $doctorId = $appointment->doctor_id;
+                $doctor = FrontendUser::where('parentId', $doctorId)->first();
+                // $patient = FrontendUser::find($appointment->patient_id);
+                $doctor->notify(new AppointmentCreateForDoctorNotification($appointment));
+
                 $notification = $this->message->success('Appointment', 'Appointment Added Successfully ');
             } else {
                 $notification = $this->message->error('Appointment', 'Appointment Field Required');

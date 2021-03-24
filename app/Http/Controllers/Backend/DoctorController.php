@@ -12,6 +12,7 @@ use App\Models\DoctorDepartment;
 use App\Services\DoctorService;
 use App\Services\ResponseService;
 use App\Traits\FileUpload;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Excel;
 
@@ -47,8 +48,6 @@ class DoctorController extends Controller
     public function index()
     {
         $doctors = $this->doctorService->lists();
-        // $doctors = Doctor::with('departments')->orderBy('id', 'DESC')->get();
-        // dd($doctors);
         return view('backend.pages.doctor.index', compact('doctors'));
     }
 
@@ -94,7 +93,6 @@ class DoctorController extends Controller
     public function show($id)
     {
         $doctor = $this->doctorService->getById($id);
-        // dd($doctor->toArray());
         $departments = $this->doctorService->getDeterment();
         $bloods = $this->doctorService->getBloods();
         $user = $this->doctorService->getUserById($id);
@@ -165,5 +163,18 @@ class DoctorController extends Controller
             $notification = $this->responseService->error('Doctor', 'System Problem');
         }
         return redirect()->back()->with($notification);
+    }
+
+    public  function ok($id)
+    {
+        $doctor = $this->doctorService->status($id);
+        if ($doctor) {
+            $notification = $this->responseService->success('Doctor', 'Doctor Status Successfully');
+        } else {
+            $notification = $this->responseService->error('Doctor', 'System Problem');
+        }
+
+
+
     }
 }

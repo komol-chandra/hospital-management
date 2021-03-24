@@ -91,7 +91,7 @@
                     </div>
                     <div class="items pull-left">
                     <i class="fa fa-users fa-2x"></i>
-                    <h4>Labratorist</h4>
+                    <h4>Laboratories</h4>
                     </div>
                 </div>
             </div>
@@ -144,11 +144,13 @@
                     <div class="monthly" id="m_calendar"></div>
                 </div>
             </div>
-             <div id="map1" class="hidden-xs hidden-sm hidden-md hidden-lg"></div>
+             {{-- <div id="doctorBar" class="hidden-xs hidden-sm hidden-md hidden-lg"></div> --}}
+             <canvas id="doctorBar" height="450"></canvas>
+
         </div>
     </div>
         <!-- datamap -->
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 ">  
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
             <div class="panel panel-bd lobidrag">
                 <div class="panel-heading">
                     <div class="panel-title">
@@ -156,12 +158,12 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                    <canvas id="percentage" height="150"></canvas>
+                    <canvas id="percentage" height="450"></canvas>
 
                 </div>
             </div>
         </div>
-        
+
         <!-- Bar Chart -->
         {{-- <div class="col-xs-12 col-sm-12 col-md-6">
             <div class="panel panel-bd lobidisable">
@@ -199,7 +201,7 @@
             </div>
          </div>
          <!-- Basic data map -->
-        <div class="col-xs-12 col-sm-6">
+        {{-- <div class="col-xs-12 col-sm-6">
             <div class="panel panel-bd lobidrag">
                 <div class="panel-heading">
                     <div class="panel-title">
@@ -212,17 +214,14 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
+        </div> --}}
+
     </div>
 @endsection
 @section('js')
 <script>
     $(document).ready(function(){
-        // studentDoughnut();
-        // countryBar();
-        // universityLine();
-        // councilorPolarArea();
+        topDoctors();
         counters();
         percentage();
         noticeList();
@@ -254,7 +253,7 @@
                 $("#receptionists").text(data.receptionists);
                 $("#representatives").text(data.representatives);
                 $("#caseManager").text(data.caseManager);
-                
+
                 $('.num').counterUp({
                     delay: 5,
                     time: 500
@@ -271,7 +270,7 @@
                 console.log(data.value);
                 let getData = $('#percentage');
                 let myDoughnutChart = new Chart(getData, {
-                    type: 'doughnut',
+                    type: 'pie',
                     data: {
                             labels: data.label,
                             datasets: [{
@@ -299,20 +298,29 @@
             }
         });
     }
-    function countryBar(){
+    function topDoctors(){
         $.ajax({
-            url:"/country_bar",
+            url:"/admin/top-doctor",
             type:"get",
             dataType:"json",
             success:function(data){
-                let country = $('#countryBar');
-                let myBarChart = new Chart(country, {
+                console.log('hi');
+                console.log(data);
+                console.log(data.appointments_count);
+                console.log(data.name);
+                // data.forEach(element => {
+                //     console.log(element.full_name);
+                //     // console.log(element.appointments_count);
+                // });
+                // console.log(data.full_name);
+                let doctor = $('#doctorBar');
+                let myBarChart = new Chart(doctor, {
                     type: 'bar',
                     data: {
-                            labels: data.label,
+                            labels: data.name,
                             datasets: [{
-                                label: 'Students',
-                                data: data.value,
+                                label: 'Doctors',
+                                data: data.appointments_count,
                                 backgroundColor: [
                                     'rgba(255, 97, 131, 0.35)',
                                     'rgba(240, 246, 44, 0.42)',
@@ -386,43 +394,43 @@
             }
         });
     }
-    function councilorPolarArea(){
-        $.ajax({
-            url:"/councilor_polar_area",
-            type:"get",
-            dataType:"json",
-            success:function(data){
-                let councilor = $('#councilorPolarArea');
-                let myPolarChart = new Chart(councilor, {
-                    type: 'polarArea',
-                    data: {
-                            labels: data.label,
-                            datasets: [{
-                                label: 'Students',
-                                data: data.value,
-                                backgroundColor: [
-                                    'rgba(255, 97, 131, 0.35)',
-                                    'rgba(240, 246, 44, 0.42)',
-                                    'rgba(79, 255, 31, 0.38)',
-                                    'rgba(0, 0, 0, 0.33)',
-                                    'rgba(49, 82, 201, 0.27)',
-                                    'rgba(201, 79, 49, 0.33)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 97, 131, 1)',
-                                    'rgba(240, 246, 44, 1)',
-                                    'rgba(79, 255, 31, 1)',
-                                    'rgba(0, 0, 0, 1)',
-                                    'rgba(49, 82, 201, 1)',
-                                    'rgba(201, 79, 49, 1)'
-                                ],
-                                borderWidth: 1
-                            }]
-                        },
-                        options: {}
-                });
-            }
-        });
-    }
+    // function councilorPolarArea(){
+    //     $.ajax({
+    //         url:"/councilor_polar_area",
+    //         type:"get",
+    //         dataType:"json",
+    //         success:function(data){
+    //             let councilor = $('#councilorPolarArea');
+    //             let myPolarChart = new Chart(councilor, {
+    //                 type: 'polarArea',
+    //                 data: {
+    //                         labels: data.label,
+    //                         datasets: [{
+    //                             label: 'Students',
+    //                             data: data.value,
+    //                             backgroundColor: [
+    //                                 'rgba(255, 97, 131, 0.35)',
+    //                                 'rgba(240, 246, 44, 0.42)',
+    //                                 'rgba(79, 255, 31, 0.38)',
+    //                                 'rgba(0, 0, 0, 0.33)',
+    //                                 'rgba(49, 82, 201, 0.27)',
+    //                                 'rgba(201, 79, 49, 0.33)'
+    //                             ],
+    //                             borderColor: [
+    //                                 'rgba(255, 97, 131, 1)',
+    //                                 'rgba(240, 246, 44, 1)',
+    //                                 'rgba(79, 255, 31, 1)',
+    //                                 'rgba(0, 0, 0, 1)',
+    //                                 'rgba(49, 82, 201, 1)',
+    //                                 'rgba(201, 79, 49, 1)'
+    //                             ],
+    //                             borderWidth: 1
+    //                         }]
+    //                     },
+    //                     options: {}
+    //             });
+    //         }
+    //     });
+    // }
     </script>
 @endsection

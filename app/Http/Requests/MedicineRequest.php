@@ -24,16 +24,23 @@ class MedicineRequest extends FormRequest
     public function rules()
     {
         return [
-            "name"            => "required",
-            "type_id"         => "required",
-            "generic_id"      => "required",
-            "manufacturer_id" => "nullable",
-            "sku"             => "nullable",
-            "tax"             => "nullable",
-            "details"         => "nullable",
-            "per_box"         => "nullable",
-            "price"           => "required",
-            "picture"         => "mimes:png,jpg,jpeg",
+            "name"               => "required",
+            "type_id"            => "required",
+            "generic_id"         => "required",
+            "manufacturer_id"    => "nullable",
+            "sku"                => "nullable",
+            "tax"                => "nullable",
+            "details"            => "nullable",
+            "per_box"            => "nullable",
+            "price"              => "required",
+            "picture"            => "mimes:png,jpg,jpeg",
+            "dosage"             => "nullable",
+            "vat"                => "nullable",
+            "unit_type_id"       => "required",
+            "single_unit_weight" => "nullable",
+            "box_weight"         => "nullable",
+            "minimum_unit"       => "nullable",
+            "unit_location"      => "nullable",
         ];
     }
     public function messages()

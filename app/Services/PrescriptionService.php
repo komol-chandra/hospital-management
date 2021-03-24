@@ -23,22 +23,7 @@ class PrescriptionService
         $user_id = Auth::user()->id;
         $prescription->created_by = $user_id;
         $prescription->fill($data)->save();
-        // dd($prescription);
-
-        foreach ($data['day'] as $key => $value) {
-            $medicineData[] = [
-                'prescription_id' => $prescription->id,
-                'day'             => $value,
-                'medicine'        => $data['medicine'][$key],
-                'duration'        => $data['duration'][$key],
-                'sequence'        => $data['sequence'][$key],
-                'day'             => $data['day'][$key],
-                'instruction'     => $data['instruction'][$key],
-            ];
-        }
-        $medicine_model = PrescriptionMedicine::insert($medicineData);
-        // dd($medicine_model);
-        if ($prescription && $medicine_model) {
+        if ($prescription) {
             return $prescription;
         } else {
             return null;

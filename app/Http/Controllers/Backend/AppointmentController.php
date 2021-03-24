@@ -57,18 +57,6 @@ class AppointmentController extends Controller
             $notification = $this->message->error('Appointment', ' System Error');
         }
         return redirect()->back()->with($notification);
-
-        // try {
-        //     $data = $this->appointmentService->payment($id);
-        //     if ($data) {
-        //         $notification = $this->message->success('Appointment', 'Payment Done Successfully ');
-        //     } else {
-        //         $notification = $this->message->error('Appointment', ' System Error');
-        //     }
-        // } catch (\Exception $e) {
-        //     $notification = $this->message->error('Appointment', $e->getMessage());
-        // }
-        // return redirect()->back()->with($notification);
     }
 
     /**

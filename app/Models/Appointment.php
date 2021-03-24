@@ -28,9 +28,9 @@ class Appointment extends Model
 
     ];
 
-    protected $casts = [
-        'created_at' => 'date:Y-m-d',
-    ];
+    // protected $casts = [
+    //     'created_at' => 'date:Y-m-d',
+    // ];
 
     public function departments()
     {

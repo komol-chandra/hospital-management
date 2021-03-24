@@ -18,7 +18,7 @@
             </li>
 
             
-            {{-- <li class="treeview">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-credit-card-alt"></i><span>RBAC</span>
                     <span class="pull-right-container">
@@ -30,10 +30,10 @@
                     <li><a href="{{ url('/admin/rbac/user') }}">User</a></li>
                    <li><a href="{{ url('/admin/rbac/user_access') }}">User Access</a></li>
                 </ul>
-            </li> --}}
+            </li>
 
 
-            @can('RBAC')
+            {{-- @can('RBAC')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-credit-card-alt"></i><span>RBAC</span>
@@ -47,7 +47,7 @@
                     @can('User_Access')<li><a href="{{ url('/admin/rbac/user_access') }}">User Access</a></li>@endcan
                 </ul>
             </li>
-            @endcan
+            @endcan --}}
             @can('Patient')
             <li>
                 <a href="{{ url('/admin/patient') }}">
@@ -110,7 +110,7 @@
             @can('Medicine')
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-user-circle-o"></i><span>Medicine</span>
+                    <i class="fa fa-user-circle-o"></i><span>Pharmacy Basic Info</span>
                     <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                     </span>
@@ -118,11 +118,31 @@
                 <ul class="treeview-menu">
                     @can('Medicine_Type')<li><a href="{{ url('/admin/medicine-type') }}">Medicine Type list</a></li>@endcan
                     @can('Generic_List')<li><a href="{{ url('/admin/generic') }}">Generic list</a></li>@endcan
+                    <li><a href="{{ url('/admin/unit-type') }}">Unit Type list</a></li>
                     @can('Manufacturer_List')<li><a href="{{ url('/admin/manufacturer') }}">Manufacture list</a></li>@endcan
                     @can('Medicine_List')<li><a href="{{ url('/admin/medicine') }}">Medicine list</a></li>@endcan
                 </ul>
             </li>
             @endcan
+
+
+
+
+            
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-user-circle-o"></i><span>Stock,Sele & Report</span>
+                    <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ url('/admin/medicine-type') }}">Medicine Type list</a></li>
+                </ul>
+            </li>
+
+
+
             @can('Account')
             <li class="treeview">
                 <a href="#">

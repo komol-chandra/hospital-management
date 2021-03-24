@@ -35,8 +35,10 @@ class AppointmentService
     }
     public function create($data)
     {
+        // dd($data);
         $appointment = new Appointment();
         $doctor_id = $data['doctor_id'];
+        $patient_id = $data['patient_id'];
         $date = $data['date'];
         $dateTime = new DateTime($date);
         $dateToDay = $dateTime->format('l');

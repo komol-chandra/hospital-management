@@ -24,7 +24,7 @@ class FrontendUserFactory extends Factory
         return [
             'name'      => $this->faker->name,
             'full_name' => $this->faker->name,
-            'email'     => $this->faker->email,
+            'email'     => $this->faker->unique()->email,
             'password'  => '12345678',
             'mobile'    => $this->faker->phoneNumber,
             'birthday'  => $this->faker->date,

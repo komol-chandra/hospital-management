@@ -3,10 +3,18 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Schedule;
+use App\Services\PrescriptionService;
+use Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    protected $prescriptionService;
+    public function __construct()
+    {
+        $this->prescriptionService = new PrescriptionService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('frontend.user.view-profile');
+        if (Auth::guard('admin')->user()->type == "patient") {
+            return view('frontend.user.view-profile');
+        } else {
+            $id = Auth::guard('admin')->user()->parentId;
+            $doctor = Schedule::where('doctor_id', $id)->get();
+            return view('frontend.user.doctor-profile', compact('doctor'));
+        }
     }
 
     /**

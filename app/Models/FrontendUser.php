@@ -56,11 +56,6 @@ class FrontendUser extends Authenticatable
         return $this->belongsTo("App\Models\Blood", "blood_id", "id");
     }
 
-    public function users()
-    {
-        return $this->belongsTo("App\Models\User", "parentId", "id");
-    }
-
     public function roll()
     {
         return $this->belongsTo('App\Models\UserRoll');
