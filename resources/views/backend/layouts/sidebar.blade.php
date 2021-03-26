@@ -137,7 +137,8 @@
                     </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="{{ url('/admin/medicine-type') }}">Medicine Type list</a></li>
+                    <li><a href="{{ url('/admin/stock/create') }}">Add Stock</a></li>
+                    <li><a href="{{ url('/admin/stock') }}"> Stock List</a></li>
                 </ul>
             </li>
 

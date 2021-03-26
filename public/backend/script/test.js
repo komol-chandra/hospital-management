@@ -14,12 +14,20 @@ $(document).ready(function () {
                     message: response.message,
                     position: "topRight",
                 });
-
                 $(".close").click();
                 $("#form_insert").trigger("reset");
             },
-            error: function (error) {
-                console.log("wrang");
+            error: function (errorMess) {
+                // iziToast.error({
+                //     title: error.title,
+                //     message: error.message,
+                //     position: "topRight",
+                // });
+                let errorList = errorMess.responseJSON;
+                console.log(errorList);
+                errorList.forEach((element) => {
+                    console.log(element);
+                });
             },
         });
     });
