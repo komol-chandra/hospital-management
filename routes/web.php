@@ -18,6 +18,7 @@ use App\Http\Controllers\Backend\ScheduleController;
 use App\Http\Controllers\Backend\StockController;
 use App\Http\Controllers\Backend\TestBillController;
 use App\Http\Controllers\Backend\UnitTypeController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DoctorDepartmentController;
 use App\Http\Controllers\EmployeeRollController;
@@ -159,6 +160,8 @@ Route::prefix('admin')->group(function () {
         //sock
         Route::resource('/stock', StockController::class);
         Route::get('/stockSearch', [StockController::class, 'stockSearch']);
+        //
+        Route::resource('/customer', CustomerController::class);
 
         //admin Prescription
         Route::resource('/prescription', PrescriptionController::class);
