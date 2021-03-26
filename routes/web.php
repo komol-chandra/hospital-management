@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\PatientController;
 use App\Http\Controllers\Backend\PrescriptionController;
 use App\Http\Controllers\Backend\ProfitLossReportController;
 use App\Http\Controllers\Backend\ScheduleController;
+use App\Http\Controllers\Backend\StockController;
 use App\Http\Controllers\Backend\TestBillController;
 use App\Http\Controllers\Backend\UnitTypeController;
 use App\Http\Controllers\DashboardController;
@@ -155,6 +156,10 @@ Route::prefix('admin')->group(function () {
         //admin Manufacturer
         Route::resource('/manufacturer', ManufacturerController::class);
         Route::get('/manufacturer/status/{id}', [ManufacturerController::class, 'status']);
+        //sock
+        Route::resource('/stock', StockController::class);
+        Route::get('/stockSearch', [StockController::class, 'stockSearch']);
+
         //admin Prescription
         Route::resource('/prescription', PrescriptionController::class);
         Route::get('/prescription/status/{id}', [PrescriptionController::class, 'status']);
