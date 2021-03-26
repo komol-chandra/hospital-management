@@ -49,11 +49,11 @@
                                 </td>
                                 <td>
                                     @if($value->status == 1)
-                                    <a class="btn btn-danger btn-xs" id="status" href="/admin/schedule/status/{{ $value->id }}"><i class="fa fa-refresh"></i></a>
+                                    <a class="btn btn-danger btn-xs" id="status" href="/admin/stock/status/{{ $value->id }}"><i class="fa fa-refresh"></i></a>
                                     @else
-                                    <a class="btn btn-info btn-xs" id="status" href="/admin/schedule/status/{{ $value->id }}"><i class="fa fa-refresh"></i></a>
+                                    <a class="btn btn-info btn-xs" id="status" href="/admin/stock/status/{{ $value->id }}"><i class="fa fa-refresh"></i></a>
                                     @endif
-                                    <a class="btn btn-info btn-xs" href="{{url('admin/schedule/'.$value->id.'/edit')}}"><i class="fa fa-pencil"></i></a>   
+                                    <a class="btn btn-info btn-xs" href="{{url('admin/stock/'.$value->id.'/edit')}}"><i class="fa fa-pencil"></i></a>   
                                 </td>
                             </tr>
                             @empty
