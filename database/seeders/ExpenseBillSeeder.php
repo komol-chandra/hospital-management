@@ -13,6 +13,7 @@ class ExpenseBillSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\ExpenseBill::factory(500)->create();
+
     }
 }
