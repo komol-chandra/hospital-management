@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function saleSearch(Request $request)
     {
         $medicines = Medicine::where(function ($query) use ($request) {
