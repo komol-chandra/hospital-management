@@ -70,7 +70,7 @@
                     <ul class="dropdown-menu">
                         <li><a href="{{ url('/admin/user-profile') }}"><i class="fa fa-users"></i> View Profile</a></li>
                         <li><a href="{{  url('/admin/user-profile/create')  }}"><i class="fa fa-gear"></i> Change Profile</a></li>
-                        <li><a href="{{  url('/admin/password')  }}"><i class="fa fa-gear"></i> Change Password</a></li>
+                        {{-- <li><a href="{{  url('/admin/password')  }}"><i class="fa fa-gear"></i> Change Password</a></li> --}}
                         <form method="POST" action="{{ route('logout') }}">@csrf
                         <li><a style="padding-left: 13px;" href="{{ route('logout') }}"
                             onclick="event.preventDefault(); this.closest('form').submit();">

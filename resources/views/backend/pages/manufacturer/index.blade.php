@@ -61,7 +61,6 @@
                                 <th>address</th>
                                 <th>details</th>
                                 <th>Created By</th>
-
                                 <th>Status</th>
                                 <th>action</th>
                             </tr>
