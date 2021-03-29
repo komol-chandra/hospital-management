@@ -25,6 +25,17 @@
 
 <script src="{{ asset('ckeditor/ckeditor.js')}}" type="text/javascript"></script>
 <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+
+{{-- select2 --}}
+<link rel="stylesheet" href="{{ asset('select2/select2.min.css') }}">
+<script src="{{ asset('select2/select2.min.js') }}"></script>
+<script>
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+</script>
+{{-- select2 --}}
+
 <script>
     function printDiv(divName) {
   var printContents = document.getElementById(divName).innerHTML;

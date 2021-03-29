@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\IncomeReportController;
 use App\Http\Controllers\Backend\PatientController;
 use App\Http\Controllers\Backend\PrescriptionController;
 use App\Http\Controllers\Backend\ProfitLossReportController;
+use App\Http\Controllers\Backend\SaleController;
 use App\Http\Controllers\Backend\ScheduleController;
 use App\Http\Controllers\Backend\StockController;
 use App\Http\Controllers\Backend\TestBillController;
@@ -162,6 +163,10 @@ Route::prefix('admin')->group(function () {
         Route::get('/stockSearch', [StockController::class, 'stockSearch']);
         //
         Route::resource('/customer', CustomerController::class);
+        //sale
+        Route::resource('/sale', SaleController::class);
+        Route::get('/saleSearch', [SaleController::class, 'saleSearch']);
+        Route::get('/getBatch/{id}', [SaleController::class, 'getBatch']);
 
         //admin Prescription
         Route::resource('/prescription', PrescriptionController::class);

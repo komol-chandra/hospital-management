@@ -3,11 +3,39 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Customer;
+use App\Models\Generic;
+use App\Models\Medicine;
+use App\Models\MedicineType;
 use App\Models\Sale;
+use App\Models\StockDetails;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
 {
+    public function saleSearch(Request $request)
+    {
+        $medicines = Medicine::where(function ($query) use ($request) {
+            if ($request->type_id) {
+                $query->where('type_id', $request->type_id);
+            }
+            if ($request->generic_id) {
+                $query->where('generic_id', $request->generic_id);
+            }
+            if ($request->search) {
+                $query->where('name', 'LIKE', '%' . $request->search . '%');
+            }
+        })->where('status', '1')->orderBy('id', 'asc')->get();
+        return response()->json($medicines);
+
+    }
+
+    public function getBatch($id)
+    {
+        $data = StockDetails::where('medicine_id', $id)->get();
+        $batch_data = json_decode($data);
+        return response()->json($batch_data);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +53,11 @@ class SaleController extends Controller
      */
     public function create()
     {
-        //
+        $type = MedicineType::where('status', '1')->get();
+        $generic = Generic::where('status', '1')->get();
+        $medicines = Medicine::where('status', '1')->get();
+        $customers = Customer::where('status', '1')->get();
+        return view('backend.pages.sale.add-sale', compact('type', 'generic', 'medicines', 'customers'));
     }
 
     /**

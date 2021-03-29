@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests\PaymentRequest;
-use App\Models\Payment;
-use App\Services\PaymentService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ServiceRequest;
+use App\Models\Service;
+use App\Services\BillingService;
 use App\Services\ResponseService;
 use Illuminate\Http\Request;
 
-class PaymentController extends Controller
+class ServiceController extends Controller
 {
-    protected $paymentService;
+    protected $billingService;
     protected $message;
     public function __construct()
     {
-        $this->paymentService = new PaymentService;
+        $this->billingService = new BillingService;
         $this->message = new ResponseService;
-
     }
     /**
      * Display a listing of the resource.
@@ -25,8 +25,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $data = $this->paymentService->lists();
-        return view('backend.pages.payment.index', compact('data'));
+        $data = $this->billingService->lists();
+        return view('backend.pages.service.index', compact('data'));
     }
 
     /**
@@ -45,14 +45,14 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(PaymentRequest $request)
+    public function store(ServiceRequest $request)
     {
         $value = $request->all();
-        $data = $this->paymentService->createOrUpdate($value);
+        $data = $this->billingService->createOrUpdate($value);
         if ($data) {
-            $notification = $this->message->success('Payment', 'Payment Insert Successfully');
+            $notification = $this->message->success('Service', 'Service Insert Successfully');
         } else {
-            $notification = $this->message->error('Payment', 'Input Filed Required');
+            $notification = $this->message->error('Service', 'Input Filed Required');
         }
         $status = 200;
         return response()->json($notification, $status);
@@ -61,10 +61,10 @@ class PaymentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Payment  $payment
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function show(Payment $payment)
+    public function show(Service $service)
     {
         //
     }
@@ -72,12 +72,12 @@ class PaymentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Payment  $payment
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data = $this->paymentService->getById($id);
+        $data = $this->billingService->getById($id);
         return response()->json($data, 200);
     }
 
@@ -85,17 +85,17 @@ class PaymentController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Payment  $payment
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(PaymentRequest $request)
+    public function update(ServiceRequest $request)
     {
         $value = $request->all();
-        $data = $this->paymentService->createOrUpdate($value);
+        $data = $this->billingService->createOrUpdate($value);
         if ($data) {
-            $notification = $this->message->success('Payment', 'Payment Updated Successfully');
+            $notification = $this->message->success('Service', 'Service Updated Successfully');
         } else {
-            $notification = $this->message->error('Payment', 'Input Filed Required');
+            $notification = $this->message->error('Service', 'Input Filed Required');
         }
         $status = 200;
         return response()->json($notification, $status);
@@ -104,26 +104,26 @@ class PaymentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Payment  $payment
+     * @param  \App\Models\Service  $service
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $data = $this->paymentService->delete($id);
+        $data = $this->billingService->delete($id);
         if ($data) {
-            $notification = $this->message->success('Payment ', 'Payment Deleted Successfully');
+            $notification = $this->message->success('Service', 'Service Deleted Successfully');
         } else {
-            $notification = $this->message->error('Payment', 'System Error');
+            $notification = $this->message->error('Service', 'System Error');
         }
         return redirect()->back()->with($notification);
     }
     public function status($id)
     {
-        $data = $this->paymentService->status($id);
+        $data = $this->billingService->status($id);
         if ($data) {
-            $notification = $this->message->success('Payment', 'Payment Status change Successfully');
+            $notification = $this->message->success('Service', 'Service Status Updated Successfully');
         } else {
-            $notification = $this->message->error('Payment', 'System Error');
+            $notification = $this->message->error('Service', 'System Error');
         }
         return redirect()->back()->with($notification);
     }

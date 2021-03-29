@@ -1,11 +1,21 @@
 <?php
+
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CustomerRequest;
+use App\Models\Customer;
+use App\Services\ResponseService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class StockDetailsController extends Controller
+class CustomerController extends Controller
 {
+    protected $message;
+    public function __construct()
+    {
+        $this->message = new ResponseService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +23,8 @@ class StockDetailsController extends Controller
      */
     public function index()
     {
-        //
+        $data = Customer::get();
+        return view('backend.pages.customer.index', compact('data'));
     }
 
     /**
@@ -32,18 +43,23 @@ class StockDetailsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CustomerRequest $request)
     {
-        //
+        $data = $request->all();
+        $customer = new Customer();
+        $customer->created_by = Auth::user()->id;
+        $success = $customer->fill($data)->save();
+        $notification = $this->message->success('Customer', ' Added Successfully ');
+        return response()->json($notification, 201);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\StockDetials  $stockDetials
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(StockDetials $stockDetials)
+    public function show(Customer $customer)
     {
         //
     }
@@ -51,10 +67,10 @@ class StockDetailsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\StockDetials  $stockDetials
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit(StockDetials $stockDetials)
+    public function edit(Customer $customer)
     {
         //
     }
@@ -63,10 +79,10 @@ class StockDetailsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\StockDetials  $stockDetials
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, StockDetials $stockDetials)
+    public function update(Request $request, Customer $customer)
     {
         //
     }
@@ -74,10 +90,10 @@ class StockDetailsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\StockDetials  $stockDetials
+     * @param  \App\Models\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(StockDetials $stockDetials)
+    public function destroy(Customer $customer)
     {
         //
     }

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\MedicineRequest;
 use App\Http\Requests\MedicineUpdateRequest;
 use App\Models\Medicine;
 use App\Services\MedicineService;
 use App\Services\ResponseService;
 use App\Traits\FileUpload;
-use Illuminate\Http\Request;
 use Str;
 
 class MedicineController extends Controller
