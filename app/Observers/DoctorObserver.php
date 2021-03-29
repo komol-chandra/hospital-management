@@ -27,7 +27,7 @@ class DoctorObserver
         $user->address = $data['address'];
         $user->mobile = $data['mobile'];
         $user->birthday = $data['birthday'];
-        $user->picture = isset($data['picture']) ? $data['picture'] : 'backend/files/profile.jpg';
+        $user->picture = isset($data['picture']) ? $data['picture'] : null;
         $user->blood_id = $data['blood_id'];
         $user->gender = $data['gender'];
         $user->save();

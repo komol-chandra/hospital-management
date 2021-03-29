@@ -31,7 +31,7 @@ class AppointmentController extends Controller
         if (isset($request->doctor_id)) {
             $data = Appointment::with('users')->where('doctor_id', $request->doctor_id)->where('date', $today)->paginate(5);
         } else {
-            $data = Appointment::with('users')->where('date', $today)->paginate(5);
+            $data = Appointment::with('users')->where('date', $today)->paginate(25);
         }
 
         return view('backend.pages.appointment.index', compact('doctors', 'data'));

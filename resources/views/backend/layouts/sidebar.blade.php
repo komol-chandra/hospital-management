@@ -2,7 +2,7 @@
     <div class="sidebar">
         <div class="user-panel">
             <div class="image pull-left">
-                <img src="/{{ Auth::user()->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image">
+                <img src="/{{ Auth::user()->picture ?? 'backend/files/no-img.png' }}" class="img-circle" alt="User Image">
             </div>
             <div class="info">
                 <h4>Welcome</h4>

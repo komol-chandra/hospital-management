@@ -160,7 +160,7 @@
                 response.forEach((value,index) => {
                     html_data += `<div class='col-sm-6 panel panel-bd' id='product-div' onclick='getProduct(${JSON.stringify(value)})'>
                             <div class='card' style="width: 18rem;">
-                            <img class='card-img-top' src="/{{ $value->picture ?? 'backend/files/no-img.png' }}" style="height: 50px; width: 50px;"  alt='Card image'>
+                            <img class='card-img-top' src="/${ value.picture ?value.picture:'backend/files/no-img.png'}" style="height: 50px; width: 50px;"  alt='Card image'>
                             <div class='card-body'>
                             <h5 class='card-title'>${value.name}</h5>
                             </div>

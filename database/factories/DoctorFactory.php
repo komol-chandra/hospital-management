@@ -22,13 +22,7 @@ class DoctorFactory extends Factory
     public function definition()
     {
         return [
-            'name'          => $this->faker->name,
             'full_name'     => $this->faker->name,
-            'email'         => $this->faker->email,
-            'password'      => '12345678',
-            'mobile'        => $this->faker->phoneNumber,
-            'birthday'      => $this->faker->date,
-            'gender'        => $this->faker->numberBetween(1, 2),
             'department_id' => $this->faker->numberBetween(1, 10),
             'phone'         => $this->faker->phoneNumber,
             'address'       => $this->faker->address,
@@ -40,8 +34,6 @@ class DoctorFactory extends Factory
             'feeReport'     => '200',
             'feeReport'     => '20,000',
             'status'        => '1',
-            'created_by'    => '1',
-            'type'          => 'doctor',
 
         ];
     }

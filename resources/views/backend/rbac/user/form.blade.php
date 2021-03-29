@@ -3,6 +3,14 @@
     {!! Form::text("name",  null, ["class"=>"form-control"]) !!}
 </div>
 <div class="col-sm-12 form-group">
+    <label>full Name <span class="text-danger">*</span></label>
+    {!! Form::text("full_name",  null, ["class"=>"form-control"]) !!}
+</div>
+<div class="col-sm-12 form-group">
+    <label>Mobile <span class="text-danger">*</span></label>
+    {!! Form::number("mobile",  null, ["class"=>"form-control"]) !!}
+</div>
+<div class="col-sm-12 form-group">
     <label>Email<span class="text-danger">*</span></label>
     {!! Form::email("email", null, ["class"=>"form-control"]) !!}
 </div>

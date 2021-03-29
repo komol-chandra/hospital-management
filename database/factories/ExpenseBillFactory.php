@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\ExpenseBill;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ExpenseBillFactory extends Factory
@@ -22,7 +23,11 @@ class ExpenseBillFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'expense_id' => $this->faker->numberBetween(1, 2),
+            'amount'     => $this->faker->numberBetween(100, 1000),
+            'details'    => $this->faker->text,
+            'date'       => Carbon::now(),
+            'status'     => '1',
         ];
     }
 }

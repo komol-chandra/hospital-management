@@ -64,7 +64,7 @@
                 <li class="dropdown dropdown-user admin-user">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
                     <div class="user-image">
-                    <img src="/{{ Auth::user()->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" height="40" width="40" alt="User Image">
+                    <img src="/{{ Auth::user()->picture ?? 'backend/files/no-img.png' }}" class="img-circle" height="40" width="40" alt="User Image">
                     </div>
                     </a>
                     <ul class="dropdown-menu">
