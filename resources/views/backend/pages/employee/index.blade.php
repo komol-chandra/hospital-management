@@ -74,7 +74,7 @@
                             <tr>
                                 <td>{{ $key+1 }}</td>
                                 <td>
-                                    <img src="/{{ $value->picture ?? 'backend/files/profile.jpg' }}" class="img-circle" alt="User Image" height="50" width="50">
+                                    <img src="/{{ $value->picture ?? 'backend/files/no-img.png' }}" class="img-circle" alt="User Image" height="50" width="50">
                                 </td>
                                 <td>{{ $value->full_name ?? null}}</td>
                                 <td>{{ $value->email ?? null}}</td>

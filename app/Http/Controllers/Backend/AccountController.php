@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Http\Requests\ServiceRequest;
-use App\Models\Service;
-use App\Services\BillingService;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\AccountRequest;
+use App\Models\Account;
+use App\Services\AccountService;
 use App\Services\ResponseService;
 use Illuminate\Http\Request;
 
-class ServiceController extends Controller
+class AccountController extends Controller
 {
-    protected $billingService;
+    protected $accountService;
     protected $message;
     public function __construct()
     {
-        $this->billingService = new BillingService;
+        $this->accountService = new AccountService;
         $this->message = new ResponseService;
     }
     /**
@@ -24,8 +25,9 @@ class ServiceController extends Controller
      */
     public function index()
     {
-        $data = $this->billingService->lists();
-        return view('backend.pages.service.index', compact('data'));
+
+        $data = $this->accountService->lists();
+        return view('backend.pages.account.index', compact('data'));
     }
 
     /**
@@ -44,14 +46,14 @@ class ServiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ServiceRequest $request)
+    public function store(AccountRequest $request)
     {
         $value = $request->all();
-        $data = $this->billingService->createOrUpdate($value);
+        $data = $this->accountService->createOrUpdate($value);
         if ($data) {
-            $notification = $this->message->success('Service', 'Service Insert Successfully');
+            $notification = $this->message->success('Account', 'Account Insert Successfully');
         } else {
-            $notification = $this->message->error('Service', 'Input Filed Required');
+            $notification = $this->message->error('Account', 'Input Filed Required');
         }
         $status = 200;
         return response()->json($notification, $status);
@@ -60,10 +62,10 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function show(Service $service)
+    public function show(Account $account)
     {
         //
     }
@@ -71,12 +73,12 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data = $this->billingService->getById($id);
+        $data = $this->accountService->getById($id);
         return response()->json($data, 200);
     }
 
@@ -84,17 +86,17 @@ class ServiceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function update(ServiceRequest $request)
+    public function update(AccountRequest $request)
     {
         $value = $request->all();
-        $data = $this->billingService->createOrUpdate($value);
+        $data = $this->accountService->createOrUpdate($value);
         if ($data) {
-            $notification = $this->message->success('Service', 'Service Updated Successfully');
+            $notification = $this->message->success('Account', 'Account Updated Successfully');
         } else {
-            $notification = $this->message->error('Service', 'Input Filed Required');
+            $notification = $this->message->error('Account', 'Input Filed Required');
         }
         $status = 200;
         return response()->json($notification, $status);
@@ -103,26 +105,26 @@ class ServiceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Service  $service
+     * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $data = $this->billingService->delete($id);
+        $data = $this->accountService->delete($id);
         if ($data) {
-            $notification = $this->message->success('Service', 'Service Deleted Successfully');
+            $notification = $this->message->success('Account', 'Account Deleted Successfully');
         } else {
-            $notification = $this->message->error('Service', 'System Error');
+            $notification = $this->message->error('Account', 'System Error');
         }
         return redirect()->back()->with($notification);
     }
     public function status($id)
     {
-        $data = $this->billingService->status($id);
+        $data = $this->accountService->status($id);
         if ($data) {
-            $notification = $this->message->success('Service', 'Service Status Updated Successfully');
+            $notification = $this->message->success('Account', 'Account Status Changed Successfully');
         } else {
-            $notification = $this->message->error('Service', 'System Error');
+            $notification = $this->message->error('Account', 'System Error');
         }
         return redirect()->back()->with($notification);
     }

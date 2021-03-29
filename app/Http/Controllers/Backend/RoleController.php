@@ -1,21 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Models\RoleModel;
-use App\Models\User;
 use App\Services\ResponseService;
-use App\Services\UserService;
+use App\Services\RoleService;
+
+// use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 
-class UserAccessController extends Controller
+class RoleController extends Controller
 {
+    protected $roleService;
     protected $message;
-    protected $userService;
     public function __construct()
     {
+        $this->roleService = new RoleService;
         $this->message = new ResponseService;
-        $this->userService = new UserService;
     }
     /**
      * Display a listing of the resource.
@@ -24,7 +26,7 @@ class UserAccessController extends Controller
      */
     public function index()
     {
-        return view('backend.rbac.user-access.index');
+        return view('backend.rbac.role.index');
     }
 
     /**
@@ -36,10 +38,10 @@ class UserAccessController extends Controller
     {
         //
     }
-    public function userAccessList(Request $request)
+    public function roleList(Request $request)
     {
-        $data = User::search($request->search)->orderBy('id', 'DESC')->paginate(10);
-        return view('backend.rbac.user-access.dataList', compact('data'));
+        $data = RoleModel::search($request->search)->orderBy('id', 'DESC')->get();
+        return view('backend.rbac.role.dataList', compact('data'));
     }
 
     /**
@@ -50,16 +52,12 @@ class UserAccessController extends Controller
      */
     public function store(Request $request)
     {
-        $role = RoleModel::findOrFail($request->role);
-        $user = User::with('roles')->findOrFail($request->id);
-        if ($user->roles->toArray() != []) {
-            $user->removeRole($user->roles[0]->name);
-        }
-        $user->assignRole($role->name);
-        if ($user) {
-            $notification = $this->message->success('User', "Successfully!{$user->name} has assigned to {$role->name}");
+        $value = $request->all();
+        $data = $this->roleService->createOrUpdate($value);
+        if ($data) {
+            $notification = $this->message->success('Role', 'Role Insert Successfully');
         } else {
-            $notification = $this->message->error('User', 'Input Filed Required');
+            $notification = $this->message->error('Role', 'Input Filed Required');
         }
         $status = 200;
         return response()->json($notification, $status);
@@ -73,7 +71,7 @@ class UserAccessController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('backend.rbac.role.view');
     }
 
     /**
@@ -84,9 +82,7 @@ class UserAccessController extends Controller
      */
     public function edit($id)
     {
-        $data = User::findOrFail($id);
-        $role = RoleModel::all();
-        return response()->json($data, 200);
+        //
     }
 
     /**
@@ -98,11 +94,6 @@ class UserAccessController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request->all());
-        // $department->name = $data['name'];
-        // $department->description = $data['description'];
-        // $department->status = $data['status'];
-
     }
 
     /**
@@ -113,11 +104,11 @@ class UserAccessController extends Controller
      */
     public function destroy($id)
     {
-        $data = $this->userService->delete($id);
+        $data = $this->roleService->delete($id);
         if ($data) {
-            $notification = $this->message->success('User', 'User Deleted Successfully');
+            $notification = $this->message->success('Role', 'Role Deleted Successfully');
         } else {
-            $notification = $this->message->error('User', 'System Error');
+            $notification = $this->message->error('Role', 'System Error');
         }
         return redirect()->back()->with($notification);
     }

@@ -1,8 +1,8 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
 use App\Exports\DoctorDepartmentExport;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\DoctorDepartmentRequest;
 use App\Models\DoctorDepartment;
 use App\Services\DoctorDepartmentService;

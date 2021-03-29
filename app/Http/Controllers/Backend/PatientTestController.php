@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\PatientTestRequest;
 use App\Models\PatientTest;
 use App\Services\PatientTestService;

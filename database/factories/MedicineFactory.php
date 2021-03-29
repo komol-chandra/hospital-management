@@ -22,7 +22,7 @@ class MedicineFactory extends Factory
     public function definition()
     {
         return [
-            'name'               => $this->faker->name,
+            'name'               => $this->faker->word,
             'type_id'            => $this->faker->numberBetween(1, 3),
             'generic_id'         => $this->faker->numberBetween(1, 3),
             'manufacturer_id'    => $this->faker->numberBetween(1, 3),

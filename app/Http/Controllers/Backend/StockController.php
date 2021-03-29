@@ -38,10 +38,9 @@ class StockController extends Controller
                 $query->where('generic_id', $request->generic_id);
             }
             if ($request->search) {
-                $query->where('name', $request->search);
+                $query->where('name', 'LIKE', '%' . $request->search . '%');
             }
-        })
-            ->orderBy('id', 'asc')->get();
+        })->where('status', '1')->orderBy('id', 'asc')->get();
         return response()->json($medicines);
 
     }

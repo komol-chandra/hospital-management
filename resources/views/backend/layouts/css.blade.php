@@ -17,3 +17,5 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('izitoast/dist/css/iziToast.min.css') }}">
 <script src="{{ asset('izitoast/dist/js/iziToast.min.js ')}}" type="text/javascript"></script>
 <!-- Toaster -->
+
+

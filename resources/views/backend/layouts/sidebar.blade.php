@@ -140,8 +140,8 @@
                     <li><a href="{{ url('/admin/stock/create') }}">Add Stock</a></li>
                     <li><a href="{{ url('/admin/stock') }}"> Stock List</a></li>
                     <li><a href="{{ url('/admin/customer') }}"> Customer List</a></li>
-                    <li><a href="{{ url('/admin/stock') }}">Add Sale</a></li>
-                    <li><a href="{{ url('/admin/stock') }}"> Sale List</a></li>
+                    <li><a href="{{ url('/admin/sale/create') }}">Add Sale</a></li>
+                    <li><a href="{{ url('/admin/sale') }}"> Sale List</a></li>
                 </ul>
             </li>
 
