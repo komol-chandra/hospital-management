@@ -68,9 +68,13 @@ class MedicineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = $this->medicineService->lists();
+        if (isset($request->search)) {
+            $data = Medicine::with('user', 'medicineType', 'generic', 'manufacturer')->search($request->search)->orderBy('id', 'DESC')->paginate(20);
+        } else {
+            $data = $this->medicineService->lists();
+        }
         return view('backend.pages.medicine.index', compact('data'));
     }
 

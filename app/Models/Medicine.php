@@ -31,6 +31,21 @@ class Medicine extends Model
         "unit_location",
         "status",
     ];
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('name', 'LIKE', '%' . $search . '%')
+            ->orWhere('sku', 'LIKE', '%' . $search . '%')
+            ->orWhereHas('medicineType', function ($query) use ($search) {
+                $query->Where("name", "LIKE", "%" . $search . "%");
+            })
+            ->orWhereHas('generic', function ($query) use ($search) {
+                $query->Where("name", "LIKE", "%" . $search . "%");
+            })
+            ->orWhereHas('manufacturer', function ($query) use ($search) {
+                $query->Where("name", "LIKE", "%" . $search . "%");
+            });
+    }
+
     public function unit()
     {
         return $this->belongsTo("App\Models\UnitType", "unit_type_id", "id");

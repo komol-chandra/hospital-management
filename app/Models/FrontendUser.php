@@ -47,8 +47,12 @@ class FrontendUser extends Authenticatable
 
     public function scopeSearch($query, $search)
     {
-        return $query->where('name', 'LIKE', '%' . $search . '%')
-            ->where('email', 'LIKE', '%' . $search . '%');
+        return $query->where('full_name', 'LIKE', '%' . $search . '%')
+            ->orWhere('email', 'LIKE', '%' . $search . '%')
+            ->orWhere('mobile', 'LIKE', '%' . $search . '%')
+            ->orWhereHas('blood', function ($query) use ($search) {
+                $query->Where("name", "LIKE", "%" . $search . "%");
+            });
     }
 
     public function blood()

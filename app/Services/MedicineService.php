@@ -16,6 +16,11 @@ class MedicineService
         return Medicine::with('user', 'medicineType', 'generic', 'manufacturer')->orderBy('id', 'DESC')->paginate(20);
     }
 
+    public function searchList()
+    {
+        //
+    }
+
     public function createOrUpdate($data)
     {
         $userId = Auth::user()->id;
