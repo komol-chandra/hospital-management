@@ -154,6 +154,10 @@ Route::prefix('admin')->group(function () {
         //admin Medicine
         Route::resource('/medicine', MedicineController::class);
         Route::get('/medicine/status/{id}', [MedicineController::class, 'status']);
+        Route::get('/medicine-excel', [MedicineController::class, 'exportExcel']);
+        Route::get('/medicine-csv', [MedicineController::class, 'exportCSV']);
+        Route::get('/medicine-pdf', [MedicineController::class, 'exportPDF']);
+        Route::post('/medicine-import', [MedicineController::class, 'import']);
         //admin Manufacturer
         Route::resource('/manufacturer', ManufacturerController::class);
         Route::get('/manufacturer/status/{id}', [ManufacturerController::class, 'status']);

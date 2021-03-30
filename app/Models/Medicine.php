@@ -31,6 +31,10 @@ class Medicine extends Model
         "unit_location",
         "status",
     ];
+    public function unit()
+    {
+        return $this->belongsTo("App\Models\UnitType", "unit_type_id", "id");
+    }
     public function user()
     {
         return $this->belongsTo("App\Models\User", "created_by", "id");
