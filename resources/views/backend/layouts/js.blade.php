@@ -29,12 +29,16 @@
 {{-- select2 --}}
 <link rel="stylesheet" href="{{ asset('select2/select2.min.css') }}">
 <script src="{{ asset('select2/select2.min.js') }}"></script>
-<script>
-    $(document).ready(function() {
-    $('.js-example-basic-single').select2();
-});
-</script>
+
 {{-- select2 --}}
+
+{{-- Date Range Picker --}}
+<script src="{{ asset('date-range-picker/moment.min.js') }}"></script>
+<script src="{{ asset('date-range-picker/daterangepicker.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('date-range-picker/daterangepicker.css') }}">
+{{-- <script src="{{ asset('date-range-picker/jquery.min.js') }}"></script> --}}
+
+{{-- Date Range Picker --}}
 
 <script>
     function printDiv(divName) {

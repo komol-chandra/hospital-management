@@ -13,7 +13,7 @@ class MedicineService
 {
     public function lists()
     {
-        return Medicine::with('user', 'medicineType', 'generic', 'manufacturer')->orderBy('id', 'DESC')->get();
+        return Medicine::with('user', 'medicineType', 'generic', 'manufacturer')->orderBy('id', 'DESC')->paginate(20);
     }
 
     public function createOrUpdate($data)

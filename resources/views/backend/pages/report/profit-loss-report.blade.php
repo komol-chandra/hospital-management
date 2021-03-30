@@ -9,6 +9,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="panel-header">
+                        
                         <div class="col-sm-12 col-xs-12">
                             {!! Form::open(['url' => '/admin/profit-loss-report','method'=>'get',"id"=>"form_insert"]) !!}
                             <div class="col-sm-4"><h4>Fliter By Type</h4></div>
@@ -182,13 +183,9 @@
             </div>
         </div>
     </div>
-
-
-    
     </div>
 </div>
-
-
-
+@endsection
+@section('js')
 
 @endsection

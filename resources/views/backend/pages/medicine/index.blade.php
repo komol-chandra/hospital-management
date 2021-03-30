@@ -6,36 +6,35 @@
 @section('breadcrumb', ' Medicine')
 <div class="row">
     <div class="col-sm-12">
-        <div class="panel panel-bd lobidrag">
+        <div class="panel panel-bd ">
             <div class="panel-heading">
-                <div class="btn-group"> 
-                    <a class="btn btn-success" href="{{ url('/admin/medicine/create') }}"> <i class="fa fa-plus"></i> Add Medicine
-                    </a>  
+                <div class="row">
+                    <div class="btn-group col-sm-12">
+                            <div class="col-sm-6">
+                                <a class="btn btn-success" href="{{ url('/admin/medicine/create') }}"> <i class="fa fa-plus"></i> Add Medicine</a>
+                            </div>
+
+                            <div class="col-sm-6 float-left">
+                                <form action="/admin/medicine-import" method="post" enctype="multipart/form-data">@csrf
+                                    <div class="col-sm-6 "><input type="file" name="file" class="form-control float-left"></div>
+                                    <div class="col-sm-6 float-right"><button class=" btn btn-black " type="submit" > Import</button></div>
+                                </form>  
+                            </div>
+                    </div>
                 </div>        
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="panel-header">
                         <div class="col-sm-4 col-xs-12">
-                            <div class="dataTables_length">
-                                <label>Display 
-                                    <select name="example_length">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select> records per page</label>
-                            </div>
+                            
                         </div>
                         <div class="col-sm-4 col-xs-12">
                             <div class="dataTables_length">
-                                <a class="btn btn-default buttons-copy btn-sm" tabindex="0">
-                                    <span>Copy</span></a>
-                                    <a class="btn btn-default buttons-csv buttons-html5 btn-sm" tabindex="0"><span>CSV</span></a>
-                                    <a class="btn btn-default buttons-excel buttons-html5 btn-sm" tabindex="0"><span>Excel</span></a>
-                                    <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" tabindex="0"><span>PDF</span></a>
-                                    <a class="btn btn-default buttons-print btn-sm" tabindex="0"><span>Print</span></a>
-                                    
+                                <a class="btn btn-default buttons-csv buttons-html5 btn-sm" tabindex="0" href="/admin/medicine-pdf"><span>PDF</span></a>
+                                <a class="btn btn-default buttons-excel buttons-html5 btn-sm" tabindex="0" href="/admin/medicine-excel"><span>Excel</span></a>
+                                <a class="btn btn-default buttons-pdf buttons-html5 btn-sm" tabindex="0" href="/admin/medicine-csv"><span>CSV</span></a>
+                                <a class="btn btn-default buttons-print btn-sm" tabindex="0"><span>Print</span></a>
                                 </div>
                         </div>
                         <div class="col-sm-4 col-xs-12">
@@ -56,6 +55,7 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
+                                <th>SL</th>
                                 <th>Image</th>
                                 <th>Created By</th>
                                 <th>Name</th>
@@ -64,7 +64,6 @@
                                 <th>Manufacturer</th>
                                 <th>SKU</th>
                                 <th>Tax</th>
-                                {{-- <th>Details</th> --}}
                                 <th>Per Box</th>
                                 <th>Prices</th>
                                 <th>status</th>
@@ -72,8 +71,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $i = ($data->currentpage()-1)* $data->perpage() + 1;
+                            @endphp
                             @forelse ($data as $value)
                             <tr >
+                                <td>{{ $i++ }}</td>
                                 <td>
                                     <img src="/{{ $value->picture ?? 'backend/files/no-img.png' }}" class="img-circle" alt="User Image" height="50" width="50">
 
@@ -85,7 +88,6 @@
                                 <td>{{ $value->manufacturer->name ?? null}}</td>
                                 <td>{{ $value->sku ?? null}}</td>
                                 <td>{{ $value->tax ?? null}}</td>
-                                {{-- <td>{{ $value->details ?? "null" }}</td> --}}
                                 <td>{{ $value->per_box ?? null}}</td>
                                 <td>{{ $value->price ?? null}}</td>
 
@@ -130,6 +132,7 @@
                             
                         </tbody>
                     </table>
+                    {{ $data->links() }}
                 </div>
             </div>
         </div>

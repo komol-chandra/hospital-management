@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Exports\MedicineExport;
+use App\Exports\MedicineViewExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MedicineRequest;
 use App\Http\Requests\MedicineUpdateRequest;
+use App\Imports\MedicineImport;
 use App\Models\Medicine;
 use App\Services\MedicineService;
 use App\Services\ResponseService;
 use App\Traits\FileUpload;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Str;
 
 class MedicineController extends Controller
@@ -16,10 +21,47 @@ class MedicineController extends Controller
     use FileUpload;
     protected $medicineService;
     protected $massage;
+
     public function __construct()
     {
         $this->medicineService = new MedicineService;
         $this->massage = new ResponseService;
+    }
+
+    public function exportExcel()
+    {
+        return Excel::download(new MedicineExport, 'medicine.xlsx');
+    }
+
+    public function exportCSV()
+    {
+        return (new MedicineExport)->download('medicine.csv', \Maatwebsite\Excel\Excel::CSV);
+    }
+
+    public function exportPDF()
+    {
+        return Excel::download(new MedicineViewExport, 'medicine.pdf');
+    }
+
+    public function import(Request $request)
+    {
+        $input = $request->file('file');
+        $import = new MedicineImport;
+        $data = $import->import($input);
+        $error = ($import->errors());
+        if ($data) {
+            $notification = $this->message->success('Medicine', 'Medicine Import Successfully ');
+        } else {
+            if (isset($errors) && $errors->any()) {
+                foreach ($error->all() as $item) {
+                    $notification = $this->message->error('Medicine', $item);
+                }
+            } else {
+                $notification = $this->message->error('Medicine', 'Medicine Field Required');
+            }
+
+        }
+        return redirect()->back()->with($notification);
     }
     /**
      * Display a listing of the resource.
