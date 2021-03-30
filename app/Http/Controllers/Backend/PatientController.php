@@ -82,7 +82,6 @@ class PatientController extends Controller
     public function patientList(Request $request)
     {
         $data = $request->all();
-        // $patients = $this->patientService->lists($data);
         $patients = FrontendUser::search($request->search)->where('type', 'patient')->orderBy('id', 'DESC')->paginate(10);
         return view('backend.pages.patient.dataList', compact('patients'));
     }

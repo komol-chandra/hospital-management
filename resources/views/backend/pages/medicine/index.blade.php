@@ -12,6 +12,7 @@
                     <div class="btn-group col-sm-12">
                             <div class="col-sm-6">
                                 <a class="btn btn-success" href="{{ url('/admin/medicine/create') }}"> <i class="fa fa-plus"></i> Add Medicine</a>
+                                <a class="btn btn-success" href="{{ url('/admin/medicine') }}">Refresh</a>
                             </div>
 
                             <div class="col-sm-6 float-left">
@@ -39,14 +40,16 @@
                         </div>
                         <div class="col-sm-4 col-xs-12">
                             <div class="dataTables_length">
-                                <div class="input-group custom-search-form">
-                                    <input type="search" class="form-control" placeholder="search..">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-primary" type="button">
-                                            <span class="glyphicon glyphicon-search"></span>
-                                        </button>
-                                    </span>
-                                </div><!-- /input-group -->
+                                <form action="/admin/medicine" method="get">
+                                    <div class="input-group custom-search-form">
+                                        <input type="search" name="search" class="form-control" placeholder="search..">
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="submit">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div><!-- /input-group -->
+                                </form>
                             </div>
                         </div>
                     </div>

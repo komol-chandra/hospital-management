@@ -132,7 +132,7 @@
 <div class="row">
     <!-- calender -->
     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-        <div class="panel panel-bd lobidisable">
+        <div class="panel panel-bd ">
             <div class="panel-heading">
                 <div class="panel-title">
                     <h4>This Mounth Top Doctors By Appointments</h4>
@@ -151,7 +151,7 @@
     </div>
         <!-- datamap -->
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 ">
-            <div class="panel panel-bd lobidrag">
+            <div class="panel panel-bd ">
                 <div class="panel-heading">
                     <div class="panel-title">
                         <h4>This Mounth  Percentage</h4>
@@ -191,7 +191,7 @@
             </div>
         </div> --}}
         <div class="col-xs-12 col-sm-12">
-            <div class="panel panel-bd lobidrag">
+            <div class="panel panel-bd ">
                 <div class="panel-heading">
                     <div class="panel-title">
                         <h4>Notice List of This Mounth </h4>
