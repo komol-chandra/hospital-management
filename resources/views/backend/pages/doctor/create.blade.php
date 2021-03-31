@@ -7,16 +7,16 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <div class="panel panel-bd lobidrag">
+        <div class="panel panel-bd ">
             <div class="panel-head">
-                <div class="btn-group"> 
-                    <a class="btn btn-primary" href="{{ url('/admin/doctor') }}"> <i class="fa fa-list"></i>Doctor List</a>  
+                <div class="btn-group">
+                    <a class="btn btn-primary" href="{{ url('/admin/doctor') }}"> <i class="fa fa-list"></i>Doctor List</a>
                 </div>
             </div>
             <div class="panel-body">
                 <div class="col-sm-12">
                     {!! Form::open(['url' => '/admin/doctor','method'=>'post','files'=>true,"id"=>"form_insert"]) !!}
-                    
+
                     @include('backend.pages.doctor.user-form')
                         @include('backend.pages.doctor.form')
                         {{-- @include('backend.pages.doctor.user-form') --}}
@@ -29,7 +29,7 @@
             </div>
         </div>
     </div>
-</div>   
+</div>
 @endsection
 @section('js')
 <script src="{{asset('backend/script/doctor.js')}}"></script>

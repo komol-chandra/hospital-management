@@ -7,43 +7,51 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\DoctorRequest;
 use App\Http\Requests\DoctorUpdateRequest;
 use App\Models\Blood;
-use App\Models\Doctor;
 use App\Models\DoctorDepartment;
 use App\Services\DoctorService;
 use App\Services\ResponseService;
 use App\Traits\FileUpload;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Maatwebsite\Excel\Excel;
 
 class DoctorController extends Controller
 {
     use FileUpload;
+
     protected $doctorService;
     protected $responseService;
     protected $excel;
+
     public function __construct(Excel $excel)
     {
         $this->doctorService = new DoctorService;
         $this->responseService = new ResponseService;
         $this->excel = $excel;
     }
-    public function doctorExcel()
+
+    public function doctorExcel(): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
         return $this->excel->download(new DoctorExport, 'doctors.xlsx', Excel::XLSX);
     }
-    public function doctorPdf()
+
+    public function doctorPdf(): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
         return $this->excel->download(new DoctorExport, 'doctors.pdf', Excel::DOMPDF);
     }
-    public function downloadCVS()
+
+    public function downloadCVS(): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
         return $this->excel->download(new DoctorExport, 'doctors.csv', Excel::CSV);
     }
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View|Response
      */
     public function index()
     {
@@ -54,7 +62,7 @@ class DoctorController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View|Response
      */
     public function create()
     {
@@ -66,29 +74,33 @@ class DoctorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param DoctorRequest $request
+     * @return RedirectResponse
      */
-    public function store(DoctorRequest $request)
+    public function store(DoctorRequest $request): RedirectResponse
     {
-        $data = $request->all();
-        if ($request->hasFile('picture')) {
-            $data['picture'] = $this->ImageUpload($request, 'picture', 'frontend-user/', 'user_');
+        try {
+            $data = $request->all();
+            if ($request->hasFile('picture')) {
+                $data['picture'] = $this->ImageUpload($request, 'picture', 'frontend-user/', 'user_');
+            }
+            $doctor = $this->doctorService->create($data);
+            if ($doctor) {
+                $notification = $this->responseService->success('Doctor', 'Doctor Added Successfully');
+            } else {
+                $notification = $this->responseService->error('Doctor', 'Input Filed Required');
+            }
+            return redirect()->back()->with($notification);
+        } catch (\Exception $e) {
+            return redirect()->back()->with($e->getMessage());
         }
-        $doctor = $this->doctorService->create($data);
-        if ($doctor) {
-            $notification = $this->responseService->success('Doctor', 'Doctor Added Successfully');
-        } else {
-            $notification = $this->responseService->error('Doctor', 'Input Filed Required');
-        }
-        return redirect()->back()->with($notification);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Application|Factory|View|Response
      */
     public function show($id)
     {
@@ -102,8 +114,8 @@ class DoctorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Application|Factory|View|Response
      */
     public function edit($id)
     {
@@ -117,11 +129,11 @@ class DoctorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
+     * @param DoctorUpdateRequest $request
+     * @param $id
+     * @return RedirectResponse
      */
-    public function update(DoctorUpdateRequest $request, $id)
+    public function update(DoctorUpdateRequest $request, $id): RedirectResponse
     {
         $validatedData = $request->all();
         // dd($validatedData);
@@ -140,10 +152,10 @@ class DoctorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Doctor  $doctor
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
         $doctor = $this->doctorService->delete($id);
         if ($doctor) {
@@ -154,7 +166,7 @@ class DoctorController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public function status($id)
+    public function status($id): RedirectResponse
     {
         $doctor = $this->doctorService->status($id);
         if ($doctor) {
@@ -165,7 +177,7 @@ class DoctorController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    public  function ok($id)
+    public function ok($id)
     {
         $doctor = $this->doctorService->status($id);
         if ($doctor) {
@@ -173,7 +185,6 @@ class DoctorController extends Controller
         } else {
             $notification = $this->responseService->error('Doctor', 'System Problem');
         }
-
 
 
     }
