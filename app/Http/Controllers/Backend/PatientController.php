@@ -12,7 +12,12 @@ use App\Models\Patient;
 use App\Services\PatientService;
 use App\Services\ResponseService;
 use App\Traits\FileUpload;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PatientController extends Controller
@@ -30,25 +35,29 @@ class PatientController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View|Response
      */
     public function index()
     {
         return view('backend.pages.patient.index');
     }
-    public function patientExcel()
+
+    public function patientExcel(): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
         return $this->excel->download(new PatientExport, 'patient.xlsx');
     }
-    public function patientCsv()
+
+    public function patientCsv(): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
         return $this->excel->download(new PatientExport, 'patient.csv');
     }
-    public function patientPdf()
+
+    public function patientPdf(): \Symfony\Component\HttpFoundation\BinaryFileResponse
     {
         return $this->excel->download(new PatientExport, 'patient.pdf', Excel::DOMPDF);
     }
-    public function patientImport(Request $request)
+
+    public function patientImport(Request $request): RedirectResponse
     {
         $data = $request->file('file');
         $import = new PatientImport;
@@ -72,13 +81,18 @@ class PatientController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View|Response
      */
     public function create()
     {
         $bloods = $this->patientService->getBloods();
         return view('backend.pages.patient.create', compact('bloods'));
     }
+
+    /**
+     * @param Request $request
+     * @return Application|Factory|View
+     */
     public function patientList(Request $request)
     {
         $data = $request->all();
@@ -89,10 +103,10 @@ class PatientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param PatientRequest $request
+     * @return RedirectResponse
      */
-    public function store(PatientRequest $request)
+    public function store(PatientRequest $request): RedirectResponse
     {
         $data = $request->all();
         if ($request->hasFile('picture')) {
@@ -110,10 +124,10 @@ class PatientController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
+     * @param Patient $patient
+     * @return Response
      */
-    public function show(Patient $patient)
+    public function show(Patient $patient): Response
     {
         //
     }
@@ -121,8 +135,8 @@ class PatientController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return Application|Factory|View|Response
      */
     public function edit($id)
     {
@@ -135,8 +149,8 @@ class PatientController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
+     * @param Patient $patient
+     * @return Response
      */
     public function update(PatientUpdateRequest $request, $id)
     {
@@ -156,8 +170,8 @@ class PatientController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Patient  $patient
-     * @return \Illuminate\Http\Response
+     * @param Patient $patient
+     * @return Response
      */
     public function destroy($id)
     {

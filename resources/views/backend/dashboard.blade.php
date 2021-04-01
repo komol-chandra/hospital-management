@@ -3,14 +3,6 @@
 @section('title', '|  Dashboard')
 @section('header-title', 'Dashboard')
 @section('breadcrumb', ' Dashboard')
-{{-- <div class="tile-stats tile-blue">
-    <div class="icon"><i class="entypo-users"></i></div>
-    <div class="num" id="assignedCount">0</div>
-    <h3>Assigned Students</h3>
-    <p>Total assigned students for councilor.</p>
-</div> --}}
-
-
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
             <div class="panel panel-bd cardbox">
