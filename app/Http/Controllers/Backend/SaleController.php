@@ -9,16 +9,22 @@ use App\Models\Medicine;
 use App\Models\MedicineType;
 use App\Models\Sale;
 use App\Models\StockDetails;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SaleController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function saleSearch(Request $request)
+    public function saleSearch(Request $request): JsonResponse
     {
         $medicines = Medicine::where(function ($query) use ($request) {
             if ($request->type_id) {
@@ -35,7 +41,7 @@ class SaleController extends Controller
 
     }
 
-    public function getBatch($id)
+    public function getBatch($id): JsonResponse
     {
         $data = StockDetails::where('medicine_id', $id)->get();
         $batch_data = json_decode($data);
@@ -44,9 +50,9 @@ class SaleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         //
     }
@@ -54,7 +60,7 @@ class SaleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View|Response
      */
     public function create()
     {
@@ -68,10 +74,10 @@ class SaleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
-    public function store(Request $request)
+    public function store(Request $request): Response
     {
         //
     }
@@ -79,10 +85,10 @@ class SaleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Sale  $sale
-     * @return \Illuminate\Http\Response
+     * @param Sale $sale
+     * @return Response
      */
-    public function show(Sale $sale)
+    public function show(Sale $sale): Response
     {
         //
     }
@@ -90,10 +96,10 @@ class SaleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Sale  $sale
-     * @return \Illuminate\Http\Response
+     * @param Sale $sale
+     * @return Response
      */
-    public function edit(Sale $sale)
+    public function edit(Sale $sale): Response
     {
         //
     }
@@ -101,11 +107,11 @@ class SaleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Sale  $sale
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Sale $sale
+     * @return Response
      */
-    public function update(Request $request, Sale $sale)
+    public function update(Request $request, Sale $sale): Response
     {
         //
     }
@@ -113,10 +119,10 @@ class SaleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Sale  $sale
-     * @return \Illuminate\Http\Response
+     * @param Sale $sale
+     * @return Response
      */
-    public function destroy(Sale $sale)
+    public function destroy(Sale $sale): Response
     {
         //
     }

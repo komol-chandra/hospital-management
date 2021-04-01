@@ -10,7 +10,7 @@
     <body class="hold-transition sidebar-mini">
         <div class="wrapper">
             @include('backend.layouts.header')
-          @include('backend.layouts.sidebar')
+            @include('backend.layouts.sidebar')
             <div class="content-wrapper">
                 <section class="content-header">
                      <form action="#" method="get" class="sidebar-form search-box pull-right hidden-md hidden-lg hidden-sm">
@@ -20,7 +20,7 @@
                                     <button type="submit" name="search" id="search-btn" class="btn"><i class="fa fa-search"></i></button>
                                 </span>
                             </div>
-                        </form>   
+                        </form>
                     <div class="header-icon">
                         <i class="fa fa-tachometer"></i>
                     </div>
@@ -38,7 +38,7 @@
                 @yield('content')
             </div>
             @include('backend.layouts.footer')
-                
+
             </div>
         </div>
     @include('backend.layouts.js')

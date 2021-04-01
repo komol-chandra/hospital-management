@@ -22,8 +22,12 @@ class StockDetails extends Model
         "exp_date",
         "sub_total",
     ];
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo("App\Models\User", "created_by", "id");
+    }
+    public function medicine(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo("App\Models\Medicine", "medicine_id", "id");
     }
 }

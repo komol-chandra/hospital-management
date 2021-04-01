@@ -71,7 +71,7 @@ class DoctorService
         return DoctorDepartment::where('status', '1')->pluck('name', 'id');
     }
 
-    public function getBloods()
+    public function getBloods(): \Illuminate\Support\Collection
     {
         return Blood::all()->pluck('name', 'id');
 

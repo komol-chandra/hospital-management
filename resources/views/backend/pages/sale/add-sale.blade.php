@@ -38,7 +38,7 @@
 
                                 <div class="col-sm-12 form-group">
                                     <input type="text" name="search" class="form-control search" id="search"
-                                           placeholder="search medacine name,sku" onchange="getSearch()">
+                                           placeholder="search medicine name,sku" onchange="getSearch()">
                                 </div>
                             </form>
 
@@ -107,8 +107,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <select name="discunt_select" id="discunt_select" class="form-control">
-                                        <option value="flate">flate</option>
+                                    <select name="discount_select" id="discount_select" class="form-control">
+                                        <option value="flat">flat</option>
                                         <option value="percent">percent</option>
                                     </select>
 
@@ -118,7 +118,7 @@
 
                             <tr class="bg-danger">
                                 <td colspan="3"></td>
-                                <th class="text-right">Discunted Amount</th>
+                                <th class="text-right">Discounted Amount</th>
                                 <th><input type="number" name="discounted_amount" required="" autocomplete="off"
                                            id="discount" class="discount form-control" placeholder="Discount"
                                            value="0.00"></th>
@@ -149,47 +149,43 @@
                             </tr>
                             <tr>
                                 <td colspan="3">
-                                    <div class="form-group row">
-                                <td>
-                                    <button type="submit" class="btn btn-success">Save</button>
+                                    <div class="form-group row ">
+                                        <button type="submit" class="btn btn-success float-right">Save</button>
+                                    </div>
                                 </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </form>
                 </div>
-                </td>
-                </tr>
-                </tfoot>
-                </table>
-                </form>
             </div>
-
-
         </div>
     </div>
-</div>
-@endsection
-@section('js')
-    <script>
-        $(document).ready(function () {
-            $('.type_id').select2();
-            $('.generic_id').select2();
-            $('.customer_id').select2();
+    @endsection
+    @section('js')
+        <script>
+            $(document).ready(function () {
+                $('.type_id').select2();
+                $('.generic_id').select2();
+                $('.customer_id').select2();
 
-        });
+            });
 
-        function getSearch() {
-            let type_id = $("#type_id").val();
-            let generic_id = $("#generic_id").val();
-            let search = $("#search").val();
-            product_search = `/admin/saleSearch?type_id=${type_id ? type_id : ""}&generic_id=${generic_id ? generic_id : ""}&search=${search ? search : ""}`;
-            $.ajax({
-                url: product_search,
-                type: "get",
-                dataType: "json",
-                async: false,
-                success: function (response) {
-                    console.log(response);
-                    let html_data = "";
-                    response.forEach(element => {
-                        html_data += `<div class='col-sm-4 panel panel-bd' id='product-div' onclick='getProduct(${JSON.stringify(element)})'>
+            function getSearch() {
+                let type_id = $("#type_id").val();
+                let generic_id = $("#generic_id").val();
+                let search = $("#search").val();
+                product_search = `/admin/saleSearch?type_id=${type_id ? type_id : ""}&generic_id=${generic_id ? generic_id : ""}&search=${search ? search : ""}`;
+                $.ajax({
+                    url: product_search,
+                    type: "get",
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        // console.log(response);
+                        let html_data = "";
+                        response.forEach(element => {
+                            html_data += `<div class='col-sm-4 panel panel-bd' id='product-div' onclick='getProduct(${JSON.stringify(element)})'>
                             <div class='card' style="width: 18rem;">
                             <img class='card-img-top' src="/${element.picture ? element.picture : 'backend/files/no-img.png'}" style="height: 50px; width: 50px;"  alt='Card image'>
                             <div class='card-body'>
@@ -197,70 +193,62 @@
                             </div>
                             </div>
                             </div>`;
-                    });
-                    $("#div").html(html_data);
-                }
-            });
-        }
-
-        var medicineArray = [];
-
-        function getProduct(value) {
-            let id = value.id;
-            $.ajax({
-                url: `/admin/getBatch/${id}`,
-                type: `get`,
-                dataType: "json",
-                success: function (response) {
-                    // console.log(response);
-
-                    var batch_data = response;
-
-                    var newMedicine = {
-
-                        medicine_id: value.id,
-                        medicine_name: value.name,
-                        // qty: batch_qty,
-                        batch_data: batch_data,
-                        qty: "",
-                        batch: "",
-                        price: "",
-                        sub_total: "",
-                    };
-                    // console.log(newMedicine);
-                    medicineArray.push(newMedicine);
-                    loop();
-
-
-                    // batch_data.forEach((value,index)=>{
-                    //     // console.log(value);
-                    //     var batch_name = (value.batch);
-                    //     var batch_qty = (value.qty);
-                    //     var price = (value.sale_rate);
-                    //     console.log(price);
-                    // });
-
-                }
-            })
-
-
-        }
-
-        function loop() {
-            let loop_html = "";
-            medicineArray.forEach((value, index) => {
-                console.log(value)
-                loop_html += `<tr>
-                        <td class="text-center" style="max-width: 1rem; width:1rem;">
-                            <select name="" id="select_batch" class="form-control"   onChange="getBatch(${index})">`
-                value.forEach((value, index) => {
-                    // console.log(element)
-                    // <option value="1">1</option>
-
+                        });
+                        $("#div").html(html_data);
+                    }
                 });
+            }
+            var medicineArray = [];
+
+            function getProduct(value) {
+                let id = value.id;
+                $.ajax({
+                    url: `/admin/getBatch/${id}`,
+                    type: `get`,
+                    dataType: "json",
+                    success: function (response) {
+                        // console.log(response);
+
+                        var batch_data = response;
+
+                        var newMedicine = {
+                            medicine_id: value.id,
+                            medicine_name: value.name,
+                            batch_data: batch_data,
+                            qty: "",
+                            batch: "",
+                            price: "",
+                            sub_total: "",
+                        };
+                        // console.log(newMedicine);
+                        medicineArray.push(newMedicine);
+                        loop();
 
 
-                loop_html += `</select>
+                        // batch_data.forEach((value,index)=>{
+                        //     // console.log(value);
+                        //     var batch_name = (value.batch);
+                        //     var batch_qty = (value.qty);
+                        //     var price = (value.sale_rate);
+                        //     console.log(price);
+                        // });
+
+                    }
+                })
+
+
+            }
+
+            function loop() {
+                let loop_html = "";
+                medicineArray.forEach((value, index) => {
+                    loop_html += `<tr>
+                        <td class="text-center" style="max-width: 1rem; width:1rem;">
+                            <select name="batch[]" id="select_batch_${index}" class="form-control"   onChange="getBatchData(${index})">`
+                    $.each(value.batch_data, function (i, v) {
+                        loop_html +=`<option value="${v.id}" ${ v.id==value.batch ? 'selected':''} >${v.batch}</option>`
+                    });
+                    loop_html += `</select>
                         </td>
                         <td class="text-center" style="max-width: 1rem; width:1rem;">
                             <input type="number" id="qty_${index}" name="qty[]" min="0" value=""  class="qty form-control form-control-sm" onChange="getQty(${index})">
@@ -279,20 +267,28 @@
                             <button class='btn btn-danger btn-sm remove_field' onclick="getRemove(${index})" style='margin-left: 8px;'><i class='fa fa-trash'></i></button>
                         </td>
                     </tr>`;
-            });
-            $("#productLoop").html(loop_html);
-        }
+                });
+                $("#productLoop").html(loop_html);
+            }
 
-        function getRemove(index) {
-            medicineArray.splice(index, 1);
-            loop();
-        }
+            function getRemove(index) {
+                medicineArray.splice(index, 1);
+                loop();
+            }
 
-        function getQty(index) {
-            let qty = $("#qty_" + index).val();
-            medicineArray[index].qty = qty;
-            loop();
-        }
-    </script>
-    {{-- {!! JsValidator::formRequest('App\Http\Requests\ScheduleRequest', '#form_insert'); !!} --}}
+            function getQty(index) {
+                let qty = $("#qty_" + index).val();
+                medicineArray[index].qty = qty;
+                loop();
+            }
+            function getBatchData(index) {
+
+                let batch = $("#select_batch_" + index).val();
+                medicineArray[index].batch = batch;
+                medicineArray[index].price = price;
+                // medicineArray[index].qty = qty;
+                loop();
+            }
+        </script>
+{{-- {!! JsValidator::formRequest('App\Http\Requests\ScheduleRequest', '#form_insert'); !!} --}}
 @endsection

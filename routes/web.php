@@ -164,6 +164,7 @@ Route::prefix('admin')->group(function () {
         //sock
         Route::resource('/stock', StockController::class);
         Route::get('/stockSearch', [StockController::class, 'stockSearch']);
+        Route::get('/stock/status/{id}', [StockController::class, 'status']);
         //
         Route::resource('/customer', CustomerController::class);
         //sale
